@@ -1,7 +1,7 @@
 import { IsNotEmpty } from 'class-validator';
 
 export class IdParamsDTO {
-  // @IsNumber()
+  // @IsNumber() // @TODO: fix constraints
   @IsNotEmpty()
   id: number;
 }

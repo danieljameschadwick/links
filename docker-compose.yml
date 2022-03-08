@@ -1,7 +1,10 @@
 version: '3'
 
 services:
-  mongo:
-    image: mongo:latest
+  postgres:
+    image: postgres:latest
+    restart: always
     ports:
-      - 27017:27017
+      - 5432:5432
+    environment:
+      POSTGRES_PASSWORD: pHGZaF9tf72mGABG
