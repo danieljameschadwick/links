@@ -5,12 +5,12 @@ export default [
         url: "https://github.com/danieljameschadwick",
         styles: {
             container: {
-                backgroundColor: "#000000",
+                backgroundColor: "#FFF",
                 borderWidth: 1,
-                borderColor: "#000000",
+                borderColor: "#254569",
             },
             text: {
-                color: "#FFF",
+                color: "rgb(17 17 17)",
             }
         },
     },

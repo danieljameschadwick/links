@@ -8,6 +8,7 @@ const styles = StyleSheet.create({
         alignItems: "center",
         flexGrow: 1,
         justifyContent: "center",
+        backgroundColor: "#000000"
     },
     link: {
         color: "blue",
@@ -15,9 +16,16 @@ const styles = StyleSheet.create({
     textContainer: {
         alignItems: "center",
     },
-    text: {
+    heading: {
+        color: "white",
         alignItems: "center",
         fontSize: 24,
+        marginBottom: 10,
+    },
+    text: {
+        color: "white",
+        alignItems: "center",
+        fontSize: 14,
         marginBottom: 16,
     },
 });
@@ -25,8 +33,12 @@ const styles = StyleSheet.create({
 const App: React.FC = () => {
     return (
         <View style={styles.container}>
-            <Text accessibilityRole={"header"} style={styles.text}>
+            <Text accessibilityRole={"header"} style={styles.heading}>
                 Daniel Chadwick
+            </Text>
+
+            <Text accessibilityRole={"text"} style={styles.text}>
+                Software Developer
             </Text>
 
             <View>

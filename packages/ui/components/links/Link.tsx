@@ -14,13 +14,13 @@ const Link: React.FC<Props> = ({ text, url, styles: propStyles }) => {
         container: {
             display: "flex",
             justifyContent: "center",
-            height: "50px",
             marginBottom: 10,
-            padding: 10,
+            borderRadius: "0.4em",
             ...propStyles.container,
         },
         text: {
             textAlign: "center",
+            padding: 16,
             ...propStyles.text,
         },
     });
