@@ -1,7 +1,7 @@
-import * as React from "react";
+import React from "react";
 import Head from "next/head";
 
-function MyApp({ Component, pageProps }) {
+function App({ Component, pageProps }) {
     return (
         <>
             <Head>
@@ -13,4 +13,4 @@ function MyApp({ Component, pageProps }) {
     );
 }
 
-export default MyApp;
+export default App;
