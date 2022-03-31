@@ -1,4 +1,4 @@
-import { React } from "react";
+import React from "react";
 import { Image, Linking, Platform, StyleSheet, Text, TouchableWithoutFeedback, View } from "react-native";
 import { Platforms } from "@links/ui/util/enum/Platforms";
 import ExternalLink from "@links/ui/components/links/ExternalLink";

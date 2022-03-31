@@ -6,7 +6,6 @@ import { StyleSheet, View } from "react-native";
 
 const fetchProfile = (username: string): ProfileInterface => {
     // @TODO: fetch data from profile.
-
     return {
         username: "dan",
         heading: "Daniel Chadwick",

@@ -1,7 +1,9 @@
 module.exports = {
-  presets: ['next/babel'],
-  plugins: [
-      ['react-native-web', { commonjs: true }],
-      ['styled-components', { 'ssr': true }],
-  ],
-}
+    presets: [
+        "@expo/next-adapter/babel",
+    ],
+    plugins: [
+        ["@babel/plugin-proposal-private-methods", { "loose": true }],
+        ["@babel/plugin-proposal-private-property-in-object", { "loose": true }],
+    ]
+};
