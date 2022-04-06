@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import styled from "styled-components/native";
-import { ProfileInterface } from "../../types/profile";
+import { ProfileInterface } from "@src/types/profile";
 import Link from "@links/ui/components/links/Link";
 
 const styles = StyleSheet.create({
@@ -15,13 +15,13 @@ const styles = StyleSheet.create({
     },
     heading: {
         color: "white",
-        alignItems: "center",
+        textAlign: "center",
         fontSize: 24,
         marginBottom: 10,
     },
     subHeading: {
         color: "white",
-        alignItems: "center",
+        textAlign: "center",
         fontSize: 14,
         marginBottom: 16,
     },
@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
 
 const Heading = styled.Text`
     color: white;
-    align-items: center;
+    text-align: center;
     font-size: 24px;
     margin-bottom: 10px;
 `;
@@ -54,9 +54,13 @@ export const Profile: React.FC<Props> = ({ profile }) => {
 
     return (
         <View style={profileStyles.container}>
-            {/*<Text accessibilityRole={"header"} style={heading}>*/}
-            {/*    {heading}*/}
-            {/*</Text>*/}
+            <Text accessibilityRole={"header"} style={styles.heading}>
+                {heading}
+            </Text>
+
+            <Text accessibilityRole={"header"} style={{ color: "white" }}>
+                {heading}
+            </Text>
 
             <Heading>
                 {heading}

@@ -4,6 +4,7 @@ const withTM = require("next-transpile-modules")([
     "react-native-web",
     "@links/ui"
 ]);
+
 const nextConfig = {
     webpack5: true,
 };

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import Profile from "../components/Profile";
-import { ProfileInterface } from "../types/profile";
 import { StyleSheet, View } from "react-native";
+import Profile from "@src/components/Profile";
+import { ProfileInterface } from "@src/types/profile";
 
 const fetchProfile = (username: string): ProfileInterface => {
     // @TODO: fetch data from profile.
@@ -64,8 +64,9 @@ const fetchProfile = (username: string): ProfileInterface => {
 
 const ProfilePage: React.FC = () => {
     const router = useRouter();
-    const { username } = router.query;
-    const [ profile, setProfile ] = useState<ProfileInterface>();
+    const { query } = router;
+    const [ profile, setProfile ] = useState<ProfileInterface | null>();
+    const username = query.username as string;
 
     useEffect(() => {
         setProfile(
