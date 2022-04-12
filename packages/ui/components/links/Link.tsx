@@ -32,7 +32,6 @@ const Link: React.FC<Props> = ({ text, url, styles: propStyles, logo = null }) =
         logo: {
             width: 25,
             height: 25,
-            marginRight: 10,
         },
         text: {
             flex: 1,

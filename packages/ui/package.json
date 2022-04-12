@@ -2,10 +2,5 @@
     "name": "@links/ui",
     "version": "0.0.1",
     "type": "module",
-    "license": "UNLICENSED",
-    "dependencies": {
-        "react": "17.0.1",
-        "react-native": "^0.67.2",
-        "react-native-web": "^0.17.6"
-    }
+    "license": "UNLICENSED"
 }

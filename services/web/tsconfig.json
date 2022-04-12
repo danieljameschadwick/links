@@ -8,7 +8,8 @@
     ],
     "baseUrl": "./",
     "paths" : {
-      "@src/*": ["./src/*"]
+      "@src/*": ["./src/*"],
+      "@links/ui/*": ["./node_modules/@links/ui/src"]
     },
     "allowJs": true,
     "skipLibCheck": true,

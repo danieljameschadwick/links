@@ -6,10 +6,14 @@
         "packages": [
             "packages/*",
             "services/*"
-        ]
+        ],
+        "installConfig": {
+            "hoistingLimits": "dependencies"
+        }
     },
     "scripts": {
-        "api:start:dev": "cd services/api && yarn run start:dev",
-        "web:start:dev": "cd services/web && yarn run start:dev"
-    }
+        "api:start:dev": "yarn workspace @links/api start:dev",
+        "web:start:dev": "yarn workspace @links/web start:dev"
+    },
+    "packageManager": "yarn@3.2.0"
 }

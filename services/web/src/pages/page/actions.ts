@@ -36,10 +36,6 @@ export const fetchProfile = (username: string): ProfileInterface => {
             borderColour: "#000",
           },
         },
-        logo: {
-          uri: "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png",
-          altText: "\"GitHub\" logo",
-        },
       },
       {
         id: 3,

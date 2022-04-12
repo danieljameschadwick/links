@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, View, Text } from "react-native";
-import Link from "@src/components/link/Link";
 import { ProfileInterface } from "@src/interfaces/ProfileInterface";
+import Link from "@links/ui/components/links/Link";
 
 const styles = StyleSheet.create({
   container: {
