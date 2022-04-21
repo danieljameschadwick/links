@@ -40,3 +40,6 @@ yarn-error.*
 .expo/
 .idea/
 .yarn/
+
+# testing
+.jest-coverage/

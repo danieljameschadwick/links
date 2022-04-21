@@ -5,7 +5,9 @@
   "scripts": {
     "build": "next build",
     "start": "next start",
-    "start:dev": "next dev"
+    "start:dev": "next dev",
+    "test": "jest --watch",
+    "test:ci": "jest --ci"
   },
   "dependencies": {
     "@expo/next-adapter": "3.0.1",
@@ -18,10 +20,18 @@
     "typescript": "4.3.2"
   },
   "devDependencies": {
+    "@babel/preset-env": "^7.16.11",
+    "@testing-library/jest-dom": "^5.16.4",
+    "@testing-library/react-native": "^9.1.0",
+    "@testing-library/user-event": "^14.1.0",
     "@types/react": "17.0.11",
+    "babel-jest": "^27.5.1",
     "babel-preset-expo": "8.4.0",
+    "jest": "^27.5.1",
     "next-compose-plugins": "2.2.1",
     "next-transpile-modules": "8.0.0",
+    "react-test-renderer": "^17.0.2",
+    "ts-jest": "^27.1.4",
     "webpack": "5.39.0"
   }
 }

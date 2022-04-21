@@ -1,22 +1,12 @@
 import React from "react";
-import { StyleSheet, View, Text } from "react-native";
-
-const styles = StyleSheet.create({
-  text: {
-    color: "red",
-  },
-});
+import { View, Text } from "react-native";
 
 const Index: React.FC = () => {
   return (
     <View>
-      <Text style={styles.text}>
-        Hello, World!
+      <Text>
+        Links index.
       </Text>
-
-      <button type="button">
-        Error
-      </button>
     </View>
   );
 };

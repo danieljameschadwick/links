@@ -26,6 +26,32 @@ const styles = StyleSheet.create({
   },
 });
 
+const tempStyles = StyleSheet.create({
+  container: {
+    display: "flex",
+    justifyContent: "center",
+    marginBottom: 10,
+    borderRadius: "0.4em",
+    backgroundColor: "white",
+  },
+  link: {
+    display: "flex",
+    padding: 16,
+  },
+  logo: {
+    width: 25,
+    height: 25,
+  },
+  text: {
+    flex: 1,
+    textAlign: "center",
+    justifyContent: "center",
+    alignContent: "center",
+    alignSelf: "center",
+    paddingRight: 0,
+  },
+});
+
 type Props = {
   profile: ProfileInterface;
 };

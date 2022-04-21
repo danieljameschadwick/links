@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { StyleSheet, View } from "react-native";
+import Head from 'next/head'
 import { useRouter } from "next/router";
 import Profile from "@src/components/profile/Profile";
 import { fetchProfile } from "@src/pages/page/actions";
 import { ProfileInterface } from "@src/interfaces/ProfileInterface";
+import Loading from "@src/components/loading";
 
 const UserProfile: React.FC = () => {
   const router = useRouter();
@@ -19,7 +21,7 @@ const UserProfile: React.FC = () => {
   }, [ username ]);
 
   if (!username) {
-    return <>rendering.</>;
+    return <Loading />;
   }
 
   const profileStyles = StyleSheet.create({
@@ -34,11 +36,17 @@ const UserProfile: React.FC = () => {
   });
 
   return (
-    // <ProfileProvider>
-    <View style={profileStyles.container}>
-      <Profile profile={profile} />
-    </View>
-    // </ProfileProvider>
+    <>
+      <Head>
+        <title>Links | {username}</title>
+      </Head>
+
+      {/*<ProfileProvider>*/}
+      <View style={profileStyles.container}>
+        <Profile profile={profile} />
+      </View>
+      {/*</ProfileProvider>*/}
+    </>
   );
 };
 
