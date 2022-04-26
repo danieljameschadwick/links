@@ -15,12 +15,14 @@ const UserProfile: React.FC = () => {
   const [ profile, setProfile ] = useState<ProfileInterface | null>();
 
   useEffect(() => {
-    setProfile(
-      fetchProfile(username as string)
-    );
+    const fetchData = async () => {
+      setProfile(await fetchProfile(username as string));
+    };
+
+    fetchData();
   }, [ username ]);
 
-  if (!username) {
+  if (!profile) {
     return <Loading />;
   }
 

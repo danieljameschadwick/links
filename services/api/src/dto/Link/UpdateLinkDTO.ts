@@ -5,6 +5,10 @@ export class UpdateLinkDTO {
   @IsOptional()
   text: string;
 
+  @IsString()
+  @IsOptional()
+  url: string;
+
   @IsOptional()
   userId: number;
 }
