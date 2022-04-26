@@ -1,9 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { Link } from '@prisma/client';
 import { PrismaService } from '@src/service/PrismaService';
-import { CreateLinkDTO } from '@src/dto/Link/CreateLinkDTO';
-import { UpdateLinkDTO } from '@src/dto/Link/UpdateLinkDTO';
-
+import { CreateLinkDTO } from '@src/dto/link/CreateLinkDTO';
+import { UpdateLinkDTO } from '@src/dto/link/UpdateLinkDTO';
 
 @Injectable()
 export class LinkService {
@@ -16,23 +15,23 @@ export class LinkService {
     });
   }
 
-  async findOne(id: number): Promise<Link | null> {
+  async findOneById(id: number): Promise<Link | null> {
     return this.prismaService.link.findUnique({
       where: { id: Number(id) },
       include: { user: true },
     });
   }
 
-  async create(createLinkDTO: CreateLinkDTO): Promise<Link> {
+  async create(CreateLinkDTO: CreateLinkDTO): Promise<Link> {
     return this.prismaService.link.create({
-      data: createLinkDTO,
+      data: CreateLinkDTO,
     });
   }
 
-  async update(id: number, updateLinkDTO: UpdateLinkDTO): Promise<Link> {
+  async update(id: number, UpdateLinkDTO: UpdateLinkDTO): Promise<Link> {
     return this.prismaService.link.update({
       where: { id: Number(id) },
-      data: updateLinkDTO,
+      data: UpdateLinkDTO,
     });
   }
 }

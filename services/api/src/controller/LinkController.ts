@@ -18,13 +18,13 @@ export class LinkController {
   }
 
   @Get('/:id')
-  async getOne(
+  async getOneById(
     @Param() idParamsDto: IdParamsDTO,
     @Res() response: Response,
   ): Promise<Response<Link | null>> {
     const { id } = idParamsDto;
 
-    const link = await this.linkService.findOne(id);
+    const link = await this.linkService.findOneById(id);
 
     if (link === null) {
       return response.status(404).send();
@@ -57,7 +57,7 @@ export class LinkController {
     @Res() response: Response,
   ): Promise<Response<Link | null>> {
     const { id } = idParamsDto;
-    const link = await this.linkService.findOne(id);
+    const link = await this.linkService.findOneById(id);
 
     if (link === null) {
       return response.status(404).send();

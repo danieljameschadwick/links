@@ -6,6 +6,7 @@ import { User } from '@prisma/client';
 import { Body } from '@nestjs/common';
 import { CreateUserDTO } from '@src/dto/User/CreateUserDTO';
 import { UserService } from '@src/service/UserService';
+import { UsernameParamsDTO } from '@src/dto/UsernameParamsDTO';
 
 @Controller('users')
 export class UserController {
@@ -16,14 +17,14 @@ export class UserController {
     return this.userService.findAll();
   }
 
-  @Get('/:id')
-  async getOne(
-    @Param() idParamsDto: IdParamsDTO,
+  @Get('/:username')
+  async getOneByUsername(
+    @Param() usernameParamsDto: UsernameParamsDTO,
     @Res() response: Response,
   ): Promise<Response<User | null>> {
-    const { id } = idParamsDto;
+    const { username } = usernameParamsDto;
 
-    const user = await this.userService.findOne(id);
+    const user = await this.userService.findOneByUsername(username);
 
     if (user === null) {
       return response.status(404).send();
