@@ -18,7 +18,10 @@ export class LinkService {
   async findOneById(id: number): Promise<Link | null> {
     return this.prismaService.link.findUnique({
       where: { id: Number(id) },
-      include: { user: true },
+      include: {
+        user: true,
+        logo: true,
+      },
     });
   }
 

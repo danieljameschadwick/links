@@ -4,7 +4,7 @@ import { Platforms } from "@links/ui/util/enum/Platforms";
 import ExternalLink from "@links/ui/components/links/ExternalLink";
 
 type LinkLogo = {
-    uri: string;
+    url: string;
     altText: string;
 };
 
@@ -69,7 +69,7 @@ const Link: React.FC<Props> = ({ text, url, styles: propStyles, logo = null }) =
                                 style={styles.logo}
                                 accessibilityLabel={logo.altText}
                                 source={{
-                                    uri: logo.uri,
+                                    uri: logo.url,
                                 }}
                             />
                         )}

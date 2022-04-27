@@ -32,6 +32,6 @@ model LinkLogo {
   id        Int      @default(autoincrement()) @id
   url       String
   altText   String?
-  link      Link    @relation(fields: [linkId], references: [id])
+  link      Link     @relation(fields: [linkId], references: [id])
   linkId    Int
 }

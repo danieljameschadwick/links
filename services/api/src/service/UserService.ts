@@ -17,14 +17,26 @@ export class UserService {
   async findOneById(id: number): Promise<User | null> {
     return this.prismaService.user.findUnique({
       where: { id: Number(id) },
-      include: { links: true },
+      include: {
+        links: {
+          include: {
+            logo: true,
+          }
+        },
+      },
     });
   }
 
   async findOneByUsername(username: string): Promise<User | null> {
     return this.prismaService.user.findUnique({
       where: { username: username },
-      include: { links: true },
+      include: {
+        links: {
+          include: {
+            logo: true,
+          }
+        },
+      },
     });
   }
 
