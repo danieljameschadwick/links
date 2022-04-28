@@ -8,30 +8,46 @@ datasource db {
 }
 
 model User {
-  id         Int     @id @default(autoincrement())
-  email      String  @unique
-  username   String  @unique
-  name       String?
-  heading    String
-  subHeading String?
-  links      Link[]
+  id             Int            @id @default(autoincrement())
+  email          String         @unique
+  username       String         @unique
+  name           String?
+  userProfile    UserProfile?
+}
+
+model UserProfile {
+  id             Int            @id @default(autoincrement())
+  user           User           @relation(fields: [userId], references: [id])
+  userId         Int
+  heading        String
+  subHeading     String?
+  profileLogo    ProfileLogo?
+  links          Link[]
+}
+
+model ProfileLogo {
+  id             Int            @id @default(autoincrement())
+  url            String
+  altText        String?
+  userProfile    UserProfile    @relation(fields: [userProfileId], references: [id])
+  userProfileId  Int
 }
 
 model Link {
-  id        Int      @default(autoincrement()) @id
-  text      String
-  url       String
-  active    Boolean? @default(true)
-  user      User?    @relation(fields: [userId], references: [id])
-  userId    Int?
-  styles    Json?
-  logo      LinkLogo?
+  id              Int             @default(autoincrement()) @id
+  text            String
+  url             String
+  active          Boolean?        @default(true)
+  userProfile     UserProfile?    @relation(fields: [userProfileId], references: [id])
+  userProfileId   Int?
+  styles         Json?
+  logo           LinkLogo?
 }
 
 model LinkLogo {
-  id        Int      @default(autoincrement()) @id
+  id        Int       @default(autoincrement()) @id
   url       String
   altText   String?
-  link      Link     @relation(fields: [linkId], references: [id])
+  link      Link      @relation(fields: [linkId], references: [id])
   linkId    Int
 }

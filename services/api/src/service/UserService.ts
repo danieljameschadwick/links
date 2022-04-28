@@ -10,7 +10,17 @@ export class UserService {
 
   async findAll(): Promise<User[]> {
     return this.prismaService.user.findMany({
-      include: { links: true },
+      include: {
+        userProfile: {
+          include: {
+            links: {
+              include: {
+                logo: true,
+              }
+            },
+          },
+        },
+      },
     });
   }
 
@@ -18,10 +28,14 @@ export class UserService {
     return this.prismaService.user.findUnique({
       where: { id: Number(id) },
       include: {
-        links: {
+        userProfile: {
           include: {
-            logo: true,
-          }
+            links: {
+              include: {
+                logo: true,
+              }
+            },
+          },
         },
       },
     });
@@ -31,10 +45,14 @@ export class UserService {
     return this.prismaService.user.findUnique({
       where: { username: username },
       include: {
-        links: {
+        userProfile: {
           include: {
-            logo: true,
-          }
+            links: {
+              include: {
+                logo: true,
+              }
+            },
+          },
         },
       },
     });

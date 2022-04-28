@@ -34,7 +34,7 @@ export class UserController {
   }
 
   @Post()
-  async create(
+  async register(
     @Body() createUserDto: CreateUserDTO,
     @Res() response: Response,
   ): Promise<Response<User | null>> {

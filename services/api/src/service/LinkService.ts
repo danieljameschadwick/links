@@ -11,7 +11,14 @@ export class LinkService {
 
   async findAll(): Promise<Link[]> {
     return this.prismaService.link.findMany({
-      include: { user: true },
+      include: {
+        userProfile: {
+          include: {
+            user: true,
+          }
+        },
+        logo: true,
+      },
     });
   }
 
@@ -19,7 +26,11 @@ export class LinkService {
     return this.prismaService.link.findUnique({
       where: { id: Number(id) },
       include: {
-        user: true,
+        userProfile: {
+          include: {
+            user: true,
+          }
+        },
         logo: true,
       },
     });

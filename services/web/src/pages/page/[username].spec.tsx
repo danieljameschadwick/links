@@ -1,6 +1,6 @@
 import React from "react";
 import { render } from "@testing-library/react-native";
-import UserProfile from "@src/pages/page/[username]";
+import UserPage from "@src/pages/page/[username]";
 
 jest.mock('next/router', () => ({
   useRouter() {
@@ -22,7 +22,7 @@ jest.mock('next/router', () => ({
 
 describe("UserProfile", () => {
   it("renders correctly", async () => {
-    const { toJSON } = render(<UserProfile />);
+    const { toJSON } = render(<UserPage />);
 
     expect(toJSON()).toMatchSnapshot();
   });

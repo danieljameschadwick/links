@@ -7,6 +7,10 @@ const Index: React.FC = () => {
       <Text>
         Links index.
       </Text>
+
+      <Text onPress={() => window.open("/register", "_self")}>
+        Register
+      </Text>
     </View>
   );
 };

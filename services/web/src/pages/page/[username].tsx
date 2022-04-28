@@ -1,26 +1,47 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, Text } from "react-native";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import Profile from "@src/components/profile/Profile";
+import UserProfile from "@src/components/profile/UserProfile";
 import { fetchProfile } from "@src/pages/page/actions";
-import { ProfileInterface } from "@src/interfaces/ProfileInterface";
+import { UserProfileInterface } from "@src/interfaces/ProfileInterface";
 import Loading from "@src/components/loading";
 import Error404 from "@src/pages/404";
+import ExternalLink from "@links/ui/components/links/ExternalLink";
+import { UserInterface } from "@src/interfaces/UserInterface";
 
-const UserProfile: React.FC = () => {
+const footerStyles = StyleSheet.create({
+  container: {
+    position: "absolute",
+    bottom: "10px",
+    width: "100%",
+    textAlign: "center",
+  },
+  text: {
+    color: "white",
+    marginBottom: "10px",
+  },
+  brandText: {
+    fontWeight: "bold",
+  },
+  linkText: {
+    textDecorationLine: "underline"
+  },
+});
+
+const UserPage: React.FC = () => {
   const router = useRouter();
   const {
     username = undefined
   } = router.query;
-  const [ profile, setProfile ] = useState<ProfileInterface | null>();
+  const [ user, setUser ] = useState<UserInterface | null>();
   const [ httpStatus, setHttpStatus ] = useState<number | null>();
 
   useEffect(() => {
     const fetchData = async () => {
       if (!username) return;
 
-      setProfile(await fetchProfile(username as string));
+      setUser(await fetchProfile(username as string));
     };
 
     fetchData()
@@ -33,7 +54,7 @@ const UserProfile: React.FC = () => {
     return <Loading />;
   }
 
-  if (!profile && httpStatus !== 200) {
+  if (!user && httpStatus !== 200) {
     return <Error404 />;
   }
 
@@ -56,11 +77,21 @@ const UserProfile: React.FC = () => {
 
       {/*<ProfileProvider>*/}
       <View style={profileStyles.container}>
-        <Profile profile={profile} />
+        <UserProfile user={user} />
       </View>
       {/*</ProfileProvider>*/}
+
+      <View style={footerStyles.container}>
+        <Text style={footerStyles.text}>
+          Powered by <Text style={footerStyles.brandText}>links</Text>.
+        </Text>
+
+        <Text style={footerStyles.text}>
+          Create your own profile <ExternalLink style={footerStyles.linkText} url={"/"} openInANewTab={false}>here</ExternalLink>.
+        </Text>
+      </View>
     </>
   );
 };
 
-export default UserProfile;
+export default UserPage;

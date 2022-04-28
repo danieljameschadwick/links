@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, View, Text } from "react-native";
-import { ProfileInterface } from "@src/interfaces/ProfileInterface";
 import Link from "@links/ui/components/links/Link";
+import { UserInterface } from "@src/interfaces/UserInterface";
 
 const styles = StyleSheet.create({
   container: {
@@ -53,15 +53,17 @@ const tempStyles = StyleSheet.create({
 });
 
 type Props = {
-  profile: ProfileInterface;
+  user: UserInterface;
 };
 
-const Profile: React.FC<Props> = ({ profile }) => {
+const UserProfile: React.FC<Props> = ({ user }) => {
   const {
-    heading,
-    subHeading = undefined,
-    links = [],
-  } = profile;
+    userProfile: {
+      heading,
+      subHeading = undefined,
+      links = [],
+    },
+  } = user;
 
   const profileStyles = StyleSheet.create({
     container: {
@@ -94,4 +96,4 @@ const Profile: React.FC<Props> = ({ profile }) => {
   );
 };
 
-export default Profile;
+export default UserProfile;
