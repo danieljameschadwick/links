@@ -1,16 +1,11 @@
 import React from "react";
 import { View, Text } from "react-native";
+import { Header } from "@src/components/layout/header/Header";
 
 const Index: React.FC = () => {
   return (
     <View>
-      <Text>
-        Links index.
-      </Text>
-
-      <Text onPress={() => window.open("/register", "_self")}>
-        Register
-      </Text>
+      <Header />
     </View>
   );
 };

@@ -3,7 +3,7 @@ import { StyleSheet, View, Text } from "react-native";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import UserProfile from "@src/components/profile/UserProfile";
-import { fetchProfile } from "@src/pages/page/actions";
+import { fetchUser } from "@src/pages/page/actions";
 import { UserProfileInterface } from "@src/interfaces/ProfileInterface";
 import Loading from "@src/components/loading";
 import Error404 from "@src/pages/404";
@@ -41,7 +41,7 @@ const UserPage: React.FC = () => {
     const fetchData = async () => {
       if (!username) return;
 
-      setUser(await fetchProfile(username as string));
+      setUser(await fetchUser(username as string));
     };
 
     fetchData()
@@ -69,6 +69,8 @@ const UserPage: React.FC = () => {
     },
   });
 
+  const { userProfile } = user;
+
   return (
     <>
       <Head>
@@ -77,7 +79,7 @@ const UserPage: React.FC = () => {
 
       {/*<ProfileProvider>*/}
       <View style={profileStyles.container}>
-        <UserProfile user={user} />
+        <UserProfile profile={userProfile} />
       </View>
       {/*</ProfileProvider>*/}
 
