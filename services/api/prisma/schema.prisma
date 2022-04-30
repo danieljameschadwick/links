@@ -22,6 +22,7 @@ model UserProfile {
   heading        String
   subHeading     String?
   profileLogo    ProfileLogo?
+  styles         Json?
   links          Link[]
 }
 
@@ -40,8 +41,8 @@ model Link {
   active          Boolean?        @default(true)
   userProfile     UserProfile?    @relation(fields: [userProfileId], references: [id])
   userProfileId   Int?
-  styles         Json?
-  logo           LinkLogo?
+  styles          Json?
+  logo            LinkLogo?
 }
 
 model LinkLogo {

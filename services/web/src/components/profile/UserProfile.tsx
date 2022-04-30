@@ -1,7 +1,6 @@
 import React from "react";
 import { StyleSheet, View, Text } from "react-native";
 import Link from "@links/ui/components/links/Link";
-import { UserInterface } from "@src/interfaces/UserInterface";
 import { UserProfileInterface } from "@src/interfaces/UserProfileInterface";
 
 const styles = StyleSheet.create({
@@ -32,7 +31,7 @@ const tempStyles = StyleSheet.create({
     display: "flex",
     justifyContent: "center",
     marginBottom: 10,
-    borderRadius: "0.4em",
+    borderRadius: 15,
     backgroundColor: "white",
   },
   link: {
@@ -68,7 +67,6 @@ const UserProfile: React.FC<Props> = ({ profile }) => {
     container: {
       maxWidth: 500,
       marginTop: 24,
-      // ...styles.container, // @TODO: add from API
     }
   });
 

@@ -9,6 +9,7 @@ import Loading from "@src/components/loading";
 import Error404 from "@src/pages/404";
 import ExternalLink from "@links/ui/components/links/ExternalLink";
 import { UserInterface } from "@src/interfaces/UserInterface";
+import profile from "@src/pages/settings/profile";
 
 const footerStyles = StyleSheet.create({
   container: {
@@ -58,18 +59,16 @@ const UserPage: React.FC = () => {
     return <Error404 />;
   }
 
+  const { userProfile } = user;
   const profileStyles = StyleSheet.create({
     container: {
       display: "flex",
       alignItems: "center",
-      backgroundColor: "black", // @TODO: derive from API
       width: "100%",
       height: "100%",
-      // ...styles.container, // @TODO: override API styling
+      ...userProfile.styles, // @TODO: override API styling
     },
   });
-
-  const { userProfile } = user;
 
   return (
     <>

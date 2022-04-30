@@ -64,13 +64,9 @@ const Profile: React.FC<Props> = ({ username = 'dan' }) => {
     return <Error404 />;
   }
 
-  // @TODO: get from API
-  const apiContainerStyle = {
-    backgroundColor: "black",
-  };
   const profileStyles = StyleSheet.create({
     container: {
-      ...apiContainerStyle,
+      ...profile.styles,
     },
   });
   const userProfileStyles = StyleSheet.flatten([
@@ -83,6 +79,7 @@ const Profile: React.FC<Props> = ({ username = 'dan' }) => {
 
     // @TODO: pass profile settings and save
   };
+
   return (
       <View style={styles.profileContainer}>
         <View style={styles.profilePanel}>
@@ -94,6 +91,7 @@ const Profile: React.FC<Props> = ({ username = 'dan' }) => {
           </View>
         </View>
 
+        {/* // @TODO: refactor to [username].tsx and have as a hideable panel */}
         <View style={styles.settingPanel}>
           <Text>Profile: </Text>
           <TextInput

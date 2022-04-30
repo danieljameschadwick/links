@@ -6,7 +6,7 @@ export interface LinkInterface {
   url: string;
   styles: StyleSheet.NamedStyles;
   logo?: {
-    uri: string;
+    url: string;
     altText: string;
   };
 }
