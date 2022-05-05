@@ -30,14 +30,19 @@ const footerStyles = StyleSheet.create({
 });
 
 const UserReducer = (
-  state: { user: UserInterface | null },
-  action: { type: string, payload: UserInterface }
+  state: { user: UserInterface | null, showSidebar: boolean },
+  action: { type: string, payload: any | null }
 ) => {
   switch (action.type) {
     case "updateUser":
       return {
         ...state,
         user: action.payload,
+      };
+    case "toggleSidebar":
+      return {
+        ...state,
+        showSidebar: !state.showSidebar,
       };
     default:
       return state;
@@ -46,10 +51,11 @@ const UserReducer = (
 
 const initialState = {
   user: null,
+  showSidebar: false,
 };
 
-export const ProfileStateContext = createContext({});
-export const ProfileDispatchContext = createContext({});
+export const ProfileStateContext = createContext(initialState);
+export const ProfileDispatchContext = createContext(initialState);
 
 const UserPage: React.FC = () => {
   const router = useRouter();
@@ -100,7 +106,7 @@ const UserPage: React.FC = () => {
       <ProfileDispatchContext.Provider value={dispatch}>
         <ProfileStateContext.Provider value={state}>
           <View style={profileStyles.container}>
-            <UserProfile profile={userProfile} />
+            <UserProfile />
           </View>
         </ProfileStateContext.Provider>
       </ProfileDispatchContext.Provider>

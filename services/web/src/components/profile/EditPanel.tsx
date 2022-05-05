@@ -1,6 +1,6 @@
-import React, { createContext } from "react";
-import { StyleSheet, TextInput, View, Text, Button, TouchableOpacity } from "react-native";
-import { UserProfileInterface } from "@src/interfaces/UserProfileInterface";
+import React, { useContext } from "react";
+import { StyleSheet, TextInput, View, Text, TouchableOpacity } from "react-native";
+import { ProfileDispatchContext, ProfileStateContext } from "@src/pages/page/[username]";
 
 const styles = StyleSheet.create({
   settingPanel: {
@@ -24,6 +24,7 @@ const styles = StyleSheet.create({
     fontWeight: "500",
   },
   panelContainer: {
+    flexGrow: 1,
     margin: "5px",
   },
   labelContainer: {
@@ -45,14 +46,10 @@ const styles = StyleSheet.create({
   },
 });
 
-const ProfileContext = createContext(null);
-
-type Props = {
-  profile: UserProfileInterface;
-}
-
-export const EditPanel: React.FC<Props> = ({ profile }) => {
-  // const profile = useContext<UserProfileInterface | null>(ProfileContext);
+export const EditPanel: React.FC = () => {
+  const dispatch = useContext(ProfileDispatchContext);
+  const state = useContext(ProfileStateContext);
+  const { user: { userProfile } } = state;
 
   const handleSubmit = () => {
     alert("save");
@@ -61,7 +58,7 @@ export const EditPanel: React.FC<Props> = ({ profile }) => {
   };
 
   const closePanel = () => {
-    alert('closePanel');
+    dispatch({ type: "toggleSidebar" });
   };
 
   return (
@@ -71,7 +68,7 @@ export const EditPanel: React.FC<Props> = ({ profile }) => {
           Settings
         </Text>
 
-        <Text onPress={closePanel}>X</Text>
+        <Text onPress={() => closePanel()}>X</Text>
       </View>
 
       <View style={styles.panelContainer}>
@@ -86,7 +83,7 @@ export const EditPanel: React.FC<Props> = ({ profile }) => {
           // onChange={(event) => setProfile(
           //   JSON.parse(event.nativeEvent.text)
           //)}
-          defaultValue={JSON.stringify(profile)}
+          defaultValue={JSON.stringify(userProfile)}
         />
       </View>
 
@@ -94,9 +91,9 @@ export const EditPanel: React.FC<Props> = ({ profile }) => {
         style={styles.buttonContainer}
         onPress={handleSubmit}
       >
-          <Text style={styles.buttonText}>
-            Save
-          </Text>
+        <Text style={styles.buttonText}>
+          Save
+        </Text>
       </TouchableOpacity>
     </View>
   );

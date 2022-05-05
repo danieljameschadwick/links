@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import { StyleSheet, View, Text } from "react-native";
 import Link from "@links/ui/components/links/Link";
-import { UserProfileInterface } from "@src/interfaces/UserProfileInterface";
 import { EditPanel } from "@src/components/profile/EditPanel";
 import { ProfileDispatchContext, ProfileStateContext } from "@src/pages/page/[username]";
 
@@ -26,6 +25,12 @@ const styles = StyleSheet.create({
     fontSize: 14,
     marginBottom: 16,
   },
+  openPanelButton: {
+    height: "auto",
+    position: "absolute",
+    right: "0",
+    backgroundColor: "white",
+  },
   sidePanel: {
     position: "absolute",
     right: 0,
@@ -34,44 +39,16 @@ const styles = StyleSheet.create({
   },
 });
 
-const tempStyles = StyleSheet.create({
-  container: {
-    display: "flex",
-    justifyContent: "center",
-    marginBottom: 10,
-    borderRadius: 15,
-    backgroundColor: "white",
-  },
-  link: {
-    display: "flex",
-    padding: 16,
-  },
-  logo: {
-    width: 25,
-    height: 25,
-  },
-  text: {
-    flex: 1,
-    textAlign: "center",
-    justifyContent: "center",
-    alignContent: "center",
-    alignSelf: "center",
-    paddingRight: 0,
-  },
-});
+const UserProfile: React.FC = () => {
+  const dispatch = useContext(ProfileDispatchContext);
+  const state = useContext(ProfileStateContext);
 
-type Props = {
-  profile: UserProfileInterface;
-};
-
-const UserProfile: React.FC<Props> = ({ profile }) => {
+  const { user: { userProfile }, showSidebar } = state;
   const {
     heading,
     subHeading = undefined,
     links = [],
-  } = profile;
-  const dispatch = useContext(ProfileDispatchContext);
-  const state = useContext(ProfileStateContext);
+  } = userProfile;
 
   const profileStyles = StyleSheet.create({
     container: {
@@ -79,6 +56,10 @@ const UserProfile: React.FC<Props> = ({ profile }) => {
       marginTop: 24,
     }
   });
+
+  const openSidebar = () => {
+    dispatch({ type: "toggleSidebar" });
+  };
 
   return (
     <>
@@ -102,11 +83,15 @@ const UserProfile: React.FC<Props> = ({ profile }) => {
         </View>
       </View>
 
-      {/*{ showSettings ? (*/}
-      <View style={styles.sidePanel}>
-        <EditPanel profile={profile} />
-      </View>
-      {/*) }*/}
+      {showSidebar ? (
+        <View style={styles.sidePanel}>
+          <EditPanel />
+        </View>
+      ) : (
+        <Text style={styles.openPanelButton} onPress={() => openSidebar()}>
+          Open Sidebar
+        </Text>
+      )}
     </>
   );
 };
