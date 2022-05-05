@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import { StyleSheet, View, Text } from "react-native";
 import Link from "@links/ui/components/links/Link";
 import { UserProfileInterface } from "@src/interfaces/UserProfileInterface";
 import { EditPanel } from "@src/components/profile/EditPanel";
+import { ProfileDispatchContext, ProfileStateContext } from "@src/pages/page/[username]";
 
 const styles = StyleSheet.create({
   container: {
@@ -69,6 +70,8 @@ const UserProfile: React.FC<Props> = ({ profile }) => {
     subHeading = undefined,
     links = [],
   } = profile;
+  const dispatch = useContext(ProfileDispatchContext);
+  const state = useContext(ProfileStateContext);
 
   const profileStyles = StyleSheet.create({
     container: {

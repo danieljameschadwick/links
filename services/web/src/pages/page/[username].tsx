@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { createContext, useEffect, useReducer, useState } from "react";
 import { StyleSheet, View, Text } from "react-native";
 import Head from "next/head";
 import { useRouter } from "next/router";
@@ -29,17 +29,41 @@ const footerStyles = StyleSheet.create({
   },
 });
 
+const UserReducer = (
+  state: { user: UserInterface | null },
+  action: { type: string, payload: UserInterface }
+) => {
+  switch (action.type) {
+    case "updateUser":
+      return {
+        ...state,
+        user: action.payload,
+      };
+    default:
+      return state;
+  }
+};
+
+const initialState = {
+  user: null,
+};
+
+export const ProfileStateContext = createContext({});
+export const ProfileDispatchContext = createContext({});
+
 const UserPage: React.FC = () => {
   const router = useRouter();
+
   const { username = undefined } = router.query;
-  const [ user, setUser ] = useState<UserInterface | null>();
   const [ httpStatus, setHttpStatus ] = useState<number | null>();
+  const [ state, dispatch ] = useReducer(UserReducer, initialState);
+  const { user = undefined } = state;
 
   useEffect(() => {
     const fetchData = async () => {
       if (!username) return;
 
-      setUser(await fetchUser(username as string));
+      dispatch({ type: "updateUser", payload: await fetchUser(username as string) });
     };
 
     fetchData()
@@ -73,11 +97,13 @@ const UserPage: React.FC = () => {
         <title>Links | {username}</title>
       </Head>
 
-      {/*<ProfileProvider>*/}
-      <View style={profileStyles.container}>
-        <UserProfile profile={userProfile} />
-      </View>
-      {/*</ProfileProvider>*/}
+      <ProfileDispatchContext.Provider value={dispatch}>
+        <ProfileStateContext.Provider value={state}>
+          <View style={profileStyles.container}>
+            <UserProfile profile={userProfile} />
+          </View>
+        </ProfileStateContext.Provider>
+      </ProfileDispatchContext.Provider>
 
       <View style={footerStyles.container}>
         <Text style={footerStyles.text}>
