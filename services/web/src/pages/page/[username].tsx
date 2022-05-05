@@ -4,12 +4,10 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import UserProfile from "@src/components/profile/UserProfile";
 import { fetchUser } from "@src/pages/page/actions";
-import { UserProfileInterface } from "@src/interfaces/ProfileInterface";
 import Loading from "@src/components/loading";
 import Error404 from "@src/pages/404";
 import ExternalLink from "@links/ui/components/links/ExternalLink";
 import { UserInterface } from "@src/interfaces/UserInterface";
-import profile from "@src/pages/settings/profile";
 
 const footerStyles = StyleSheet.create({
   container: {
@@ -17,6 +15,7 @@ const footerStyles = StyleSheet.create({
     bottom: "10px",
     width: "100%",
     textAlign: "center",
+    zIndex: 3, // content + 1
   },
   text: {
     color: "white",
@@ -32,9 +31,7 @@ const footerStyles = StyleSheet.create({
 
 const UserPage: React.FC = () => {
   const router = useRouter();
-  const {
-    username = undefined
-  } = router.query;
+  const { username = undefined } = router.query;
   const [ user, setUser ] = useState<UserInterface | null>();
   const [ httpStatus, setHttpStatus ] = useState<number | null>();
 

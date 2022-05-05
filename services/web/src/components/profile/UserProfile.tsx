@@ -2,6 +2,7 @@ import React from "react";
 import { StyleSheet, View, Text } from "react-native";
 import Link from "@links/ui/components/links/Link";
 import { UserProfileInterface } from "@src/interfaces/UserProfileInterface";
+import { EditPanel } from "@src/components/profile/EditPanel";
 
 const styles = StyleSheet.create({
   container: {
@@ -23,6 +24,12 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontSize: 14,
     marginBottom: 16,
+  },
+  sidePanel: {
+    position: "absolute",
+    right: 0,
+    height: "100%",
+    backgroundColor: "white",
   },
 });
 
@@ -71,25 +78,33 @@ const UserProfile: React.FC<Props> = ({ profile }) => {
   });
 
   return (
-    <View style={profileStyles.container}>
-      <Text accessibilityRole={"header"} style={styles.heading}>
-        {heading}
-      </Text>
-
-      {subHeading && (
-        <Text accessibilityRole={"text"} style={styles.subHeading}>
-          {subHeading}
+    <>
+      <View style={profileStyles.container}>
+        <Text accessibilityRole={"header"} style={styles.heading}>
+          {heading}
         </Text>
-      )}
 
-      <View>
-        {links.map(({ id, text, url, styles, logo = null }) => {
-          return (
-            <Link key={id} text={text} url={url} styles={styles} logo={logo} />
-          );
-        })}
+        {subHeading && (
+          <Text accessibilityRole={"text"} style={styles.subHeading}>
+            {subHeading}
+          </Text>
+        )}
+
+        <View>
+          {links.map(({ id, text, url, styles, logo = null }) => {
+            return (
+              <Link key={id} text={text} url={url} styles={styles} logo={logo} />
+            );
+          })}
+        </View>
       </View>
-    </View>
+
+      {/*{ showSettings ? (*/}
+      <View style={styles.sidePanel}>
+        <EditPanel profile={profile} />
+      </View>
+      {/*) }*/}
+    </>
   );
 };
 
