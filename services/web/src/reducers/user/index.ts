@@ -1,3 +1,3 @@
-import { UserReducer } from "@src/reducers/user/UserReducer";
+import { UserProfileReducer } from "@src/reducers/user/UserProfileReducer";
 
-export default UserReducer;
+export default UserProfileReducer;

@@ -8,6 +8,7 @@ import Error404 from "@src/pages/404";
 import ExternalLink from "@links/ui/components/links/ExternalLink";
 import UserReducer from "@src/reducers/user";
 import InvalidArgumentError from "@src/error/InvalidArgumentError";
+import { UserProfileActionType } from "@src/reducers/user/UserProfileReducer";
 
 const footerStyles = StyleSheet.create({
   container: {
@@ -40,8 +41,8 @@ const initialState = {
   showSidebar: false,
 };
 
-export const ProfileStateContext = createContext(initialState);
 export const ProfileDispatchContext = createContext(initialState);
+export const ProfileStateContext = createContext(initialState);
 
 const UserPage: React.FC = () => {
   const router = useRouter();
@@ -55,7 +56,7 @@ const UserPage: React.FC = () => {
     const fetchData = async () => {
       if (!username) throw new InvalidArgumentError();
 
-      await dispatch({ type: "updateUser", payload: await fetchUser(username as string) });
+      await dispatch({ type: UserProfileActionType.UPDATE_USER, payload: await fetchUser(username as string) });
     };
 
     fetchData()

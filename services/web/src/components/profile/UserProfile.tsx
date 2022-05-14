@@ -4,6 +4,7 @@ import Icon from "react-native-vector-icons/Entypo";
 import Link from "@links/ui/components/links/Link";
 import { EditPanel } from "@src/components/profile/EditPanel";
 import { ProfileDispatchContext, ProfileStateContext } from "@src/pages/page/[username]";
+import { UserProfileActionType } from "@src/reducers/user/UserProfileReducer";
 
 const styles = StyleSheet.create({
   container: {
@@ -58,7 +59,7 @@ const UserProfile: React.FC = () => {
   });
 
   const openSidebar = () => {
-    dispatch({ type: "toggleSidebar" });
+    dispatch({ type: UserProfileActionType.TOGGLE_SIDEBAR, payload: { showSidebar: true } });
   };
 
   return (

@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { StyleSheet, TextInput, View, Text, TouchableOpacity } from "react-native";
 import Icon from "react-native-vector-icons/Entypo";
 import { ProfileDispatchContext, ProfileStateContext } from "@src/pages/page/[username]";
+import { UserProfileActionType } from "@src/reducers/user/UserProfileReducer";
 
 const styles = StyleSheet.create({
   settingPanel: {
@@ -64,7 +65,7 @@ export const EditPanel: React.FC = () => {
   };
 
   const closePanel = () => {
-    dispatch({ type: "toggleSidebar" });
+    dispatch({ type: UserProfileActionType.TOGGLE_SIDEBAR, payload: { showSidebar: false } });
   };
 
   return (
