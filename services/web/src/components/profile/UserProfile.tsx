@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
+import Icon from "react-native-vector-icons/Entypo";
 import Link from "@links/ui/components/links/Link";
 import { EditPanel } from "@src/components/profile/EditPanel";
 import { ProfileDispatchContext, ProfileStateContext } from "@src/pages/page/[username]";
@@ -28,8 +29,7 @@ const styles = StyleSheet.create({
   openPanelButton: {
     height: "auto",
     position: "absolute",
-    right: "0",
-    backgroundColor: "white",
+    right: "7px",
   },
   sidePanel: {
     position: "absolute",
@@ -88,9 +88,9 @@ const UserProfile: React.FC = () => {
           <EditPanel />
         </View>
       ) : (
-        <Text style={styles.openPanelButton} onPress={() => openSidebar()}>
-          Open Sidebar
-        </Text>
+        <TouchableOpacity style={styles.openPanelButton} onPress={() => openSidebar()}>
+          <Icon name={"edit"} size={30} color={"rgb(255,113,0)"} />
+        </TouchableOpacity>
       )}
     </>
   );

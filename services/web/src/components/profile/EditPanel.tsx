@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { StyleSheet, TextInput, View, Text, TouchableOpacity } from "react-native";
+import Icon from "react-native-vector-icons/Entypo";
 import { ProfileDispatchContext, ProfileStateContext } from "@src/pages/page/[username]";
 
 const styles = StyleSheet.create({
@@ -16,12 +17,16 @@ const styles = StyleSheet.create({
     alignItems: "center",
     width: "100%",
     height: "40px",
-    backgroundColor: "rgb(33, 150, 243)",
+    backgroundColor: "rgb(0,0,0)",
   },
   headerText: {
-    color: "rgb(255,255,255)",
+    color: "rgb(255,113,0)",
     fontSize: 16,
     fontWeight: "500",
+  },
+  closeButton: {
+    position: "absolute",
+    right: 10,
   },
   panelContainer: {
     flexGrow: 1,
@@ -37,12 +42,13 @@ const styles = StyleSheet.create({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    height: "30px",
-    backgroundColor: "rgb(33, 150, 243)",
+    height: "35px",
+    backgroundColor: "rgb(0,0,0)",
   },
   buttonText: {
     fontSize: 14,
-    color: "rgb(255,255,255)",
+    fontWeight: "600",
+    color: "rgb(255,113,0)",
   },
 });
 
@@ -68,7 +74,12 @@ export const EditPanel: React.FC = () => {
           Settings
         </Text>
 
-        <Text onPress={() => closePanel()}>X</Text>
+        <TouchableOpacity
+          style={styles.closeButton}
+          onPress={() => closePanel()}
+        >
+          <Icon name={"cross"} size={30} color={"rgb(255,113,0)"} />
+        </TouchableOpacity>
       </View>
 
       <View style={styles.panelContainer}>

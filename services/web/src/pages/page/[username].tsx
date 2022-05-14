@@ -4,10 +4,10 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import UserProfile from "@src/components/profile/UserProfile";
 import { fetchUser } from "@src/pages/page/actions";
-import Loading from "@src/components/loading";
 import Error404 from "@src/pages/404";
 import ExternalLink from "@links/ui/components/links/ExternalLink";
-import { UserInterface } from "@src/interfaces/UserInterface";
+import UserReducer from "@src/reducers/user";
+import InvalidArgumentError from "@src/error/InvalidArgumentError";
 
 const footerStyles = StyleSheet.create({
   container: {
@@ -18,36 +18,22 @@ const footerStyles = StyleSheet.create({
     zIndex: 3, // content + 1
   },
   text: {
-    color: "white",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    color: "rgb(255,255,255)",
     marginBottom: "10px",
   },
   brandText: {
+    fontSize: 17,
     fontWeight: "bold",
+    color: "rgb(255,113,0)",
   },
   linkText: {
-    textDecorationLine: "underline"
+    textDecorationLine: "underline",
+    color: "rgb(255,113,0)",
   },
 });
-
-const UserReducer = (
-  state: { user: UserInterface | null, showSidebar: boolean },
-  action: { type: string, payload: any | null }
-) => {
-  switch (action.type) {
-    case "updateUser":
-      return {
-        ...state,
-        user: action.payload,
-      };
-    case "toggleSidebar":
-      return {
-        ...state,
-        showSidebar: !state.showSidebar,
-      };
-    default:
-      return state;
-  }
-};
 
 const initialState = {
   user: null,
@@ -61,25 +47,33 @@ const UserPage: React.FC = () => {
   const router = useRouter();
 
   const { username = undefined } = router.query;
-  const [ httpStatus, setHttpStatus ] = useState<number | null>();
+  const [ httpStatus, setHttpStatus ] = useState<number | null>(null);
   const [ state, dispatch ] = useReducer(UserReducer, initialState);
   const { user = undefined } = state;
 
   useEffect(() => {
     const fetchData = async () => {
-      if (!username) return;
+      if (!username) throw new InvalidArgumentError();
 
-      dispatch({ type: "updateUser", payload: await fetchUser(username as string) });
+      await dispatch({ type: "updateUser", payload: await fetchUser(username as string) });
     };
 
     fetchData()
-      .catch(() => {
+      .then(() => {
+        setHttpStatus(200);
+      })
+      .catch((error) => {
+        if (error instanceof InvalidArgumentError) {
+          return; // no fetch occurred, username not set
+        }
+
         setHttpStatus(404); // @TODO: improve error handling/logging/rather than catch all
-      });
+      })
+    ;
   }, [ username ]);
 
   if (httpStatus === null) {
-    return <Loading />;
+    return null;
   }
 
   if (!user && httpStatus !== 200) {
