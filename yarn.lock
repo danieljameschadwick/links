@@ -3087,6 +3087,7 @@ __metadata:
     react: 17.0.2
     react-dom: 17.0.2
     react-native: ^0.68.0
+    react-native-media-query: ^1.0.11
     react-native-svg: ^12.3.0
     react-native-vector-icons: ^9.1.0
     react-native-web: ^0.17.7
@@ -7412,6 +7413,13 @@ __metadata:
   peerDependencies:
     webpack: ^4.0.0 || ^5.0.0
   checksum: a45d7ee8105eea7a76caa45286f4b31f9413520511ae99a78886c522305a94c8adf289951f989d239919a9ffc08ea8cac2bf9c362f21b65d6f54f6812e904cc0
+  languageName: node
+  linkType: hard
+
+"css-mediaquery@npm:^0.1.2":
+  version: 0.1.2
+  resolution: "css-mediaquery@npm:0.1.2"
+  checksum: 8e26ae52d8aaaa71893f82fc485363ff0fab494b7d3b3464572aaed50714b8b538d33dbdaa69f0c02cf7f80d1f4d9a77519306c0492223ce91b3987475031a69
   languageName: node
   linkType: hard
 
@@ -15615,6 +15623,15 @@ __metadata:
   dependencies:
     react-native-codegen: "*"
   checksum: ee14e5abc692fadb66527334e00ce57bfb7371fae82711f3a1c658c8896e93daee17019e533b1eb0323606f812fa5c645e67348f4169ecc0cb9fa3de3706b5e6
+  languageName: node
+  linkType: hard
+
+"react-native-media-query@npm:^1.0.11":
+  version: 1.0.11
+  resolution: "react-native-media-query@npm:1.0.11"
+  dependencies:
+    css-mediaquery: ^0.1.2
+  checksum: 340c11de1517ca65dc3c5791ad31a8ab723d81a7e78c8aeca57277137e7bef5b7eae93b5ebf583f74488d037ee5f3c02ac816f8b88211a5777c0240ec24e41ed
   languageName: node
   linkType: hard
 

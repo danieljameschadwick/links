@@ -1,6 +1,7 @@
-import { Children } from "react";
+import React from "react";
+import { AppRegistry } from 'react-native-web';
 import NextDocument, { Html, Head, Main, NextScript } from "next/document";
-import { AppRegistry } from "react-native";
+import { flush } from 'react-native-media-query';
 
 const normalizeNextElements = `
   #__next {
@@ -12,14 +13,13 @@ const normalizeNextElements = `
 
 export default class Document extends NextDocument {
   static async getInitialProps({ renderPage }) {
-    AppRegistry.registerComponent("links", () => Main);
-    const { getStyleElement } = AppRegistry.getApplication("links");
-    const page = await renderPage();
-    const styles = [
-      <style dangerouslySetInnerHTML={{ __html: normalizeNextElements }} />,
-      getStyleElement(),
-    ];
-    return { ...page, styles: Children.toArray(styles) };
+    AppRegistry.registerComponent("Main", () => Main);
+
+    const { getStyleElement } = AppRegistry.getApplication("Main");
+    const { html, head } = await renderPage();
+    const styles = [ getStyleElement(), flush() ];
+
+    return { html, head, styles: React.Children.toArray(styles) };
   };
 
   render() {

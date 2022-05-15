@@ -1,11 +1,14 @@
 import React from "react";
-import { View, Text } from "react-native";
-import { Header } from "@src/components/layout/header/Header";
+import { View } from "react-native";
+import Header from "@src/components/layout/header";
+import { GetStartedPanel } from "@src/components/homepage/panel/GetStartedPanel";
 
 const Index: React.FC = () => {
   return (
     <View>
       <Header />
+
+      <GetStartedPanel />
     </View>
   );
 };

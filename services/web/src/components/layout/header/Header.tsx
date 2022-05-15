@@ -1,17 +1,53 @@
-import { View, Text } from "react-native";
+import { StyleSheet, View, Text } from "react-native";
+
+const styles = StyleSheet.create({
+  container: {
+    display: "flex",
+    flexDirection: "row",
+    width: "100%",
+    height: "50px",
+    padding: "12px",
+  },
+  logoText: {
+    alignSelf: "center",
+    fontSize: 17,
+    fontWeight: "bold",
+    color: "rgb(255,113,0)",
+  },
+  linksContainer: {
+    display: "flex",
+    flexGrow: 1,
+    flexDirection: "row",
+    alignSelf: "center",
+    justifyContent: "flex-end",
+  },
+  link: {
+    padding: "6px",
+  }
+});
 
 export const Header = () => {
   return (
-    <View>
-      <Text>links</Text>
+    <View style={styles.container}>
+      <Text style={styles.logoText}>
+        links
+      </Text>
 
-      <View>
-        <Text onPress={() => window.open("/login", "_self")}>
+      <View style={styles.linksContainer}>
+        <Text
+          accessibilityRole="link"
+          style={styles.link}
+          onPress={() => window.open("/login", "_self")}
+        >
           Login
         </Text>
 
-        <Text onPress={() => window.open("/register", "_self")}>
-          Login
+        <Text
+          accessibilityRole="link"
+          style={styles.link}
+          onPress={() => window.open("/register", "_self")}
+        >
+          Register
         </Text>
       </View>
     </View>

@@ -108,7 +108,7 @@ const UserPage: React.FC = () => {
 
       <View style={footerStyles.container}>
         <Text style={footerStyles.text}>
-          Powered by <Text style={footerStyles.brandText}>links</Text>.
+          Powered by <ExternalLink style={footerStyles.brandText} url={"/"} openInANewTab={false}>links</ExternalLink>.
         </Text>
 
         <Text style={footerStyles.text}>
