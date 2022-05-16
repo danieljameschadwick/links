@@ -1,11 +1,11 @@
 import dynamic from "next/dynamic";
 import React from "react";
 
-const NoSSRWrapper: React.FC = props => {
-  return (
-    <>{props.children}</>
-  );
-};
+type Props = {
+  children: React.ReactNode;
+}
+
+const NoSSRWrapper: React.FC<Props> = ({ children }) => <>{ children }</>;
 
 export default dynamic(() => Promise.resolve(NoSSRWrapper), {
   ssr: false

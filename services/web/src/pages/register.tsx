@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { TextInput, Button } from "react-native";
+import { StyleSheet, TextInput, Button, View } from "react-native";
+import Header from "@src/components/layout/header";
+
+const styles = StyleSheet.create({
+  container: {
+    height: "100%",
+  },
+});
 
 const Register: React.FC = () => {
   const [ form, setForm ] = useState({});
@@ -9,7 +16,9 @@ const Register: React.FC = () => {
   };
 
   return (
-    <>
+    <View style={styles.container}>
+      <Header />
+
       <form>
         <TextInput
           placeholder={"Email"}
@@ -34,7 +43,7 @@ const Register: React.FC = () => {
 
         <Button title={"Register"} onPress={handleSubmit} />
       </form>
-    </>
+    </View>
   );
 };
 

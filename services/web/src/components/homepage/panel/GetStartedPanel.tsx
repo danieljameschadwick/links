@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { Text, TextInput, Button, View } from "react-native-web";
+import { Text, Button, View } from "react-native-web";
 import StyleSheet from "react-native-media-query";
 import Panel from "@src/components/layout/panel";
+import { TextInput } from "@src/components/form/textInput/TextInput";
 
 const { ids, styles } = StyleSheet.create({
   container: {
@@ -87,31 +88,22 @@ export const GetStartedPanel: React.FC = () => {
       <View style={styles.form} dataSet={{ media: ids.form }}>
         {/* on mobile we wont validate as we just show the button */}
 
-        <View style={styles.inputContainer}>
-          <View style={styles.preInputContainer}>
-            <Text style={styles.preInputText}>
-              links.gg/
-            </Text>
-          </View>
-
-          <TextInput
-            style={styles.input}
-            dataSet={{ media: ids.input }}
-            placeholder={""}
-            textContentType={"username"}
-            onChange={(event) => setForm({
-              ...form,
-              username: event.nativeEvent.text,
-            })}
-            onSubmitEditing={handleSubmit}
-          />
-        </View>
+        <TextInput
+          textContentType={"username"}
+          label={"links.gg/"}
+          placeholder={"URL"}
+          onChange={(event) => setForm({
+            ...form,
+            url: event.nativeEvent.text,
+          })}
+          onSubmit={handleSubmit}
+        />
 
         <Button
           style={styles.button}
           title={"Get started for free"}
           onPress={handleSubmit}
-          color={'rgb(255,113,0)'}
+          color={"rgb(255,113,0)"}
         />
       </View>
     </Panel>

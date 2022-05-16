@@ -30,7 +30,7 @@ const Index: React.FC = () => {
   // });
 
   return (
-    <NoSsrWrapper>
+    <NoSsrWrapper> {/* used when styles change due to styling */}
       <View style={styles.container}>
         <Header />
 

@@ -43,7 +43,6 @@ const styles = StyleSheet.create({
 const UserProfile: React.FC = () => {
   const dispatch = useContext(ProfileDispatchContext);
   const state = useContext(ProfileStateContext);
-
   const { user: { userProfile }, showSidebar } = state;
   const {
     heading,
