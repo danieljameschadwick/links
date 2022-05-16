@@ -17,7 +17,11 @@ export default class Document extends NextDocument {
 
     const { getStyleElement } = AppRegistry.getApplication("Main");
     const { html, head } = await renderPage();
-    const styles = [ getStyleElement(), flush() ];
+    const styles = [
+      <style dangerouslySetInnerHTML={{ __html: normalizeNextElements }} />,
+      getStyleElement(),
+      flush(),
+    ];
 
     return { html, head, styles: React.Children.toArray(styles) };
   };
@@ -33,8 +37,8 @@ export default class Document extends NextDocument {
         </Head>
 
         <body style={{ height: "100%", overflow: "hidden" }}>
-        <Main />
-        <NextScript />
+          <Main />
+          <NextScript />
         </body>
       </Html>
     );

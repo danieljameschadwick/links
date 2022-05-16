@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { Text, TextInput, Button, View } from "react-native";
-import StyleSheet from 'react-native-media-query';
+import { Text, TextInput, Button, View } from "react-native-web";
+import StyleSheet from "react-native-media-query";
 import Panel from "@src/components/layout/panel";
 
 const { ids, styles } = StyleSheet.create({
@@ -9,14 +9,20 @@ const { ids, styles } = StyleSheet.create({
     alignSelf: "center",
     alignItems: "center",
     justifyContent: "center",
-    width: "800px",
-    '@media (max-width: 800px)': {
+    width: "667px",
+    textAlign: "center",
+    "@media (max-width: 667px)": {
+      paddingLeft: "12px",
+      paddingRight: "12px",
       width: "100%",
     }
   },
   heading: { // @TODO: make a reusable h1/h2/h3 component for public pages
     fontSize: 26,
     marginBottom: 15,
+  },
+  darkHeading: { // @TODO: make a reusable h1/h2/h3 component for public pages
+    color: "white",
   },
   headingBold: {
     color: "rgb(255,113,0)",
@@ -25,6 +31,10 @@ const { ids, styles } = StyleSheet.create({
   form: {
     display: "flex",
     flexDirection: "column",
+    width: 350,
+    "@media (max-width: 667px)": {
+      width: "100%",
+    }
   },
   inputContainer: {
     display: "flex",
@@ -34,23 +44,32 @@ const { ids, styles } = StyleSheet.create({
   preInputContainer: {
     height: 35,
     justifyContent: "center",
-    border: "1px solid rgb(171,171,171)",
+    backgroundColor: "rgb(245, 246, 248)",
     borderTopLeftRadius: 5,
     borderBottomLeftRadius: 5,
+    padding: "10px",
   },
   preInputText: {
-    // alignSelf: "center",
+    fontWeight: "700",
   },
   input: {
     height: 35,
-    fontSize: 20,
-    border: "1px solid rgb(171,171,171)",
+    fontSize: 14,
+    backgroundColor: "rgb(245, 246, 248)",
     borderTopRightRadius: 5,
     borderBottomRightRadius: 5,
+    width: "100%",
+    outline: "none",
   },
+  button: {
+    width: "100%",
+    backgroundColor: "rgb(255,113,0)",
+  }
 });
 
 export const GetStartedPanel: React.FC = () => {
+  // const colorScheme = useColorScheme();
+  // const heading = colorScheme === "dark" ? [styles.darkHeading , styles.heading] : [styles.heading];
   const [ form, setForm ] = useState({});
 
   const handleSubmit = (): void => {
@@ -65,15 +84,19 @@ export const GetStartedPanel: React.FC = () => {
         Create <Text style={styles.headingBold}>your</Text> landing page for the internet
       </Text>
 
-      <form>
+      <View style={styles.form} dataSet={{ media: ids.form }}>
         {/* on mobile we wont validate as we just show the button */}
 
         <View style={styles.inputContainer}>
           <View style={styles.preInputContainer}>
-            <Text style={styles.preInputText}>links.cc</Text>
+            <Text style={styles.preInputText}>
+              links.gg/
+            </Text>
           </View>
+
           <TextInput
             style={styles.input}
+            dataSet={{ media: ids.input }}
             placeholder={""}
             textContentType={"username"}
             onChange={(event) => setForm({
@@ -84,9 +107,13 @@ export const GetStartedPanel: React.FC = () => {
           />
         </View>
 
-
-        <Button title={"Get started for free"} onPress={handleSubmit} />
-      </form>
+        <Button
+          style={styles.button}
+          title={"Get started for free"}
+          onPress={handleSubmit}
+          color={'rgb(255,113,0)'}
+        />
+      </View>
     </Panel>
   );
-}
+};
