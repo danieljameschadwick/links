@@ -13,7 +13,8 @@
     },
     "scripts": {
         "api:start:dev": "yarn workspace @links/api start:dev",
-        "web:start:dev": "yarn workspace @links/web start:dev"
+        "web:start:dev": "yarn workspace @links/web start:dev",
+        "native:start:dev": "yarn workspace @links/native start:dev"
     },
     "packageManager": "yarn@3.2.0"
 }

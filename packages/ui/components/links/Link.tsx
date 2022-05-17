@@ -25,19 +25,17 @@ type Props = {
   logo?: LinkLogo;
 };
 
-const Link: React.FC<Props> = ({ text, url, styles: propStyles, logo = null }) => {
+const Link: React.FC<Props> = ({ text, url, styles: propStyles = null, logo = null }) => {
   const styles = StyleSheet.create({
     container: {
       display: "flex",
       justifyContent: "center",
       marginBottom: 10,
-      borderRadius: "0.4em",
-      ...propStyles.container,
+      borderRadius: 5,
     },
     link: {
       display: "flex",
       padding: 16,
-      ...propStyles.text,
     },
     logo: {
       width: 25,
@@ -59,7 +57,13 @@ const Link: React.FC<Props> = ({ text, url, styles: propStyles, logo = null }) =
     },
   });
 
-  const textStyle = logo ? StyleSheet.compose(styles.text, logoStyles.text) : styles.text;
+  const containerStyles = [ styles.container ];
+  const textStyles = logo ? [styles.text, logoStyles.text] : [ styles.text ];
+
+  if (propStyles) {
+    if (propStyles.container) containerStyles.push(propStyles.container);
+    if (propStyles.text) textStyles.push(propStyles.text);
+  }
 
   const handlePress = () => {
     Linking.openURL(url);
@@ -72,9 +76,9 @@ const Link: React.FC<Props> = ({ text, url, styles: propStyles, logo = null }) =
   if (Platform.OS === Platforms.WEB) {
     return (
       <TouchableWithoutFeedback>
-        <View style={styles.container}>
+        <View style={containerStyles}>
           <ExternalLink style={styles.link} url={url}>
-            {logo && (
+            { logo && (
               <Image
                 style={styles.logo}
                 accessibilityLabel={logo.altText}
@@ -84,7 +88,7 @@ const Link: React.FC<Props> = ({ text, url, styles: propStyles, logo = null }) =
               />
             )}
 
-            <Text style={textStyle}>{text}</Text>
+            <Text style={textStyles}>{text}</Text>
           </ExternalLink>
         </View>
       </TouchableWithoutFeedback>

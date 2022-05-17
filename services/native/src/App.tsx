@@ -1,18 +1,20 @@
 import React from "react";
-import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
-// import Link from "@links/ui/components/links/Link";
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "#FFFFFF",
     alignItems: "center",
     justifyContent: "center",
   },
+  link: {
+    backgroundColor: "red",
+    height: 200,
+  }
 });
 
-const App = () => {
+const App: React.FC = () => {
   return (
     <View style={styles.container}>
       <Text>
@@ -23,9 +25,8 @@ const App = () => {
       {/*<Link*/}
       {/*  text={"www.danielchadwick.co.uk"}*/}
       {/*  url={"www.danielchadwick.co.uk"}*/}
+      {/*  styles={styles.link}*/}
       {/*/>*/}
-
-      <StatusBar style="auto" />
     </View>
   );
 };

@@ -19,8 +19,7 @@
     "react-native-media-query": "^1.0.11",
     "react-native-svg": "^12.3.0",
     "react-native-vector-icons": "^9.1.0",
-    "react-native-web": "^0.17.7",
-    "typescript": "4.3.2"
+    "react-native-web": "0.17.7"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.16.11",
@@ -39,6 +38,7 @@
     "next-transpile-modules": "^9.0.0",
     "react-test-renderer": "^17.0.2",
     "ts-jest": "^27.1.4",
+    "typescript": "4.3.2",
     "url-loader": "^4.1.1",
     "webpack": "5.39.0"
   }
