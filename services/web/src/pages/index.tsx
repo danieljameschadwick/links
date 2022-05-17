@@ -1,8 +1,9 @@
 import React from "react";
 import { StyleSheet, View } from "react-native-web";
-import Header from "@src/components/layout/header";
-import { GetStartedPanel } from "@src/components/homepage/panel/GetStartedPanel";
 import NoSsrWrapper from "@src/components/noSsrWrapper";
+import { Header } from "@src/components/layout/Header";
+import { GetStartedPanel } from "@src/components/homepage/panel/GetStartedPanel";
+import { UseAnywherePanel } from "@src/components/homepage/panel/UseAnywherePanel";
 
 const styles = StyleSheet.create({
   container: {
@@ -35,6 +36,8 @@ const Index: React.FC = () => {
         <Header />
 
         <GetStartedPanel />
+
+        <UseAnywherePanel />
       </View>
     </NoSsrWrapper>
   );

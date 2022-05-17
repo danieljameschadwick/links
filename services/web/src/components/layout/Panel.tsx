@@ -1,5 +1,11 @@
 import React from "react";
-import { StyleProp, View, ViewStyle } from "react-native";
+import { StyleSheet, StyleProp, View, ViewStyle } from "react-native-web";
+
+const styles = StyleSheet.create({
+  container: {
+    marginBottom: 46,
+  }
+})
 
 type Props = {
   style?: StyleProp<ViewStyle>;
@@ -9,7 +15,7 @@ type Props = {
 
 export const Panel: React.FC<Props> = ({ style = undefined, dataSet = undefined, children }) => {
   return (
-    <View style={style} dataSet={dataSet}>
+    <View style={[ styles.container, style]} dataSet={dataSet}>
       { children }
     </View>
   );

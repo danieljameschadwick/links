@@ -1,3 +1,4 @@
+import ExternalLink from "@links/ui/components/links/ExternalLink";
 import { StyleSheet, View, Text } from "react-native";
 
 const styles = StyleSheet.create({
@@ -29,9 +30,9 @@ const styles = StyleSheet.create({
 export const Header = () => {
   return (
     <View style={styles.container}>
-      <Text style={styles.logoText}>
+      <ExternalLink style={styles.logoText} url={"/"} openInANewTab={false}>
         links
-      </Text>
+      </ExternalLink>
 
       <View style={styles.linksContainer}>
         <Text

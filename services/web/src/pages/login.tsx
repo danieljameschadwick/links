@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { StyleSheet, TextInput, Button, View } from "react-native";
-import Header from "@src/components/layout/header";
+import { Header } from "@src/components/layout/Header";
 
 const styles = StyleSheet.create({
   container: {

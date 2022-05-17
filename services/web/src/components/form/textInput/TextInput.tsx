@@ -10,7 +10,6 @@ const { ids, styles } = StyleSheet.create({
     borderRadius: 5,
   },
   outlineContainer: {
-    // border: "2px solid rgb(154, 154, 154)",
     borderRadius: 8,
     outlineStyle: "solid",
     outlineColor: "rgb(154, 154, 154)",
@@ -37,10 +36,6 @@ const { ids, styles } = StyleSheet.create({
     width: "100%",
     outline: "none",
   },
-  button: {
-    width: "100%",
-    backgroundColor: "rgb(255,113,0)",
-  }
 });
 
 type Props = {
