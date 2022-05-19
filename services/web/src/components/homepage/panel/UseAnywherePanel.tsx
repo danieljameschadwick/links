@@ -1,24 +1,35 @@
 import React from "react";
-import { StyleSheet, View, Text } from "react-native";
+import StyleSheet from "react-native-media-query";
+import { View, Text } from "react-native";
 import { Panel } from "@src/components/layout/Panel";
 
-const styles = StyleSheet.create({
+const { ids, styles } = StyleSheet.create({
   columnContainer: {
     height: 400,
     display: "flex",
     flexDirection: "row",
+    "@media (max-width: 667px)": {
+      height: "auto",
+      flexDirection: "column",
+      flexWrap: "wrap",
+    }
   },
   column: {
     width: "50%",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
+    overflow: "hidden",
+    "@media (max-width: 667px)": {
+      width: "100%",
+    }
   },
   heading: {
     fontSize: 36,
     marginBottom: 10,
   },
   headingAccent: {
+    fontSize: 36,
     color: "rgb(255,113,0)",
     fontWeight: "bold",
   },
@@ -31,8 +42,8 @@ const styles = StyleSheet.create({
 export const UseAnywherePanel: React.FC = () => {
   return (
     <Panel>
-      <View style={styles.columnContainer}>
-        <View style={styles.column}>
+      <View style={styles.columnContainer} dataSet={{ media: ids.columnContainer }}>
+        <View style={styles.column} dataSet={{ media: ids.column }}>
           <View>
             <Text style={styles.heading}>
               Use <Text style={styles.headingAccent}>links</Text> everywhere
@@ -43,13 +54,15 @@ export const UseAnywherePanel: React.FC = () => {
           </View>
         </View>
 
-        {/* @TODO: add native library supported by web, replace linktree source */}
-        <video
-          style={{ height: "auto" }}
-          src={"https://videos.ctfassets.net/lbsm39fugycf/1i6LctbRMzKsEmWCdbZWe8/3aecc0e1dd43fa2e291e9d6778c822ee/link_to_anywhere.mp4"}
-          loop={true}
-          autoPlay={true}
-        />
+        <View style={styles.column} dataSet={{ media: ids.column }}>
+          {/* @TODO: add native library supported by web, replace linktree source */}
+          <video
+            style={{ height: "auto" }}
+            src={"https://videos.ctfassets.net/lbsm39fugycf/1i6LctbRMzKsEmWCdbZWe8/3aecc0e1dd43fa2e291e9d6778c822ee/link_to_anywhere.mp4"}
+            loop={true}
+            autoPlay={true}
+          />
+        </View>
       </View>
     </Panel>
   );

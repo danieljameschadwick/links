@@ -8,9 +8,7 @@ import { UserProfileActionType } from "@src/reducers/user/UserProfileReducer";
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: "center",
-    flexGrow: 1,
-    justifyContent: "center",
+    height: "100%",
   },
   textContainer: {
     alignItems: "center",
@@ -62,7 +60,7 @@ const UserProfile: React.FC = () => {
   };
 
   return (
-    <>
+    <View style={styles.container}>
       <View style={profileStyles.container}>
         <Text accessibilityRole={"header"} style={styles.heading}>
           {heading}
@@ -92,7 +90,7 @@ const UserProfile: React.FC = () => {
           <Icon name={"edit"} size={30} color={"rgb(255,113,0)"} />
         </TouchableOpacity>
       )}
-    </>
+    </View>
   );
 };
 

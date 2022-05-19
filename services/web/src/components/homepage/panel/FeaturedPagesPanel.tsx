@@ -22,7 +22,8 @@ const { ids, styles } = StyleSheet.create({
     fontSize: 22,
     marginBottom: 15,
   },
-  headingBold: {
+  headingAccent: {
+    fontSize: 22,
     color: "rgb(255,113,0)",
     fontWeight: "bold",
   },
@@ -32,7 +33,7 @@ export const FeaturedPagesPanel: React.FC = () => {
   return (
     <Panel style={styles.container} dataSet={{ media: ids.container }}>
       <Text style={styles.heading}>
-        Checkout our <Text style={styles.headingBold}>favourite</Text> landing pages
+        Checkout our <Text style={styles.headingAccent}>favourite</Text> landing pages
       </Text>
 
       <View>

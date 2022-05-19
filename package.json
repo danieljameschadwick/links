@@ -8,13 +8,16 @@
             "services/*"
         ],
         "installConfig": {
-            "hoistingLimits": "dependencies"
+            "hoistingLimits": "workspaces"
         }
     },
     "scripts": {
         "api:start:dev": "yarn workspace @links/api start:dev",
         "web:start:dev": "yarn workspace @links/web start:dev",
-        "native:start:dev": "yarn workspace @links/native start:dev"
+        "expo:start:dev": "yarn workspace @links/expo start:dev"
     },
-    "packageManager": "yarn@3.2.0"
+    "packageManager": "yarn@3.2.0",
+    "devDependencies": {
+        "expo-yarn-workspaces": "^2.0.0"
+    }
 }
