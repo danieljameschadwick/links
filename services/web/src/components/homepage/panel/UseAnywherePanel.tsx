@@ -29,7 +29,6 @@ const { ids, styles } = StyleSheet.create({
     marginBottom: 10,
   },
   headingAccent: {
-    fontSize: 36,
     color: "rgb(255,113,0)",
     fontWeight: "bold",
   },
