@@ -58,6 +58,11 @@ const nextConfig = {
 };
 
 module.exports = withPlugins(
-  [withTM, [withExpo, { projectRoot: __dirname }]],
+  [
+    withTM,
+    [
+      withExpo, { projectRoot: __dirname }
+    ]
+  ],
   nextConfig,
 );

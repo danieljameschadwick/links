@@ -3,11 +3,11 @@
   "version": "0.1.0",
   "license": "UNLICENSED",
   "scripts": {
-    "build": "next build",
     "start": "next start",
     "start:dev": "next dev",
     "test": "jest --watch",
-    "test:ci": "jest --ci"
+    "test:ci": "jest --ci",
+    "build": "next build"
   },
   "dependencies": {
     "@expo/next-adapter": "3.0.1",

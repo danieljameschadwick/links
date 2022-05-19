@@ -8,7 +8,7 @@
             "services/*"
         ],
         "installConfig": {
-            "hoistingLimits": "workspaces"
+            "hoistingLimits": "dependencies"
         }
     },
     "scripts": {
