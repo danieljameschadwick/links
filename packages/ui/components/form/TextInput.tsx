@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import StyleSheet from "react-native-media-query";
 import { Text, TextInput as NativeTextInput, View } from "react-native-web";
 
-const { ids, styles } = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     display: "flex",
     flexDirection: "row",

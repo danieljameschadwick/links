@@ -1,10 +1,8 @@
 import React, { useState } from "react";
-import { Text, Button, View } from "react-native-web";
+import { Linking, Text, Button, View } from "react-native";
 import StyleSheet from "react-native-media-query";
-import { Panel } from "@src/components/layout/Panel";
-import { TextInput } from "@src/components/form/TextInput";
-import { objectToQueryString } from "@src/util/http/objectToQueryString";
-import { UsernameInput } from "@src/components/form/UsernameInput";
+import { Panel } from "@links/ui/components/layout/Panel";
+import { TextInput } from "@links/ui/components/form/TextInput";
 
 const { ids, styles } = StyleSheet.create({
   container: {
@@ -15,11 +13,6 @@ const { ids, styles } = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     textAlign: "center",
-    "@media (max-width: 667px)": {
-      paddingLeft: "12px",
-      paddingRight: "12px",
-      width: "100%",
-    },
   },
   heading: { // @TODO: make a reusable h1/h2/h3 component for public pages
     fontSize: 36,
@@ -54,13 +47,10 @@ export const GetStartedPanel: React.FC = () => {
   // const heading = colorScheme === "dark" ? [styles.darkHeading , styles.heading] : [styles.heading];
   const [ form, setForm ] = useState({});
 
-  const handleSubmit = () => {
+  const handleSubmit = (): void => {
     console.log(form);
 
     // redirect to the register page w/ form data
-
-    const queryString = objectToQueryString(form);
-    window.open(`/register${queryString}`);
   };
 
   return (
@@ -73,12 +63,15 @@ export const GetStartedPanel: React.FC = () => {
         {/* on mobile we wont validate as we just show the button */}
 
         <View style={styles.inputContainer}>
-          <UsernameInput
+          <TextInput
+            textContentType={"username"}
+            label={"links.gg/"}
+            placeholder={"URL"}
             onChange={(event) => setForm({
               ...form,
-              username: event.nativeEvent.text,
+              url: event.nativeEvent.text,
             })}
-            onSubmitEditing={handleSubmit}
+            onSubmit={handleSubmit}
           />
         </View>
 

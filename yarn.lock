@@ -3938,7 +3938,7 @@ __metadata:
     "@babel/core": ^7.14.8
     "@expo/next-adapter": ^3.1.0
     "@gorhom/bottom-sheet": ^4.1.3
-    "@links/ui": "workspace:^"
+    "@links/ui": "*"
     "@types/react": ~17.0.21
     "@types/react-native": ~0.64.12
     expo: ^43.0.0
@@ -3960,9 +3960,9 @@ __metadata:
     react-dom: 17.0.2
     react-native: 0.64.2
     react-native-gesture-handler: ~1.10.2
-    react-native-reanimated: ~2.2.0
+    react-native-reanimated: 2.2.0
     react-native-safe-area-context: 3.3.2
-    react-native-screens: ~3.8.0
+    react-native-screens: 3.8.0
     react-native-web: 0.17.1
     typescript: ^4.3.4
   languageName: unknown
@@ -3976,7 +3976,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@links/ui@workspace:^, @links/ui@workspace:packages/ui":
+"@links/ui@*, @links/ui@workspace:packages/ui":
   version: 0.0.0-use.local
   resolution: "@links/ui@workspace:packages/ui"
   languageName: unknown
@@ -18447,9 +18447,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-reanimated@npm:~2.2.0":
-  version: 2.2.4
-  resolution: "react-native-reanimated@npm:2.2.4"
+"react-native-reanimated@npm:2.2.0":
+  version: 2.2.0
+  resolution: "react-native-reanimated@npm:2.2.0"
   dependencies:
     "@babel/plugin-transform-object-assign": ^7.10.4
     fbjs: ^3.0.0
@@ -18459,7 +18459,7 @@ __metadata:
     react: "*"
     react-native: "*"
     react-native-gesture-handler: "*"
-  checksum: 9f970782087942527bbd7c1b0f904d66abf065f0ec6ef0e6449e44c8c95a301ca523b519d332f2c03ab1fc05a6e5c4d9d1b04563af01e6c943e1b5bf9643489d
+  checksum: faa81f9bcfa846aca54deed82485790ed112d536ad12d2dd0a578868a023ec7ec14da5c46b24af5a911ca89f2e8f74d00313306d5b08780fc3a0ba89ff464d1f
   languageName: node
   linkType: hard
 
@@ -18489,7 +18489,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-screens@npm:~3.8.0":
+"react-native-screens@npm:3.8.0":
   version: 3.8.0
   resolution: "react-native-screens@npm:3.8.0"
   dependencies:

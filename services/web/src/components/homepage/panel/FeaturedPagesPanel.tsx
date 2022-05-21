@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Text, Button, View } from "react-native-web";
 import StyleSheet from "react-native-media-query";
 import { Panel } from "@src/components/layout/Panel";
-import { TextInput } from "@src/components/form/textInput/TextInput";
+import { TextInput } from "@src/components/form/TextInput";
 
 const { ids, styles } = StyleSheet.create({
   container: {
