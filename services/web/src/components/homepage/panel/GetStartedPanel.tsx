@@ -60,7 +60,7 @@ export const GetStartedPanel: React.FC = () => {
     // redirect to the register page w/ form data
 
     const queryString = objectToQueryString(form);
-    window.open(`/register${queryString}`);
+    window.open(`/register${queryString}`, "_self");
   };
 
   return (
