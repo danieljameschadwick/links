@@ -16,7 +16,7 @@ const { ids, styles } = StyleSheet.create({
   outlineContainer: {
     borderRadius: 8,
     outlineStyle: "solid",
-    outlineColor: "rgb(154, 154, 154)",
+    outlineColor: "rgb(124,124,124)",
     outlineWidth: 2,
 
   },

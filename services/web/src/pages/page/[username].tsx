@@ -112,7 +112,7 @@ const UserPage: React.FC = () => {
         </Text>
 
         <Text style={footerStyles.text}>
-          Create your own profile <ExternalLink style={footerStyles.linkText} url={"/"} openInANewTab={false}>here</ExternalLink>.
+          Create your own profile <ExternalLink style={footerStyles.linkText} url={"/register"} openInANewTab={false}>here</ExternalLink>.
         </Text>
       </View>
     </>

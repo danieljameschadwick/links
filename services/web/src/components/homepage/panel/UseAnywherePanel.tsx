@@ -56,10 +56,11 @@ export const UseAnywherePanel: React.FC = () => {
         <View style={styles.column} dataSet={{ media: ids.column }}>
           {/* @TODO: add native library supported by web, replace linktree source */}
           <video
-            style={{ height: "auto" }}
-            src={"https://videos.ctfassets.net/lbsm39fugycf/1i6LctbRMzKsEmWCdbZWe8/3aecc0e1dd43fa2e291e9d6778c822ee/link_to_anywhere.mp4"}
+            style={{ height: "auto", maxHeight: "100%" }}
+            src={"/assets/link_to_anywhere.mp4"}
             loop={true}
             autoPlay={true}
+            muted={true}
           />
         </View>
       </View>

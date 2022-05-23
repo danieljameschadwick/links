@@ -28,9 +28,24 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   openPanelButton: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
     height: "auto",
     position: "absolute",
-    right: "7px",
+    backgroundColor: "rgb(255,113,0)",
+    top: 7,
+    right: 7,
+    paddingTop: 7,
+    paddingBottom: 7,
+    paddingLeft: 10,
+    paddingRight: 10,
+    borderRadius: 7,
+  },
+  editText: {
+    color: "rgb(0,0,0)",
+    paddingRight: 10,
+    fontWeight: 600,
   },
   sidePanel: {
     position: "absolute",
@@ -89,7 +104,9 @@ const UserProfile: React.FC = () => {
         </View>
       ) : (
         <TouchableOpacity style={styles.openPanelButton} onPress={() => openSidebar()}>
-          <Icon name={"edit"} size={30} color={"rgb(255,113,0)"} />
+          <Text style={styles.editText}>Edit</Text>
+
+          <Icon name={"edit"} size={20} color={"rgb(0, 0, 0)"} />
         </TouchableOpacity>
       )}
     </>

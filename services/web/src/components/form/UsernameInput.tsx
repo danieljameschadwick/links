@@ -16,7 +16,7 @@ export const UsernameInput: React.FC<Props> = (
   }
 ) => {
   const helpText = showHelpText
-    ? "This is your what people will use to find your page, and cannot be changed later."
+    ? "This is what people will use to find your page, and cannot be changed later."
     : null
   ;
 
