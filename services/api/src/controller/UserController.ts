@@ -33,7 +33,7 @@ export class UserController {
   }
 
   @Post()
-  async register(
+  async create(
     @Body() createUserDto: CreateUserDTO,
   ): Promise<User | null> {
     const user = await this.userService.create(createUserDto);

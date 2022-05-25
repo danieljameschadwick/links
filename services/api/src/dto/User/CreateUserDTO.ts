@@ -1,14 +1,12 @@
 import { IsEmail, IsNotEmpty, IsString } from 'class-validator';
-import * as bcrypt from 'bcrypt';
-import { Transform } from 'class-transformer';
+import { EncryptDecorator } from '@src/decorator/encryptDecorator';
 
 export class CreateUserDTO {
   @IsEmail()
   @IsNotEmpty()
   email: string;
 
-  // @Encrypt()
-  @Transform(({ value }) => bcrypt.hash(value, 10))
+  @EncryptDecorator()
   @IsNotEmpty()
   password: string;
 
