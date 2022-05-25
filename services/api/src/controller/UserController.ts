@@ -1,5 +1,4 @@
-import { Controller, Get, Param, Res } from '@nestjs/common';
-import { IdParamsDTO } from '@src/dto/IdParamsDTO';
+import { ClassSerializerInterceptor, Controller, Get, Param, Res, UseInterceptors } from '@nestjs/common';
 import { Response } from 'express';
 import { Post } from '@nestjs/common';
 import { User } from '@prisma/client';
@@ -36,17 +35,13 @@ export class UserController {
   @Post()
   async register(
     @Body() createUserDto: CreateUserDTO,
-    @Res() response: Response,
-  ): Promise<Response<User | null>> {
+  ): Promise<User | null> {
     const user = await this.userService.create(createUserDto);
 
     if (user === null) {
-      return response.status(404).send();
+      return null;
     }
 
-    return response
-      .location(`/users/${user.id}`)
-      .send(user)
-    ;
+    return user;
   }
 }

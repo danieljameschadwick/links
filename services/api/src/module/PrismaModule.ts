@@ -3,7 +3,7 @@ import { LinkModule } from '@src/module/LinkModule';
 import { PrismaService } from '@src/service/PrismaService';
 
 @Module({
-  providers: [PrismaService],
-  exports: [PrismaService],
+  providers: [ PrismaService ],
+  exports: [ PrismaService ],
 })
 export class PrismaModule {}
