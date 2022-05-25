@@ -33,41 +33,40 @@ const { ids, styles } = StyleSheet.create({
   heading: {
     fontSize: 36,
     marginBottom: 10,
-  },
-  headingAccent: {
-    color: "rgb(255,113,0)",
-    fontWeight: "bold",
+    textAlign: "right",
   },
   subHeading: {
     fontSize: 18,
     color: "rgb(38, 50, 56)",
+    textAlign: "right",
   },
 });
 
-export const UseAnywherePanel: React.FC = () => {
+export const PrivacyPanel: React.FC = () => {
   return (
     <Panel style={styles.panelContainer}>
       <View style={styles.columnContainer} dataSet={{ media: ids.columnContainer }}>
         <View style={styles.column} dataSet={{ media: ids.column }}>
-          <View>
-            <Text style={styles.heading}>
-              Use <Text style={styles.headingAccent}>links</Text> everywhere.
-            </Text>
-            <Text style={styles.subHeading}>
-              Reach your target audiences with a single click.
-            </Text>
-          </View>
-        </View>
-
-        <View style={styles.column} dataSet={{ media: ids.column }}>
           {/* @TODO: add native library supported by web */}
           <video
             style={{ height: "auto", maxHeight: "100%", maxWidth: "100%" }}
-            src={"/assets/link_to_anywhere.mp4"}
+            src={"/assets/privacy.mp4"}
             loop={true}
             autoPlay={true}
             muted={true}
           />
+        </View>
+
+        <View style={styles.column} dataSet={{ media: ids.column }}>
+          <View>
+            <Text style={styles.heading}>
+              Safe, trusted, private.
+            </Text>
+            <Text style={styles.subHeading}>
+              Privacy is non-negotiable. We're committed to protecting the privacy of you
+              and your visitors.
+            </Text>
+          </View>
         </View>
       </View>
     </Panel>

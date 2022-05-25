@@ -35,7 +35,7 @@ export default class Document extends NextDocument {
           <title>Links</title>
         </Head>
 
-        <body style={{ height: "100%", overflow: "hidden" }}>
+        <body style={{ height: "100%" }}>
           <Main />
           <NextScript />
         </body>
