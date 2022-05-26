@@ -56,7 +56,7 @@ type Props = {
   placeholder: string;
   textContentType: string;
   onChange: (event) => void;
-  onSubmitEditing: () => void;
+  onSubmitEditing?: () => void;
   label?: string | React.ReactNode;
   defaultValue?: string;
   helpText?: string;
@@ -68,7 +68,7 @@ export const TextInput: React.FC<Props> = (
     placeholder,
     textContentType,
     onChange,
-    onSubmitEditing,
+    onSubmitEditing = null,
     label = null,
     defaultValue = null,
     helpText = null,

@@ -4022,6 +4022,7 @@ __metadata:
     patch-package: 6.4.7
     react: 17.0.2
     react-dom: 17.0.2
+    react-hook-form: ^7.31.2
     react-native: 0.68.2
     react-native-media-query: ^1.0.11
     react-native-svg: ^12.3.0
@@ -18572,6 +18573,15 @@ __metadata:
   version: 6.0.10
   resolution: "react-error-overlay@npm:6.0.10"
   checksum: e7384f086a0162eecac8e081fe3c79b32f4ac8690c56bde35ab6b6380d10e6c8375bbb689a450902b6615261fcf6c95ea016fc0b200934667089ca83536bc4a7
+  languageName: node
+  linkType: hard
+
+"react-hook-form@npm:^7.31.2":
+  version: 7.31.2
+  resolution: "react-hook-form@npm:7.31.2"
+  peerDependencies:
+    react: ^16.8.0 || ^17 || ^18
+  checksum: 8a6b0ab7cb893adfbdec6340c6e4c5a702e34948659f67d37dde918ad3f6c1e6f3245e29030453482698dc33b6a48b7bc10d449ecec27997e41794ba5ccd8611
   languageName: node
   linkType: hard
 

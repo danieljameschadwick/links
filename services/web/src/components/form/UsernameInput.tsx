@@ -5,14 +5,14 @@ import { TextInput } from "@src/components/form/TextInput";
 type Props = {
   showHelpText?: boolean;
   onChange: (event: any) => void; // @TODO: figure out what type the native event is
-  onSubmitEditing: () => void;
+  onSubmitEditing?: () => void;
   defaultValue?: string;
 };
 
 export const UsernameInput: React.FC<Props> = (
   {
     onChange,
-    onSubmitEditing,
+    onSubmitEditing = null,
     showHelpText = false,
     defaultValue = null,
   }

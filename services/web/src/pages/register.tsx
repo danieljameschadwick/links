@@ -1,6 +1,7 @@
-import React, { useEffect, useReducer, useState } from "react";
+import React, { useEffect } from "react";
 import { StyleSheet, Button, View } from "react-native";
 import { useRouter } from "next/router";
+import { Controller, useForm } from "react-hook-form";
 import { Header } from "@src/components/layout/Header";
 import { PageContent } from "@src/components/layout/PageContent";
 import { Heading, headerStyles } from "@src/components/layout/text/h1";
@@ -8,11 +9,11 @@ import { TextInput } from "@src/components/form/TextInput";
 import { UsernameInput } from "@src/components/form/UsernameInput";
 import post from "@src/util/http/post";
 
-const styles = StyleSheet.create({
-  container: {
-    height: "100%",
-  },
-});
+type FormData = {
+  username: string;
+  email: string;
+  password: string;
+};
 
 const Register: React.FC = () => {
   const {
@@ -20,31 +21,28 @@ const Register: React.FC = () => {
       username,
     },
   } = useRouter();
-  const [ form, setForm ] = useState({
-    username: username,
-    email: "",
-    password: "",
+  const { control, setValue, handleSubmit, formState, formState: { errors } } = useForm<FormData>({
+    defaultValues: {
+      username,
+      email: "",
+      password: "",
+    },
   });
 
   useEffect(() => {
-    setForm({
-      ...form,
-      username,
-    });
+    setValue("username", username);
   }, [ username ]);
 
-  const handleSubmit = async () => {
-    console.log(form);
-
+  const onSubmit = (async (data) => {
     try {
-      await post(`${process.env.NEXT_PUBLIC_API_URI}/users`, form);
+      await post(`${process.env.NEXT_PUBLIC_API_URI}/users`, data);
     } catch (error) {
       console.log(error); // plug into error handling
     }
 
     // dispatch to user reducer, and authenticate
     // dispatch(USER.AUTHENTICATE, { form // userData })
-  };
+  });
 
   return (
     <View style={styles.container}>
@@ -59,48 +57,71 @@ const Register: React.FC = () => {
           Create an account for free - forever!
         </Heading>
 
-        <form>
-          <UsernameInput
-            onChange={(event) => setForm({
-              ...form,
-              username: event.nativeEvent.text,
-            })}
-            defaultValue={form.username}
-            onSubmitEditing={handleSubmit}
-            showHelpText={true}
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div style={{ color: "red" }}>
+            <pre>
+              {Object.keys(errors).length > 0 && (
+                <label>Errors: {JSON.stringify(errors, null, 2)}</label>
+              )}
+            </pre>
+          </div>
+
+          <Controller
+            control={control}
+            render={({ field: { onChange, value } }) => (
+              <UsernameInput
+                defaultValue={value}
+                onChange={value => onChange(value)}
+                showHelpText={true}
+              />
+            )}
+            name={"username"}
+            rules={{ required: true }}
           />
 
-          <TextInput
-            placeholder={"Email"}
-            textContentType={"emailAddress"}
-            onChange={(event) => setForm({
-              ...form,
-              email: event.nativeEvent.text,
-            })}
-            onSubmitEditing={handleSubmit}
+          <Controller
+            control={control}
+            render={({ field: { onChange } }) => (
+              <TextInput
+                placeholder={"Email"}
+                textContentType={"emailAddress"}
+                onChange={value => onChange(value)}
+              />
+            )}
+            name={"email"}
+            rules={{ required: true }}
           />
 
-          <TextInput
-            secureTextEntry={true}
-            placeholder={"Password"}
-            textContentType={"password"}
-            onChange={(event) => setForm({
-              ...form,
-              password: event.nativeEvent.text,
-            })}
-            onSubmitEditing={handleSubmit}
+          <Controller
+            control={control}
+            render={({ field: { onChange } }) => (
+              <TextInput
+                secureTextEntry={true}
+                placeholder={"Password"}
+                textContentType={"password"}
+                onChange={value => onChange(value)}
+              />
+            )}
+            name={"password"}
+            rules={{ required: true }}
           />
 
           <Button
             accessibilityLabel={"submit"}
             color={"rgb(255,113,0)"}
             title={"Register"}
-            onPress={handleSubmit}
+            onPress={handleSubmit(onSubmit)}
           />
         </form>
       </PageContent>
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    height: "100%",
+  },
+});
 
 export default Register;
