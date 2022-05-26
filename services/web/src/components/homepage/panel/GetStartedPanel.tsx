@@ -55,11 +55,8 @@ export const GetStartedPanel: React.FC = () => {
   const [ form, setForm ] = useState({});
 
   const handleSubmit = () => {
-    console.log(form);
-
-    // redirect to the register page w/ form data
-
     const queryString = objectToQueryString(form);
+
     window.open(`/register${queryString}`, "_self");
   };
 

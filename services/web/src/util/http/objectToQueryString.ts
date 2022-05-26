@@ -12,8 +12,8 @@ export const objectToQueryString = (object: Object): string => {
     return "";
   }
 
-  for (const [ , key ] of Object.entries(object)) {
-    queryString += `url=${key}&`
+  for (const [ id, key ] of Object.entries(object)) {
+    queryString += `${id}=${key}&`
   }
 
   return queryString.slice(0, queryString.length - 1);

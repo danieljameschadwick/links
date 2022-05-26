@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { StyleSheet, Button, View } from "react-native";
 import { useRouter } from "next/router";
 import { Header } from "@src/components/layout/Header";
@@ -14,16 +14,27 @@ const styles = StyleSheet.create({
 });
 
 const Register: React.FC = () => {
-  const { query } = useRouter();
-  const username = query.url as string ?? null;
+  const {
+    query: {
+      username,
+    },
+  } = useRouter();
+
   const [ form, setForm ] = useState({
-    username,
+    username: username,
+    email: "",
+    password: "",
   });
+
+  useEffect(() => {
+    setForm({
+      ...form,
+      username,
+    });
+  }, [ username ]);
 
   const handleSubmit = (): void => {
     console.log(form);
-
-    
   };
 
   return (
@@ -45,7 +56,7 @@ const Register: React.FC = () => {
               ...form,
               username: event.nativeEvent.text,
             })}
-            defaultValue={username}
+            defaultValue={form.username}
             onSubmitEditing={handleSubmit}
             showHelpText={true}
           />
