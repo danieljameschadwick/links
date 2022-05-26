@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { StyleSheet, Button, View } from "react-native";
+import { useRouter } from "next/router";
 import { Header } from "@src/components/layout/Header";
 import { PageContent } from "@src/components/layout/PageContent";
 import { Heading, headerStyles } from "@src/components/layout/text/h1";
@@ -13,10 +14,16 @@ const styles = StyleSheet.create({
 });
 
 const Register: React.FC = () => {
-  const [ form, setForm ] = useState({});
+  const { query } = useRouter();
+  const username = query.url as string ?? null;
+  const [ form, setForm ] = useState({
+    username,
+  });
 
   const handleSubmit = (): void => {
     console.log(form);
+
+    
   };
 
   return (
@@ -38,6 +45,7 @@ const Register: React.FC = () => {
               ...form,
               username: event.nativeEvent.text,
             })}
+            defaultValue={username}
             onSubmitEditing={handleSubmit}
             showHelpText={true}
           />

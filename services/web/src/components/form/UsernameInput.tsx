@@ -6,6 +6,7 @@ type Props = {
   showHelpText?: boolean;
   onChange: (event: any) => void; // @TODO: figure out what type the native event is
   onSubmitEditing: () => void;
+  defaultValue?: string;
 };
 
 export const UsernameInput: React.FC<Props> = (
@@ -13,6 +14,7 @@ export const UsernameInput: React.FC<Props> = (
     onChange,
     onSubmitEditing,
     showHelpText = false,
+    defaultValue = null,
   }
 ) => {
   const helpText = showHelpText
@@ -29,6 +31,7 @@ export const UsernameInput: React.FC<Props> = (
         </Text>
       }
       placeholder={"Username"}
+      defaultValue={defaultValue}
       helpText={helpText}
       onChange={onChange}
       onSubmitEditing={onSubmitEditing}

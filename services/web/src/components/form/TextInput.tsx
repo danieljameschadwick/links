@@ -57,7 +57,8 @@ type Props = {
   textContentType: string;
   onChange: (event) => void;
   onSubmitEditing: () => void;
-  label?: string | React.ReactNode | null;
+  label?: string | React.ReactNode;
+  defaultValue?: string;
   helpText?: string;
   secureTextEntry?: boolean;
 };
@@ -69,6 +70,7 @@ export const TextInput: React.FC<Props> = (
     onChange,
     onSubmitEditing,
     label = null,
+    defaultValue = null,
     helpText = null,
     secureTextEntry = false,
   }
@@ -96,6 +98,7 @@ export const TextInput: React.FC<Props> = (
           style={input}
           dataSet={{ media: ids.input }}
           placeholder={placeholder}
+          defaultValue={defaultValue}
           onChange={onChange}
           onFocus={() => setOnClick(true)}
           onBlur={() => setOnClick(false)}
