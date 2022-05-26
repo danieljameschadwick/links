@@ -1,4 +1,4 @@
-import { IsEmail, IsNotEmpty, IsString } from 'class-validator';
+import { IsEmail, IsNotEmpty, IsOptional, IsString } from 'class-validator';
 import { EncryptDecorator } from '@src/decorator/encryptDecorator';
 
 export class CreateUserDTO {
@@ -15,6 +15,6 @@ export class CreateUserDTO {
   username: string;
 
   @IsString()
-  @IsNotEmpty()
+  @IsOptional()
   name: string;
 }

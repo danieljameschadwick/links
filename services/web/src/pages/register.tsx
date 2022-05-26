@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useReducer, useState } from "react";
 import { StyleSheet, Button, View } from "react-native";
 import { useRouter } from "next/router";
 import { Header } from "@src/components/layout/Header";
@@ -6,6 +6,7 @@ import { PageContent } from "@src/components/layout/PageContent";
 import { Heading, headerStyles } from "@src/components/layout/text/h1";
 import { TextInput } from "@src/components/form/TextInput";
 import { UsernameInput } from "@src/components/form/UsernameInput";
+import post from "@src/util/http/post";
 
 const styles = StyleSheet.create({
   container: {
@@ -19,7 +20,6 @@ const Register: React.FC = () => {
       username,
     },
   } = useRouter();
-
   const [ form, setForm ] = useState({
     username: username,
     email: "",
@@ -33,8 +33,17 @@ const Register: React.FC = () => {
     });
   }, [ username ]);
 
-  const handleSubmit = (): void => {
+  const handleSubmit = async () => {
     console.log(form);
+
+    try {
+      await post(`${process.env.NEXT_PUBLIC_API_URI}/users`, form);
+    } catch (error) {
+      console.log(error); // plug into error handling
+    }
+
+    // dispatch to user reducer, and authenticate
+    // dispatch(USER.AUTHENTICATE, { form // userData })
   };
 
   return (

@@ -6,9 +6,8 @@ import UserProfile from "@src/components/profile/UserProfile";
 import { fetchUser } from "@src/pages/page/actions";
 import Error404 from "@src/pages/404";
 import ExternalLink from "@links/ui/components/links/ExternalLink";
-import UserReducer from "@src/reducers/user";
 import InvalidArgumentError from "@src/error/InvalidArgumentError";
-import { UserProfileActionType } from "@src/reducers/user/UserProfileReducer";
+import { UserProfileActionType, UserProfileReducer } from "@src/reducers/user/UserProfileReducer";
 
 const footerStyles = StyleSheet.create({
   container: {
@@ -49,7 +48,7 @@ const UserPage: React.FC = () => {
 
   const { username = undefined } = router.query;
   const [ httpStatus, setHttpStatus ] = useState<number | null>(null);
-  const [ state, dispatch ] = useReducer(UserReducer, initialState);
+  const [ state, dispatch ] = useReducer(UserProfileReducer, initialState);
   const { user = undefined } = state;
 
   useEffect(() => {
