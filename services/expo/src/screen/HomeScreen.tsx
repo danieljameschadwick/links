@@ -23,10 +23,6 @@ export const HomeScreen: React.FC = () => {
       flex: 1,
       flexDirection: "column",
     },
-    debug: {
-      borderColor: "red",
-      borderWidth: 1,
-    },
   });
 
   const linkStyles = StyleSheet.create({
@@ -48,7 +44,7 @@ export const HomeScreen: React.FC = () => {
 
   return (
     <View style={[styles.container]}>
-      <View style={[styles.headingContainer, styles.debug]}>
+      <View style={[styles.headingContainer]}>
         <Text>
           Daniel Chadwick
         </Text>
