@@ -26,12 +26,19 @@ yarn run web:start:dev
 To add a new package, from the root directory:
 
 ```
-npx lerna add <package> --scope=<service/package> [--scope=c --scope=d]
+lerna add <package> --scope=<service/package> [--scope=c --scope=d]
 ```
 
 E.g.
+
 ```
-npx lerna add @links/ui --scope=@links/web --dev
+lerna add @links/ui --scope=@links/web --dev
+```
+
+Or try:
+
+```
+yarn workspace @links/expo add react-devtools@4.22.0 --dev
 ```
 
 To remove an existing package:

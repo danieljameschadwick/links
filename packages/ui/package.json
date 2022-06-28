@@ -5,6 +5,7 @@
     "license": "UNLICENSED",
     "dependencies": {
         "react": "17.0.2",
+        "react-devtools": "4.22.0",
         "react-dom": "17.0.2",
         "react-native": "0.68.2",
         "react-native-media-query": "1.0.11",

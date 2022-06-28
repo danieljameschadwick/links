@@ -22,8 +22,8 @@ const envConfig = {
 const config = envConfig[STAGE ?? 'development']
 
 export default {
-  name: 'Example',
-  description: 'Expo + Next.js Monorepo Example',
+  name: 'Links',
+  description: '',
   slug: 'example',
   scheme: 'example',
   owner: 'poolpoolpool',
