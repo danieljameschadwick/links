@@ -96,12 +96,22 @@ const Link: React.FC<Props> = ({ text, url, styles: propStyles = null, logo = nu
   }
 
   return (
-    <TouchableWithoutFeedback style={styles.container} onPress={() => handlePress()}>
-      <Text accessibilityRole={"link"} style={styles.text}>
-        {text}
-      </Text>
+    <TouchableWithoutFeedback accessibilityRole={"link"} onPress={() => handlePress()}>
+      <View style={containerStyles}>
+        <Text style={textStyles}>
+          {text}
+        </Text>
+      </View>
     </TouchableWithoutFeedback>
   );
+
+  // return (
+  //   <TouchableWithoutFeedback style={styles.container} onPress={() => handlePress()}>
+  //     <Text accessibilityRole={"link"} style={styles.text}>
+  //       {text}
+  //     </Text>
+  //   </TouchableWithoutFeedback>
+  // );
 };
 
 export default Link;

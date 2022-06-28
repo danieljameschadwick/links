@@ -12,12 +12,24 @@
         }
     },
     "scripts": {
-        "api:start:dev": "yarn workspace @links/api start:dev",
-        "web:start:dev": "yarn workspace @links/web start:dev",
-        "expo:start:dev": "yarn workspace @links/expo start:dev"
+        "install": "yarn lerna exec yarn install",
+        "api:start:dev": "yarn lerna run dev --scope=@links/api",
+        "api:generate": "yarn lerna run generate --scope=@links/api",
+        "web:start:dev": "yarn lerna run dev --scope=@links/web",
+        "expo:start:dev": "yarn lerna run dev --scope=@links/expo",
+        "bootstrap": "yarn lerna bootstrap",
+        "clean": "rm -rf ./packages/*/node_modules && rm -rf ./services/*/node_modules",
+        "graph": "yarn nx graph"
     },
-    "packageManager": "yarn@3.2.0",
     "devDependencies": {
+        "lerna": "^5.1.6",
+        "nx": "^14.3.6",
+        "react": "17.0.2",
+        "react-dom": "17.0.2",
+        "react-native": "0.68.2",
+        "react-native-media-query": "1.0.11",
+        "react-native-web": "0.17.7",
         "expo-yarn-workspaces": "^2.0.0"
-    }
+    },
+    "packageManager": "yarn@1.22.1"
 }

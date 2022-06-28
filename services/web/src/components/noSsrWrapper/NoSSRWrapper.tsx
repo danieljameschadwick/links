@@ -5,7 +5,11 @@ type Props = {
   children: React.ReactNode;
 }
 
-const NoSSRWrapper: React.FC<Props> = ({ children }) => <>{ children }</>;
+const NoSSRWrapper: React.FC<Props> = ({ children }) => {
+  return (
+    <>{children}</>
+  );
+}
 
 export default dynamic(() => Promise.resolve(NoSSRWrapper), {
   ssr: false
