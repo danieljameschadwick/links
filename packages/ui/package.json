@@ -2,5 +2,12 @@
     "name": "@links/ui",
     "version": "0.0.1",
     "type": "module",
-    "license": "UNLICENSED"
+    "license": "UNLICENSED",
+    "dependencies": {
+        "react": "17.0.2",
+        "react-dom": "17.0.2",
+        "react-native": "0.68.2",
+        "react-native-media-query": "1.0.11",
+        "react-native-web": "0.17.7"
+    }
 }

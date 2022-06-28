@@ -1,5 +1,5 @@
-import ExternalLink from "@links/ui/components/links/ExternalLink";
 import { StyleSheet, View, Text } from "react-native";
+import ExternalLink from "@links/ui/components/links/ExternalLink";
 
 const styles = StyleSheet.create({
   container: {
