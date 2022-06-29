@@ -1,7 +1,6 @@
 const path = require("path");
 const { withExpo } = require("@expo/next-adapter");
 const withPlugins = require("next-compose-plugins");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 const withTM = require("next-transpile-modules")([
   "@links/ui",
