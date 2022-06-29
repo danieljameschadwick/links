@@ -8,7 +8,7 @@ async function bootstrap() {
   app.enableCors();
   app.useGlobalPipes(new ValidationPipe({ transform: true }));
   app.useGlobalInterceptors(
-    new ClassSerializerInterceptor(app.get(Reflector))
+    new ClassSerializerInterceptor(app.get(Reflector)),
   );
 
   await app.listen(process.env.PORT ?? 4000);
