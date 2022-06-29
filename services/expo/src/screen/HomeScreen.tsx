@@ -9,32 +9,47 @@ export const HomeScreen: React.FC = () => {
     container: {
       flex: 1,
       flexDirection: "column",
-      justifyContent: "center",
+      justifyContent: "flex-start",
       alignItems: "center",
+      width: "100%",
       paddingTop: insets.top,
       paddingBottom: insets.bottom
     },
     headingContainer: {
-      flex: 1,
-      alignItems: "center",
-      marginBottom: 10,
+      width: "100%",
+      marginBottom: 5,
     },
     linksContainer: {
       flex: 1,
       flexDirection: "column",
+      justifyContent: "flex-start",
+      width: "100%",
+      padding: 10,
     },
+    headingText: {
+      fontSize: 24,
+      fontWeight: "bold",
+      marginBottom: 2,
+      textAlign: "center",
+    },
+    subHeadingText: {
+      fontSize: 18,
+      textAlign: "center",
+    }
   });
 
+  const linkHeight = 50;
   const linkStyles = StyleSheet.create({
     container: {
       flex: 1,
       justifyContent: "center",
       alignItems: "center",
+      maxHeight: linkHeight,
       backgroundColor: "black",
-      maxHeight: 35,
     },
     text: {
       color: "white",
+      lineHeight: linkHeight,
     },
   });
 
@@ -43,18 +58,18 @@ export const HomeScreen: React.FC = () => {
   };
 
   return (
-    <View style={[styles.container]}>
-      <View style={[styles.headingContainer]}>
-        <Text>
+    <View style={[ styles.container ]}>
+      <View style={[ styles.headingContainer ]}>
+        <Text style={[ styles.headingText ]}>
           Daniel Chadwick
         </Text>
 
-        <Text>
+        <Text style={[ styles.subHeadingText ]}>
           Developer
         </Text>
       </View>
 
-      <View style={[styles.linksContainer]}>
+      <View style={[ styles.linksContainer ]}>
         <Link
           text={"www.danielchadwick.co.uk"}
           url={"http://www.danielchadwick.co.uk"}
