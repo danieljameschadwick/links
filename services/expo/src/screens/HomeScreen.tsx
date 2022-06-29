@@ -1,6 +1,7 @@
 import React from "react";
-import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { ScreenLink } from "../components/link/ScreenLink";
 
 interface Props {
   navigation: any; // @TODO: investigate type
@@ -16,17 +17,18 @@ export const HomeScreen: React.FC<Props> = ({ navigation }) => {
       alignItems: "center",
       width: "100%",
       paddingTop: insets.top,
-      paddingBottom: insets.bottom
+      paddingBottom: insets.bottom,
+      paddingLeft: 10,
+      paddingRight: 10,
     },
   });
 
   return (
-    <View style={[ styles.container ]}>
-      <TouchableOpacity onPress={() => navigation.navigate('Links')}>
-        <Text>
-          Daniel Chadwick's Profile
-        </Text>
-      </TouchableOpacity>
+    <View style={[ styles.container, styles.debug ]}>
+      <ScreenLink
+        text={"Daniel Chadwick's Profile"}
+        onPress={() => navigation.navigate("Links")}
+      />
     </View>
   );
 };

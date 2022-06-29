@@ -19,13 +19,6 @@ export const LinkScreen: React.FC = () => {
       width: "100%",
       marginBottom: 5,
     },
-    linksContainer: {
-      flex: 1,
-      flexDirection: "column",
-      justifyContent: "flex-start",
-      width: "100%",
-      padding: 10,
-    },
     headingText: {
       fontSize: 24,
       fontWeight: "bold",
@@ -35,6 +28,13 @@ export const LinkScreen: React.FC = () => {
     subHeadingText: {
       fontSize: 18,
       textAlign: "center",
+    },
+    linksContainer: {
+      flex: 1,
+      flexDirection: "column",
+      justifyContent: "flex-start",
+      width: "100%",
+      padding: 10,
     },
   });
 

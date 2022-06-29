@@ -4,8 +4,8 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import { StyleSheet } from "react-native";
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { HomeScreen } from "./src/screen/HomeScreen";
-import { LinkScreen } from "./src/screen/LinkScreen";
+import { HomeScreen } from "./src/screens/HomeScreen";
+import { LinkScreen } from "./src/screens/LinkScreen";
 
 const styles = StyleSheet.create({
   container: {
