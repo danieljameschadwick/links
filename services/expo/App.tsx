@@ -1,11 +1,11 @@
 import React from "react";
-import { enableScreens } from "react-native-screens";
 import { StatusBar } from "expo-status-bar";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-import { StyleSheet, Alert, TouchableOpacity, Text, View } from "react-native";
+import { StyleSheet } from "react-native";
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { HomeScreen } from "./src/screen/HomeScreen";
-
-enableScreens(true);
+import { LinkScreen } from "./src/screen/LinkScreen";
 
 const styles = StyleSheet.create({
   container: {
@@ -13,12 +13,19 @@ const styles = StyleSheet.create({
   }
 });
 
+const Stack = createNativeStackNavigator();
+
 const App: React.FC = () => {
   return (
     <SafeAreaProvider style={styles.container}>
       <StatusBar />
 
-      <HomeScreen />
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="Index">
+          <Stack.Screen name="Index" component={HomeScreen} options={{ title: 'Home' }} />
+          <Stack.Screen name="Links" component={LinkScreen} options={{ headerShown: false }} />
+        </Stack.Navigator>
+      </NavigationContainer>
     </SafeAreaProvider>
   );
 };

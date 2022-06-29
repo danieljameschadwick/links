@@ -104,14 +104,6 @@ const Link: React.FC<Props> = ({ text, url, styles: propStyles = null, logo = nu
       </View>
     </TouchableWithoutFeedback>
   );
-
-  // return (
-  //   <TouchableWithoutFeedback style={styles.container} onPress={() => handlePress()}>
-  //     <Text accessibilityRole={"link"} style={styles.text}>
-  //       {text}
-  //     </Text>
-  //   </TouchableWithoutFeedback>
-  // );
 };
 
 export default Link;

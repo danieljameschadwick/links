@@ -1,9 +1,12 @@
 import React from "react";
-import { StyleSheet, Alert, TouchableOpacity, View, Text } from "react-native";
+import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import Link from "@links/ui/components/links/Link";
 
-export const HomeScreen: React.FC = () => {
+interface Props {
+  navigation: any; // @TODO: investigate type
+}
+
+export const HomeScreen: React.FC<Props> = ({ navigation }) => {
   const insets = useSafeAreaInsets();
   const styles = StyleSheet.create({
     container: {
@@ -15,73 +18,15 @@ export const HomeScreen: React.FC = () => {
       paddingTop: insets.top,
       paddingBottom: insets.bottom
     },
-    headingContainer: {
-      width: "100%",
-      marginBottom: 5,
-    },
-    linksContainer: {
-      flex: 1,
-      flexDirection: "column",
-      justifyContent: "flex-start",
-      width: "100%",
-      padding: 10,
-    },
-    headingText: {
-      fontSize: 24,
-      fontWeight: "bold",
-      marginBottom: 2,
-      textAlign: "center",
-    },
-    subHeadingText: {
-      fontSize: 18,
-      textAlign: "center",
-    }
   });
-
-  const linkHeight = 50;
-  const linkStyles = StyleSheet.create({
-    container: {
-      flex: 1,
-      justifyContent: "center",
-      alignItems: "center",
-      maxHeight: linkHeight,
-      backgroundColor: "black",
-    },
-    text: {
-      color: "white",
-      lineHeight: linkHeight,
-    },
-  });
-
-  const handlePress = () => {
-    Alert.alert("Test alert");
-  };
 
   return (
     <View style={[ styles.container ]}>
-      <View style={[ styles.headingContainer ]}>
-        <Text style={[ styles.headingText ]}>
-          Daniel Chadwick
+      <TouchableOpacity onPress={() => navigation.navigate('Links')}>
+        <Text>
+          Daniel Chadwick's Profile
         </Text>
-
-        <Text style={[ styles.subHeadingText ]}>
-          Developer
-        </Text>
-      </View>
-
-      <View style={[ styles.linksContainer ]}>
-        <Link
-          text={"www.danielchadwick.co.uk"}
-          url={"http://www.danielchadwick.co.uk"}
-          styles={linkStyles}
-        />
-
-        <Link
-          text={"GitHub"}
-          url={"http://www.github.com/danieljameschadwick"}
-          styles={linkStyles}
-        />
-      </View>
+      </TouchableOpacity>
     </View>
   );
 };
