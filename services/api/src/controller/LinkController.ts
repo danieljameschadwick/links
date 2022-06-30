@@ -13,7 +13,7 @@ export class LinkController {
   constructor(private readonly linkService: LinkService) {}
 
   @Get()
-  getAll() {
+  getAll(): Promise<Link[]> {
     return this.linkService.findAll();
   }
 
@@ -30,7 +30,7 @@ export class LinkController {
       return response.status(404).send();
     }
 
-    return response.send(link);
+    return response.status(200).send(link);
   }
 
   @Post()
