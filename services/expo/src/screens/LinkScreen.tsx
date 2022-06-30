@@ -1,9 +1,38 @@
-import React from "react";
-import { StyleSheet, View, Text } from "react-native";
+import React, { useEffect, useState } from "react";
+import { StyleSheet, View, Text, ViewStyle, StyleProp } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import Link from "@links/ui/components/links/Link";
 
-export const LinkScreen: React.FC = () => {
+// @TODO: move to typing package
+interface User {
+  username: string;
+  userProfile?: {
+    heading: string;
+    subHeading?: string;
+    styles: StyleProp<ViewStyle>;
+    links: LinkInterface[],
+  },
+}
+
+interface LinkInterface {
+  id: number;
+  text: string;
+  url: string;
+  styles: StyleProp<ViewStyle>;
+  logo?: {
+    url: string;
+    altText: string;
+  };
+}
+
+interface Props {
+  route: any;
+}
+
+export const LinkScreen: React.FC<Props> = ({ route }) => {
+  const [ user, setUser ] = useState<User | null>(null);
+  const username = route.params?.username;
+
   const insets = useSafeAreaInsets();
   const styles = StyleSheet.create({
     container: {
@@ -13,7 +42,7 @@ export const LinkScreen: React.FC = () => {
       alignItems: "center",
       width: "100%",
       paddingTop: insets.top,
-      paddingBottom: insets.bottom
+      paddingBottom: insets.bottom,
     },
     headingContainer: {
       width: "100%",
@@ -38,45 +67,61 @@ export const LinkScreen: React.FC = () => {
     },
   });
 
-  const linkHeight = 50;
-  const linkStyles = StyleSheet.create({
-    container: {
-      flex: 1,
-      justifyContent: "center",
-      alignItems: "center",
-      maxHeight: linkHeight,
-      backgroundColor: "black",
-    },
-    text: {
-      color: "white",
-      lineHeight: linkHeight,
-    },
-  });
+  useEffect(() => {
+    const fetchData = async (username) => {
+      // @TODO: replace with env var
+      const response = await fetch(`http://localhost:4000/users/${username}`);
+      const data = await response.json();
+
+      if (response.status !== 200) {
+        return; // @TODO: error handling
+      }
+
+      setUser(data);
+    }
+
+    try {
+      fetchData(username);
+    } catch (error) {
+      console.log('error');
+    }
+  }, [ username ]);
+
+  if (!user) {
+    return (
+      <View style={[ styles.container ]}>
+        <Text>Loading..</Text>
+      </View>
+    );
+  }
+
+  const { userProfile: {
+    heading,
+    subHeading,
+    styles: profileStyles,
+    links
+  } } = user;
 
   return (
-    <View style={[ styles.container ]}>
+    <View style={[ styles.container, profileStyles.container ]}>
       <View style={[ styles.headingContainer ]}>
-        <Text style={[ styles.headingText ]}>
-          Daniel Chadwick
+        <Text style={[ styles.headingText, profileStyles.headingText ]}>
+          { heading }
         </Text>
 
-        <Text style={[ styles.subHeadingText ]}>
-          Developer
-        </Text>
+        { subHeading && (
+          <Text style={[ styles.subHeadingText, profileStyles.headingText ]}>
+            { subHeading }
+          </Text>
+        )}
       </View>
 
       <View style={[ styles.linksContainer ]}>
-        <Link
-          text={"www.danielchadwick.co.uk"}
-          url={"http://www.danielchadwick.co.uk"}
-          styles={linkStyles}
-        />
-
-        <Link
-          text={"GitHub"}
-          url={"http://www.github.com/danieljameschadwick"}
-          styles={linkStyles}
-        />
+        {links.map(({ id, text, url, styles }) => {
+          return (
+            <Link key={id} text={text} url={url} styles={styles} />
+          );
+        })}
       </View>
     </View>
   );

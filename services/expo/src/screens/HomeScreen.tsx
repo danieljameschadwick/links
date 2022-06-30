@@ -24,10 +24,12 @@ export const HomeScreen: React.FC<Props> = ({ navigation }) => {
   });
 
   return (
-    <View style={[ styles.container, styles.debug ]}>
+    <View style={[ styles.container ]}>
       <ScreenLink
         text={"Daniel Chadwick's Profile"}
-        onPress={() => navigation.navigate("Links")}
+        onPress={() => navigation.navigate("Links", {
+          username: "dan",
+        })}
       />
     </View>
   );

@@ -95,10 +95,23 @@ const Link: React.FC<Props> = ({ text, url, styles: propStyles = null, logo = nu
     );
   }
 
+  const linkHeight = 50;
+  const linkStyle = StyleSheet.create({
+    container: {
+      flex: 1,
+      justifyContent: "center",
+      alignItems: "center",
+      maxHeight: linkHeight,
+    },
+    text: {
+      lineHeight: linkHeight,
+    },
+  });
+
   return (
     <TouchableWithoutFeedback accessibilityRole={"link"} onPress={() => handlePress()}>
-      <View style={containerStyles}>
-        <Text style={textStyles}>
+      <View style={[ linkStyle.container, containerStyles ]}>
+        <Text style={[ linkStyle.text, textStyles ]}>
           {text}
         </Text>
       </View>

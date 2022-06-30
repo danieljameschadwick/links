@@ -87,7 +87,7 @@ const UserPage: React.FC = () => {
       alignItems: "center",
       width: "100%",
       height: "100%",
-      ...userProfile.styles, // @TODO: override API styling
+      ...userProfile.styles.container, // @TODO: override API styling
     },
   });
 

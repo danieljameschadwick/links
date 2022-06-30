@@ -8,9 +8,7 @@ import { UserProfileActionType } from "@src/reducers/user/UserProfileReducer";
 
 const styles = StyleSheet.create({
   container: {
-    flexGrow: 1,
-    alignItems: "center",
-    justifyContent: "center",
+    marginTop: 24,
   },
   textContainer: {
     alignItems: "center",
@@ -62,15 +60,9 @@ const UserProfile: React.FC = () => {
   const {
     heading,
     subHeading = undefined,
+    styles: profileStyles,
     links = [],
   } = userProfile;
-
-  const profileStyles = StyleSheet.create({
-    container: {
-      maxWidth: 500,
-      marginTop: 24,
-    }
-  });
 
   const openSidebar = () => {
     dispatch({ type: UserProfileActionType.TOGGLE_SIDEBAR, payload: { showSidebar: true } });
@@ -78,13 +70,13 @@ const UserProfile: React.FC = () => {
 
   return (
     <>
-      <View style={profileStyles.container}>
-        <Text accessibilityRole={"header"} style={styles.heading}>
+      <View style={[ styles.container ]}>
+        <Text accessibilityRole={"header"} style={[ styles.heading, profileStyles.headingText ]}>
           {heading}
         </Text>
 
         {subHeading && (
-          <Text accessibilityRole={"text"} style={styles.subHeading}>
+          <Text accessibilityRole={"text"} style={[ styles.subHeading, profileStyles.headingText ]}>
             {subHeading}
           </Text>
         )}
