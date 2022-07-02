@@ -95,12 +95,22 @@ export const LinkScreen: React.FC<Props> = ({ route }) => {
     );
   }
 
-  const { userProfile: {
+  const { userProfile } = user;
+
+  if (!userProfile) {
+    return (
+      <View style={[ styles.container ]}>
+        <Text>Profile under construction.</Text>
+      </View>
+    );
+  }
+
+  const {
     heading,
-    subHeading,
+    subHeading = null,
     styles: profileStyles,
-    links
-  } } = user;
+    links = [],
+  } = userProfile;
 
   return (
     <View style={[ styles.container, profileStyles.container ]}>
@@ -117,9 +127,15 @@ export const LinkScreen: React.FC<Props> = ({ route }) => {
       </View>
 
       <View style={[ styles.linksContainer ]}>
-        {links.map(({ id, text, url, styles }) => {
+        {links.map(({ id, text, url, styles, logo }) => {
           return (
-            <Link key={id} text={text} url={url} styles={styles} />
+            <Link
+              key={id}
+              text={text}
+              url={url}
+              styles={styles}
+              logo={logo}
+            />
           );
         })}
       </View>

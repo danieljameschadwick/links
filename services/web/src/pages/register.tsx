@@ -16,14 +16,11 @@ type FormData = {
 };
 
 const Register: React.FC = () => {
-  const {
-    query: {
-      username,
-    },
-  } = useRouter();
+  const { query } = useRouter();
+  const username = query.username as string;
   const { control, setValue, handleSubmit, formState, formState: { errors } } = useForm<FormData>({
     defaultValues: {
-      username,
+      username: username || "",
       email: "",
       password: "",
     },
@@ -70,7 +67,7 @@ const Register: React.FC = () => {
             control={control}
             render={({ field: { onChange, value } }) => (
               <UsernameInput
-                defaultValue={value}
+                defaultValue={value || ""}
                 onChange={value => onChange(value)}
                 showHelpText={true}
               />
@@ -81,10 +78,11 @@ const Register: React.FC = () => {
 
           <Controller
             control={control}
-            render={({ field: { onChange } }) => (
+            render={({ field: { onChange, value } }) => (
               <TextInput
                 placeholder={"Email"}
                 textContentType={"emailAddress"}
+                defaultValue={value || ""}
                 onChange={value => onChange(value)}
               />
             )}
@@ -94,10 +92,11 @@ const Register: React.FC = () => {
 
           <Controller
             control={control}
-            render={({ field: { onChange } }) => (
+            render={({ field: { onChange, value } }) => (
               <TextInput
                 secureTextEntry={true}
                 placeholder={"Password"}
+                defaultValue={value || ""}
                 textContentType={"password"}
                 onChange={value => onChange(value)}
               />

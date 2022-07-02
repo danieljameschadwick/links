@@ -3,7 +3,7 @@ import React from "react";
 
 interface Props {
   text: string;
-  onPress: () => {};
+  onPress: () => void;
 }
 
 export const ScreenLink: React.FC<Props> = ({ text, onPress }) => {
@@ -12,6 +12,7 @@ export const ScreenLink: React.FC<Props> = ({ text, onPress }) => {
       height: 50,
       width: "100%",
       backgroundColor: "black",
+      marginBottom: 10,
     },
     text: {
       color: "white",

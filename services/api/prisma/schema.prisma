@@ -36,14 +36,16 @@ model ProfileLogo {
 }
 
 model Link {
-  id              Int             @default(autoincrement()) @id
+  id              Int               @default(autoincrement()) @id
   text            String
   url             String
-  active          Boolean?        @default(true)
-  userProfile     UserProfile?    @relation(fields: [userProfileId], references: [id])
+  active          Boolean?          @default(true)
+  userProfile     UserProfile?      @relation(fields: [userProfileId], references: [id])
   userProfileId   Int?
   styles          Json?
   logo            LinkLogo?
+  displayOrder    Int               @default(autoincrement())
+  @@unique([userProfileId, displayOrder], map: "userProfileId_displayOrder")
 }
 
 model LinkLogo {

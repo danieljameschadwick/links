@@ -1,7 +1,6 @@
 import React from "react";
 import {
   Image,
-  Linking,
   Platform,
   StyleSheet,
   Text,
@@ -12,6 +11,7 @@ import {
 } from "react-native";
 import { Platforms } from "@links/ui/util/enum/Platforms";
 import ExternalLink from "@links/ui/components/links/ExternalLink";
+import AppLink from "./AppLink";
 
 type LinkLogo = {
   url: string;
@@ -57,17 +57,13 @@ const Link: React.FC<Props> = ({ text, url, styles: propStyles = null, logo = nu
     },
   });
 
-  const containerStyles = [ styles.container ];
-  const textStyles = logo ? [styles.text, logoStyles.text] : [ styles.text ];
+  const containerStyle = [ styles.container ];
+  const textStyle = logo ? [styles.text, logoStyles.text] : [ styles.text ];
 
   if (propStyles) {
-    if (propStyles.container) containerStyles.push(propStyles.container);
-    if (propStyles.text) textStyles.push(propStyles.text);
+    if (propStyles.container) containerStyle.push(propStyles.container);
+    if (propStyles.text) textStyle.push(propStyles.text);
   }
-
-  const handlePress = () => {
-    Linking.openURL(url);
-  };
 
   // The purpose of TouchableWithoutFeedback is just to stop propagating
   // press events to parents
@@ -76,7 +72,7 @@ const Link: React.FC<Props> = ({ text, url, styles: propStyles = null, logo = nu
   if (Platform.OS === Platforms.WEB) {
     return (
       <TouchableWithoutFeedback>
-        <View style={containerStyles}>
+        <View style={containerStyle}>
           <ExternalLink style={styles.link} url={url}>
             { logo && (
               <Image
@@ -88,34 +84,21 @@ const Link: React.FC<Props> = ({ text, url, styles: propStyles = null, logo = nu
               />
             )}
 
-            <Text style={textStyles}>{text}</Text>
+            <Text style={textStyle}>{text}</Text>
           </ExternalLink>
         </View>
       </TouchableWithoutFeedback>
     );
   }
 
-  const linkHeight = 50;
-  const linkStyle = StyleSheet.create({
-    container: {
-      flex: 1,
-      justifyContent: "center",
-      alignItems: "center",
-      maxHeight: linkHeight,
-    },
-    text: {
-      lineHeight: linkHeight,
-    },
-  });
-
   return (
-    <TouchableWithoutFeedback accessibilityRole={"link"} onPress={() => handlePress()}>
-      <View style={[ linkStyle.container, containerStyles ]}>
-        <Text style={[ linkStyle.text, textStyles ]}>
-          {text}
-        </Text>
-      </View>
-    </TouchableWithoutFeedback>
+    <AppLink
+      text={text}
+      url={url}
+      containerStyle={containerStyle}
+      textStyle={textStyle}
+      logo={logo}
+    />
   );
 };
 

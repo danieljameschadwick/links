@@ -22,9 +22,14 @@ const styles = StyleSheet.create({
 });
 
 const Login: React.FC = () => {
-  const [ form, setForm ] = useState({});
+  const [ form, setForm ] = useState({
+    email: '',
+    password: '',
+  });
+  const { email, password } = form;
 
   const handleSubmit = (): void => {
+    // @TODO: handle login
     console.log(form);
   };
 
@@ -45,6 +50,7 @@ const Login: React.FC = () => {
               ...form,
               email: event.nativeEvent.text,
             })}
+            defaultValue={email}
             onSubmitEditing={handleSubmit}
           />
 
@@ -56,6 +62,7 @@ const Login: React.FC = () => {
               ...form,
               password: event.nativeEvent.text,
             })}
+            defaultValue={password}
             onSubmitEditing={handleSubmit}
           />
 

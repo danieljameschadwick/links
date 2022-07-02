@@ -16,7 +16,10 @@ export class UserService {
             links: {
               include: {
                 logo: true,
-              }
+              },
+              orderBy: {
+                displayOrder: 'asc',
+              },
             },
           },
         },
@@ -33,7 +36,10 @@ export class UserService {
             links: {
               include: {
                 logo: true,
-              }
+              },
+              orderBy: {
+                displayOrder: 'asc',
+              },
             },
           },
         },
@@ -50,7 +56,10 @@ export class UserService {
             links: {
               include: {
                 logo: true,
-              }
+              },
+              orderBy: {
+                displayOrder: 'asc',
+              },
             },
           },
         },
