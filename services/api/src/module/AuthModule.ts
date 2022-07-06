@@ -6,7 +6,8 @@ import { UserModule } from '@src/module/UserModule';
 import { AuthController } from '@src/controller/AuthController';
 import { JwtModule } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
-import { JwtStrategy } from '@src/auth/JwtStrategy';
+import { RefreshTokenStrategy } from '@src/auth/strategy/RefreshTokenStrategy';
+import { AccessTokenStrategy } from '@src/auth/strategy/AccessTokenStrategy';
 
 @Module({
   imports: [
@@ -21,10 +22,10 @@ import { JwtStrategy } from '@src/auth/JwtStrategy';
           },
         };
       },
-      inject: [ConfigService],
+      inject: [ ConfigService ],
     }),
   ],
   controllers: [ AuthController ],
-  providers: [ AuthService, LocalStrategy, JwtStrategy ],
+  providers: [ AuthService, LocalStrategy, AccessTokenStrategy, RefreshTokenStrategy ],
 })
 export class AuthModule {}

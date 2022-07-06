@@ -1,9 +1,10 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import React, { useEffect, useState } from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, Text } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { ScreenLink } from "../components/link/ScreenLink";
 import { RootStackParamList } from "../typing/typing";
+import { API_URL } from "@env";
 
 type Props = NativeStackScreenProps<RootStackParamList, "Index">;
 
@@ -14,7 +15,7 @@ export const HomeScreen: React.FC<Props> = ({ navigation }) => {
   useEffect(() => {
     const fetchData = async () => {
       // @TODO: replace with env var
-      const response = await fetch(`http://localhost:4000/users`);
+      const response = await fetch(`${API_URL}/users`);
       const data = await response.json();
 
       if (response.status !== 200) {
@@ -34,27 +35,37 @@ export const HomeScreen: React.FC<Props> = ({ navigation }) => {
   const insets = useSafeAreaInsets();
   const styles = StyleSheet.create({
     container: {
-      flex: 1,
-      flexDirection: "column",
-      justifyContent: "flex-start",
-      alignItems: "center",
       width: "100%",
-      paddingTop: insets.top,
+      paddingTop: 15,
       paddingBottom: insets.bottom,
       paddingLeft: 10,
       paddingRight: 10,
     },
+    linksContainer: {
+      marginBottom: 25,
+    },
+    heading: {
+      textAlign: "center",
+      fontSize: 18,
+      marginBottom: 15,
+      fontWeight: "bold",
+    },
   });
 
   return (
-    <>
-      <View style={[ styles.container ]}>
+    <View style={[ styles.container ]}>
+      <View style={[ styles.linksContainer ]}>
         <ScreenLink
           text={`Login`}
           onPress={() => navigation.navigate("Login")}
         />
       </View>
-      <View style={[ styles.container ]}>
+
+      <View>
+        <Text style={[ styles.heading ]}>
+          Links
+        </Text>
+
         {profiles.map((({ name, username }, index) =>
             <ScreenLink
               key={index}
@@ -65,6 +76,6 @@ export const HomeScreen: React.FC<Props> = ({ navigation }) => {
             />
         ))}
       </View>
-    </>
+    </View>
   );
 };

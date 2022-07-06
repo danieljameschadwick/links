@@ -1,7 +1,8 @@
-import { Injectable } from '@nestjs/common';
-import { User } from '@prisma/client'
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { User } from '@prisma/client';
 import { PrismaService } from '@src/service/PrismaService';
 import { CreateUserDTO } from '@src/dto/User/CreateUserDTO';
+import { Tokens } from '@src/auth/Types';
 
 @Injectable()
 export class UserService {
@@ -49,7 +50,27 @@ export class UserService {
 
   async findOneByUsername(username: string): Promise<User | null> {
     return this.prismaService.user.findUnique({
-      where: { username: username },
+      where: { username },
+      include: {
+        userProfile: {
+          include: {
+            links: {
+              include: {
+                logo: true,
+              },
+              orderBy: {
+                displayOrder: 'asc',
+              },
+            },
+          },
+        },
+      },
+    });
+  }
+
+  async findOneByEmail(email: string): Promise<User | null> {
+    return this.prismaService.user.findUnique({
+      where: { email },
       include: {
         userProfile: {
           include: {
@@ -69,7 +90,32 @@ export class UserService {
 
   async create(createUserDTO: CreateUserDTO): Promise<User> {
     return this.prismaService.user.create({
-      data: createUserDTO
+      data: createUserDTO,
+    });
+  }
+
+  async logout(id: number): Promise<User> {
+    return this.prismaService.user.update({
+      where: { id },
+      data: {
+        refreshToken: null,
+      },
+    });
+  }
+
+  async updateTokens(id: number, accessToken, refreshToken): Promise<User> {
+    const user = await this.findOneById(id);
+
+    if (!user) {
+      throw new HttpException('User with this id does not exist', HttpStatus.NOT_FOUND);
+    }
+
+    return this.prismaService.user.update({
+      where: { id },
+      data: {
+        accessToken,
+        refreshToken,
+      },
     });
   }
 }

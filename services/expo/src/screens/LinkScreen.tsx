@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { StyleSheet, View, Text, ViewStyle, StyleProp } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import Link from "@links/ui/components/links/Link";
+import { API_URL } from '@env';
 
 // @TODO: move to typing package
 interface User {
@@ -70,7 +71,7 @@ export const LinkScreen: React.FC<Props> = ({ route }) => {
   useEffect(() => {
     const fetchData = async (username) => {
       // @TODO: replace with env var
-      const response = await fetch(`http://localhost:4000/users/${username}`);
+      const response = await fetch(`${API_URL}/users/${username}`);
       const data = await response.json();
 
       if (response.status !== 200) {
