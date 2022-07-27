@@ -1,9 +1,9 @@
 import React from "react";
-import { Linking } from "react-native";
+import { Linking, StyleProp, ViewStyle } from "react-native";
 import { Text } from "react-native-web";
 
 type Props = {
-  style: React.CSSProperties;
+  style: StyleProp<ViewStyle>;
   url: string;
   openInANewTab?: boolean;
   children: React.ReactNode;

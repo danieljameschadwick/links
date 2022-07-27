@@ -1,4 +1,4 @@
-import { Controller, Request, Post, UseGuards, Get, HttpCode, HttpStatus } from '@nestjs/common';
+import { Controller, Request, Post, UseGuards, Get, HttpCode, HttpStatus, Body } from '@nestjs/common';
 import { LocalAuthGuard } from '@src/auth/LocalAuthGuard';
 import { AuthService } from '@src/service/AuthService';
 import { Tokens } from '@src/auth/Types';
@@ -6,10 +6,15 @@ import { RefreshTokenGuard } from '@src/auth/tokenGuard/RefreshTokenGuard';
 import { GetCurrentUserId } from '@src/auth/decorators/GetCurrentUserId';
 import { GetCurrentUser } from '@src/auth/decorators/GetCurrentUser';
 import { AccessTokenGuard } from '@src/auth/tokenGuard/AccessTokenGuard';
+import { UserService } from '@src/service/UserService';
+import { ResetPasswordDTO } from '@src/dto/User/ResetPasswordDTO';
 
 @Controller('/authenticate')
 export class AuthController {
-  constructor(private authService: AuthService) {
+  constructor(
+    private authService: AuthService,
+    private userService: UserService,
+  ) {
   }
 
   @UseGuards(LocalAuthGuard)
@@ -22,7 +27,9 @@ export class AuthController {
   @UseGuards(AccessTokenGuard)
   @Post('/logout')
   @HttpCode(HttpStatus.OK)
-  logout(@GetCurrentUserId() userId: number): Promise<boolean> {
+  logout(
+    @GetCurrentUserId() userId: number
+  ): Promise<boolean> {
     return this.authService.logout(userId);
   }
 
@@ -37,8 +44,22 @@ export class AuthController {
   }
 
   @UseGuards(AccessTokenGuard)
-  @Get('/profile')
+  @Post('/reset')
+  @HttpCode(HttpStatus.OK)
+  resetPassword(
+    @GetCurrentUserId() id: number,
+    @Body() body: ResetPasswordDTO,
+  ): Promise<void> {
+    const { password } = body;
+
+    return this.authService.resetPassword(id, password);
+  }
+
+  @UseGuards(AccessTokenGuard)
+  @Get('/user')
   profile(@Request() request) {
-    return request.user;
+    const { email } = request.user;
+
+    return this.userService.findOneByEmail(email);
   }
 }

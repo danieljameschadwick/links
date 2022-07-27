@@ -1,5 +1,65 @@
 import { StyleSheet, View, Text } from "react-native";
 import ExternalLink from "@links/ui/components/links/ExternalLink";
+import { useAppSelector } from "@src/app/hooks";
+import { selectUser } from "@src/app/reducer/UserReducer";
+
+export const Header = () => {
+  const user = useAppSelector(selectUser);
+
+  const logout = () => {
+    // @TODO: implement logout
+  };
+
+  return (
+    <>
+      <View style={styles.container}>
+        <ExternalLink style={styles.logoText} url={"/"} openInANewTab={false}>
+          links
+        </ExternalLink>
+
+        <View style={styles.linksContainer}>
+          {user ? (
+            <>
+              <ExternalLink
+                style={styles.link}
+                url={"/user/profile"}
+              >
+                {user.name}
+              </ExternalLink>
+              <Text
+                accessibilityRole="link"
+                style={styles.link}
+                onPress={() => logout()}
+              >
+                Logout
+              </Text>
+            </>
+          ) : (
+            <>
+              <Text
+                accessibilityRole="link"
+                style={styles.link}
+                onPress={() => window.open("/login", "_self")}
+              >
+                Login
+              </Text>
+
+              <Text
+                accessibilityRole="link"
+                style={styles.link}
+                onPress={() => window.open("/register", "_self")}
+              >
+                Register
+              </Text>
+            </>
+          )}
+        </View>
+      </View>
+
+      <View style={styles.fixedCoverContainer} />
+    </>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -37,35 +97,3 @@ const styles = StyleSheet.create({
     padding: 6,
   }
 });
-
-export const Header = () => {
-  return (
-    <>
-      <View style={styles.container}>
-        <ExternalLink style={styles.logoText} url={"/"} openInANewTab={false}>
-          links
-        </ExternalLink>
-
-        <View style={styles.linksContainer}>
-          <Text
-            accessibilityRole="link"
-            style={styles.link}
-            onPress={() => window.open("/login", "_self")}
-          >
-            Login
-          </Text>
-
-          <Text
-            accessibilityRole="link"
-            style={styles.link}
-            onPress={() => window.open("/register", "_self")}
-          >
-            Register
-          </Text>
-        </View>
-      </View>
-
-      <View style={styles.fixedCoverContainer} />
-      </>
-  );
-};

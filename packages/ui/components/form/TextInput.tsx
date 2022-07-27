@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import StyleSheet from "react-native-media-query";
-import { Platform, Text, TextInput as NativeTextInput, View } from "react-native";
-import { Platforms } from "../../util/enum/Platforms";
+import { Text, TextInput as NativeTextInput, View } from "react-native";
 import { isPlatform } from "../../hooks/isPlatform";
 
 const { ids, styles } = StyleSheet.create({

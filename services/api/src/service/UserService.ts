@@ -2,7 +2,7 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { User } from '@prisma/client';
 import { PrismaService } from '@src/service/PrismaService';
 import { CreateUserDTO } from '@src/dto/User/CreateUserDTO';
-import { Tokens } from '@src/auth/Types';
+import { encrypt } from '@src/util/encrypt';
 
 @Injectable()
 export class UserService {
@@ -10,7 +10,7 @@ export class UserService {
   }
 
   async findAll(): Promise<User[]> {
-    return this.prismaService.user.findMany({
+    return await this.prismaService.user.findMany({
       include: {
         userProfile: {
           include: {
@@ -29,7 +29,7 @@ export class UserService {
   }
 
   async findOneById(id: number): Promise<User | null> {
-    return this.prismaService.user.findUnique({
+    return await this.prismaService.user.findUnique({
       where: { id: Number(id) },
       include: {
         userProfile: {
@@ -49,7 +49,7 @@ export class UserService {
   }
 
   async findOneByUsername(username: string): Promise<User | null> {
-    return this.prismaService.user.findUnique({
+    return await this.prismaService.user.findUnique({
       where: { username },
       include: {
         userProfile: {
@@ -69,7 +69,7 @@ export class UserService {
   }
 
   async findOneByEmail(email: string): Promise<User | null> {
-    return this.prismaService.user.findUnique({
+    return await this.prismaService.user.findUnique({
       where: { email },
       include: {
         userProfile: {
@@ -89,13 +89,13 @@ export class UserService {
   }
 
   async create(createUserDTO: CreateUserDTO): Promise<User> {
-    return this.prismaService.user.create({
+    return await this.prismaService.user.create({
       data: createUserDTO,
     });
   }
 
   async logout(id: number): Promise<User> {
-    return this.prismaService.user.update({
+    return await this.prismaService.user.update({
       where: { id },
       data: {
         refreshToken: null,
@@ -110,11 +110,26 @@ export class UserService {
       throw new HttpException('User with this id does not exist', HttpStatus.NOT_FOUND);
     }
 
-    return this.prismaService.user.update({
+    return await this.prismaService.user.update({
       where: { id },
       data: {
         accessToken,
         refreshToken,
+      },
+    });
+  }
+
+  async updatePassword(id: number, password: string): Promise<User> {
+    const user = await this.findOneById(id);
+
+    if (!user) {
+      throw new HttpException('User with this id does not exist', HttpStatus.NOT_FOUND);
+    }
+
+    return await this.prismaService.user.update({
+      where: { id },
+      data: {
+        password: encrypt(password),
       },
     });
   }

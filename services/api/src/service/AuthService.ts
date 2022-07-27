@@ -91,4 +91,8 @@ export class AuthService {
       refreshToken,
     };
   }
+
+  async resetPassword(id: number, password: string): Promise<void> {
+    await this.userService.updatePassword(id, password);
+  }
 }
