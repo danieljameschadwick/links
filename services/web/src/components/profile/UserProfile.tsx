@@ -5,6 +5,8 @@ import Link from "@links/ui/components/links/Link";
 import { EditPanel } from "@src/components/profile/EditPanel";
 import { ProfileDispatchContext, ProfileStateContext } from "@src/pages/page/[username]";
 import { UserProfileActionType } from "@src/reducers/user/UserProfileReducer";
+import { useAppSelector } from "@src/app/hooks";
+import { selectStoreUser } from "@src/app/reducer/UserReducer";
 
 const styles = StyleSheet.create({
   container: {
@@ -56,17 +58,20 @@ const styles = StyleSheet.create({
 const UserProfile: React.FC = () => {
   const dispatch = useContext(ProfileDispatchContext);
   const state = useContext(ProfileStateContext);
-  const { user: { userProfile }, showSidebar } = state;
+  const storeUser = useAppSelector(selectStoreUser);
+  const { user, showSidebar } = state;
   const {
     heading,
     subHeading = undefined,
     styles: profileStyles,
     links = [],
-  } = userProfile;
+  } = user.userProfile;
 
   const openSidebar = () => {
     dispatch({ type: UserProfileActionType.TOGGLE_SIDEBAR, payload: { showSidebar: true } });
   };
+
+  const isCurrentUsersProfile = storeUser?.id === user?.id;
 
   return (
     <>
@@ -90,16 +95,18 @@ const UserProfile: React.FC = () => {
         </View>
       </View>
 
-      {showSidebar ? (
-        <View style={styles.sidePanel}>
-          <EditPanel />
-        </View>
-      ) : (
-        <TouchableOpacity style={styles.openPanelButton} onPress={() => openSidebar()}>
-          <Text style={styles.editText}>Edit</Text>
+      {isCurrentUsersProfile && (
+        showSidebar ? (
+          <View style={styles.sidePanel}>
+            <EditPanel />
+          </View>
+        ) : (
+          <TouchableOpacity style={styles.openPanelButton} onPress={() => openSidebar()}>
+            <Text style={styles.editText}>Edit</Text>
 
-          <Icon name={"edit"} size={20} color={"rgb(0, 0, 0)"} />
-        </TouchableOpacity>
+            <Icon name={"edit"} size={20} color={"rgb(0, 0, 0)"} />
+          </TouchableOpacity>
+        )
       )}
     </>
   );
