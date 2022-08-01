@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { StyleSheet, Button, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { useRouter } from "next/router";
 import { Controller, useForm } from "react-hook-form";
 import { Header } from "@src/components/layout/Header";
@@ -8,6 +8,9 @@ import { Heading, headerStyles } from "@src/components/layout/text/h1";
 import { TextInput } from "@src/components/form/TextInput";
 import { UsernameInput } from "@src/components/form/UsernameInput";
 import post from "@src/util/http/post";
+import { Button } from "@src/components/form/Button";
+import { useAppDispatch, useAppSelector } from "@src/app/hooks";
+import { selectStoreUser } from "@src/app/reducer/UserReducer";
 
 type FormData = {
   username: string;
@@ -16,8 +19,12 @@ type FormData = {
 };
 
 const Register: React.FC = () => {
-  const { query } = useRouter();
+  const router = useRouter();
+  const dispatch = useAppDispatch();
+  const storeUser = useAppSelector(selectStoreUser);
+  const { query } = router;
   const username = query.username as string;
+
   const { control, setValue, handleSubmit, formState, formState: { errors } } = useForm<FormData>({
     defaultValues: {
       username: username || "",
@@ -29,6 +36,14 @@ const Register: React.FC = () => {
   useEffect(() => {
     setValue("username", username);
   }, [ username ]);
+
+  useEffect(() => {
+    if (!storeUser) {
+      return;
+    }
+
+    router.push('/user/settings');
+  }, [storeUser]);
 
   const onSubmit = (async (data) => {
     try {
@@ -108,9 +123,9 @@ const Register: React.FC = () => {
           />
 
           <Button
-            accessibilityLabel={"submit"}
-            color={"rgb(255,113,0)"}
-            title={"Register"}
+            text={"Register"}
+            accessibilityLabel={"Register"}
+            buttonStyles={buttonStyles}
             onPress={handleSubmit(onSubmit)}
           />
         </form>
@@ -122,6 +137,14 @@ const Register: React.FC = () => {
 const styles = StyleSheet.create({
   container: {
     height: "100%",
+  },
+});
+
+const buttonStyles = StyleSheet.create({
+  button: {
+    width: "100%",
+    backgroundColor: "rgb(255,113,0)",
+    height: 40,
   },
 });
 

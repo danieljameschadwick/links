@@ -3,19 +3,24 @@ import { Pressable, Text, StyleProp, ViewStyle, StyleSheet } from "react-native"
 
 interface Props {
   text: string;
-  buttonStyles?: StyleProp<ViewStyle>[];
   onPress: () => void;
+  accessibilityLabel: string;
+  buttonStyles?: StyleProp<ViewStyle>[];
 }
 
 export const Button: React.FC<Props> = (
   {
     text,
     onPress,
+    accessibilityLabel = "Submit",
     buttonStyles = undefined,
   }
 ) => {
   return (
     <Pressable
+      accessibilityLabel={accessibilityLabel}
+      accessibilityRole={"button"}
+      onPress={onPress}
       style={({ pressed }) => [
         {
           backgroundColor: pressed ? "rgb(253,137,35)" : "rgb(255,113,0)",
@@ -23,7 +28,6 @@ export const Button: React.FC<Props> = (
         styles.button,
         buttonStyles?.button,
       ]}
-      onPress={onPress}
     >
       <Text style={[ styles.text, buttonStyles?.text ]}>{text}</Text>
     </Pressable>

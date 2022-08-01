@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, Button, Text, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import { useRouter } from "next/router";
 import { Header } from "@src/components/layout/Header";
 import { Heading, headerStyles } from "@src/components/layout/text/h1";
+import { Button } from "@src/components/form/Button";
 import { PageContent } from "@src/components/layout/PageContent";
 import { TextInput } from "@src/components/form/TextInput";
 import { HttpMethod } from "@src/util/http/httpFetch";
@@ -98,9 +99,8 @@ const Login: React.FC = () => {
           />
 
           <Button
-            accessibilityLabel={"submit"}
-            color={"rgb(255,113,0)"}
-            title={"Login"}
+            text={"Login"}
+            buttonStyles={buttonStyles}
             onPress={handleSubmit}
           />
         </form>
@@ -133,6 +133,14 @@ const styles = StyleSheet.create({
   linkUnderline: {
     textDecorationLine: "underline",
   }
+});
+
+const buttonStyles = StyleSheet.create({
+  button: {
+    width: "100%",
+    backgroundColor: "rgb(255,113,0)",
+    height: 40,
+  },
 });
 
 export default Login;
