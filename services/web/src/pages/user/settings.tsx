@@ -9,6 +9,7 @@ import { useRouter } from "next/router";
 import { fetchUserByToken, refreshTokens } from "@src/services/user";
 import { UserInterface } from "@src/interfaces/UserInterface";
 import { TextInput } from "@src/components/form/TextInput";
+import { UsernameInput } from "@src/components/form/UsernameInput";
 
 const Settings: React.FC = () => {
   const router = useRouter();
@@ -38,8 +39,7 @@ const Settings: React.FC = () => {
         }
 
         dispatch(setTokens(await refreshedTokenResponse.json())); // set our refreshed tokens
-
-        return;
+        router.reload();
       }
 
       if (userResponse.status !== 200) {
@@ -62,10 +62,16 @@ const Settings: React.FC = () => {
 
       <PageContent>
         <Heading style={[ headerStyles.center ]}>
-          Profile
+          Settings
         </Heading>
 
         <form>
+          <UsernameInput
+            onChange={(event) => console.log(event)}
+            defaultValue={user.username}
+            disabled
+          />
+
           <TextInput
             label={"Name"}
             textContentType={"name"}
@@ -73,16 +79,6 @@ const Settings: React.FC = () => {
             placeholder={"Name"}
             onChange={(event) => console.log(event)}
             defaultValue={user.name}
-            disabled
-          />
-
-          <TextInput
-            label={"Username"}
-            textContentType={"username"}
-            autoComplete={"username"}
-            placeholder={"Username"}
-            onChange={(event) => console.log(event)}
-            defaultValue={user.username}
             disabled
           />
 

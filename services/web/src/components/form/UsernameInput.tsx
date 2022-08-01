@@ -2,12 +2,13 @@ import React from "react";
 import { StyleSheet, Text } from "react-native-web";
 import { TextInput } from "@src/components/form/TextInput";
 
-type Props = {
+interface Props {
   showHelpText?: boolean;
-  onChange: (event: any) => void; // @TODO: figure out what type the native event is
+  onChange: (event) => void;
   onSubmitEditing?: () => void;
   defaultValue?: string;
-};
+  disabled?: boolean;
+}
 
 export const UsernameInput: React.FC<Props> = (
   {
@@ -15,6 +16,7 @@ export const UsernameInput: React.FC<Props> = (
     onSubmitEditing = null,
     showHelpText = false,
     defaultValue = null,
+    disabled = false,
   }
 ) => {
   const helpText = showHelpText
@@ -36,6 +38,7 @@ export const UsernameInput: React.FC<Props> = (
       helpText={helpText}
       onChange={onChange}
       onSubmitEditing={onSubmitEditing}
+      disabled
     />
   );
 };

@@ -8,53 +8,6 @@ import { UserProfileActionType } from "@src/reducers/user/UserProfileReducer";
 import { useAppSelector } from "@src/app/hooks";
 import { selectStoreUser } from "@src/app/reducer/UserReducer";
 
-const styles = StyleSheet.create({
-  container: {
-    marginTop: 24,
-  },
-  textContainer: {
-    alignItems: "center",
-  },
-  heading: {
-    color: "white",
-    textAlign: "center",
-    fontSize: 24,
-    marginBottom: 10,
-  },
-  subHeading: {
-    color: "white",
-    textAlign: "center",
-    fontSize: 14,
-    marginBottom: 16,
-  },
-  openPanelButton: {
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
-    height: "auto",
-    position: "absolute",
-    backgroundColor: "rgb(255,113,0)",
-    top: 7,
-    right: 7,
-    paddingTop: 7,
-    paddingBottom: 7,
-    paddingLeft: 10,
-    paddingRight: 10,
-    borderRadius: 7,
-  },
-  editText: {
-    color: "rgb(0,0,0)",
-    paddingRight: 10,
-    fontWeight: 600,
-  },
-  sidePanel: {
-    position: "absolute",
-    right: 0,
-    height: "100%",
-    backgroundColor: "white",
-  },
-});
-
 const UserProfile: React.FC = () => {
   const dispatch = useContext(ProfileDispatchContext);
   const state = useContext(ProfileStateContext);
@@ -111,5 +64,52 @@ const UserProfile: React.FC = () => {
     </>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    marginTop: 24,
+  },
+  textContainer: {
+    alignItems: "center",
+  },
+  heading: {
+    color: "white",
+    textAlign: "center",
+    fontSize: 24,
+    marginBottom: 10,
+  },
+  subHeading: {
+    color: "white",
+    textAlign: "center",
+    fontSize: 14,
+    marginBottom: 16,
+  },
+  openPanelButton: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    height: "auto",
+    position: "absolute",
+    backgroundColor: "rgb(255,113,0)",
+    top: 7,
+    right: 7,
+    paddingTop: 7,
+    paddingBottom: 7,
+    paddingLeft: 10,
+    paddingRight: 10,
+    borderRadius: 7,
+  },
+  editText: {
+    color: "rgb(0,0,0)",
+    paddingRight: 10,
+    fontWeight: 600,
+  },
+  sidePanel: {
+    position: "absolute",
+    right: 0,
+    height: "100%",
+    backgroundColor: "white",
+  },
+});
 
 export default UserProfile;
