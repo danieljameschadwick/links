@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useRouter } from "next/router";
 import { Text, Button, View } from "react-native-web";
 import StyleSheet from "react-native-media-query";
 import { Panel } from "@src/components/layout/Panel";
@@ -51,12 +52,13 @@ const { ids, styles } = StyleSheet.create({
 export const GetStartedPanel: React.FC = () => {
   // const colorScheme = useColorScheme();
   // const heading = colorScheme === "dark" ? [styles.darkHeading , styles.heading] : [styles.heading];
+  const router = useRouter();
   const [ form, setForm ] = useState({});
 
   const handleSubmit = () => {
     const queryString = objectToQueryString(form);
 
-    window.open(`/register${queryString}`, "_self");
+    router.push(`/register${queryString}`);
   };
 
   return (

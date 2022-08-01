@@ -38,7 +38,7 @@ export const UsernameInput: React.FC<Props> = (
       helpText={helpText}
       onChange={onChange}
       onSubmitEditing={onSubmitEditing}
-      disabled
+      disabled={disabled}
     />
   );
 };

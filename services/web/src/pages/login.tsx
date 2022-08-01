@@ -109,7 +109,7 @@ const Login: React.FC = () => {
           <Text
             accessibilityRole="link"
             style={styles.link}
-            onPress={() => window.open("/register", "_self")}
+            onPress={() => router.push("/register")}
           >
             Don't have an account? <Text style={styles.linkUnderline}>Create one here</Text>.
           </Text>

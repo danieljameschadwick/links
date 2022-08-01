@@ -1,9 +1,12 @@
+import React from "react";
 import { StyleSheet, View, Text } from "react-native";
+import { useRouter } from "next/router";
 import ExternalLink from "@links/ui/components/links/ExternalLink";
 import { useAppSelector } from "@src/app/hooks";
 import { selectStoreUser } from "@src/app/reducer/UserReducer";
 
-export const Header = () => {
+export const Header: React.FC = () => {
+  const router = useRouter();
   const user = useAppSelector(selectStoreUser);
 
   const logout = () => {
@@ -41,7 +44,7 @@ export const Header = () => {
               <Text
                 accessibilityRole="link"
                 style={styles.link}
-                onPress={() => window.open("/login", "_self")}
+                onPress={() => router.push("/login")}
               >
                 Login
               </Text>
@@ -49,7 +52,7 @@ export const Header = () => {
               <Text
                 accessibilityRole="link"
                 style={styles.link}
-                onPress={() => window.open("/register", "_self")}
+                onPress={() => router.push("/register")}
               >
                 Register
               </Text>

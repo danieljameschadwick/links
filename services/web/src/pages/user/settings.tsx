@@ -19,15 +19,13 @@ const Settings: React.FC = () => {
   const [ user, setUser ] = useState<UserInterface | null>(null);
 
   useEffect(() => {
-    if (storeUser) {
-      return;
-    }
-
-    router.push('/login');
-  }, [storeUser]);
-
-  useEffect(() => {
     const fetchData = async () => {
+      if (!tokens) {
+        router.push('/login');
+
+        return;
+      }
+
       const userResponse = await fetchUserByToken(tokens.accessToken);
 
       if (userResponse.status === 401) {
@@ -54,6 +52,10 @@ const Settings: React.FC = () => {
 
   if (!user) {
     return null;
+  }
+
+  const handleModifyPassword = () => {
+    console.log('// @TODO: handle modify password logic');
   }
 
   return (
@@ -100,6 +102,8 @@ const Settings: React.FC = () => {
             placeholder={"Password"}
             onChange={(event) => console.log(event)}
             defaultValue={"password"} // no reason to send the actual password
+            buttonText={"Modify password"}
+            handleButtonPress={handleModifyPassword}
             disabled
           />
         </form>
