@@ -31,6 +31,7 @@ export const UsernameInput: React.FC<Props> = (
         </Text>
       }
       placeholder={"Username"}
+      autoComplete={"username"}
       defaultValue={defaultValue}
       helpText={helpText}
       onChange={onChange}

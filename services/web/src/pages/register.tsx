@@ -81,6 +81,7 @@ const Register: React.FC = () => {
             render={({ field: { onChange, value } }) => (
               <TextInput
                 placeholder={"Email"}
+                autoComplete={"email"}
                 textContentType={"emailAddress"}
                 defaultValue={value || ""}
                 onChange={value => onChange(value)}
@@ -94,7 +95,8 @@ const Register: React.FC = () => {
             control={control}
             render={({ field: { onChange, value } }) => (
               <TextInput
-                secureTextEntry={true}
+                secureTextEntry
+                autoComplete={"password"}
                 placeholder={"Password"}
                 defaultValue={value || ""}
                 textContentType={"password"}

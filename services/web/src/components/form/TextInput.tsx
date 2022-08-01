@@ -61,8 +61,9 @@ interface Props {
   textContentType: string;
   onChange: (event) => void;
   onSubmitEditing?: () => void;
-  disabled: boolean;
   label?: string | React.ReactNode;
+  autoComplete?: string;
+  disabled?: boolean;
   defaultValue?: string;
   helpText?: string;
   secureTextEntry?: boolean;
@@ -74,6 +75,7 @@ export const TextInput: React.FC<Props> = (
     textContentType,
     onChange,
     onSubmitEditing = null,
+    autoComplete = "off",
     disabled = false,
     label = null,
     defaultValue = null,
@@ -102,6 +104,7 @@ export const TextInput: React.FC<Props> = (
 
         <NativeTextInput
           textContentType={textContentType}
+          autoComplete={autoComplete}
           style={input}
           dataSet={{ media: ids.input }}
           placeholder={placeholder}

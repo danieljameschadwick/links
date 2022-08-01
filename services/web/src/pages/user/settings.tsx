@@ -37,7 +37,6 @@ const Settings: React.FC = () => {
           return;
         }
 
-        console.log('refresh tokens and set');
         dispatch(setTokens(await refreshedTokenResponse.json())); // set our refreshed tokens
 
         return;
@@ -69,19 +68,42 @@ const Settings: React.FC = () => {
         <form>
           <TextInput
             label={"Name"}
-            placeholder={"Name"}
             textContentType={"name"}
+            autoComplete={"name"}
+            placeholder={"Name"}
             onChange={(event) => console.log(event)}
             defaultValue={user.name}
             disabled
           />
 
           <TextInput
+            label={"Username"}
+            textContentType={"username"}
+            autoComplete={"username"}
+            placeholder={"Username"}
+            onChange={(event) => console.log(event)}
+            defaultValue={user.username}
+            disabled
+          />
+
+          <TextInput
             label={"Email Address"}
-            placeholder={"Email Address"}
             textContentType={"emailAddress"}
+            autoComplete={"email"}
+            placeholder={"Email Address"}
             onChange={(event) => console.log(event)}
             defaultValue={user.email}
+            disabled
+          />
+
+          <TextInput
+            secureTextEntry
+            label={"Password"}
+            textContentType={"password"}
+            autoComplete={"password"}
+            placeholder={"Password"}
+            onChange={(event) => console.log(event)}
+            defaultValue={"password"} // no reason to send the actual password
             disabled
           />
         </form>

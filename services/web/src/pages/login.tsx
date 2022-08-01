@@ -73,8 +73,9 @@ const Login: React.FC = () => {
 
         <form>
           <TextInput
-            placeholder={"Email"}
-            textContentType={"emailAddress"}
+            placeholder={"Email / Username"}
+            autoComplete={"username"}
+            textContentType={"username"}
             onChange={(event) => setForm({
               ...form,
               email: event.nativeEvent.text,
@@ -84,7 +85,8 @@ const Login: React.FC = () => {
           />
 
           <TextInput
-            secureTextEntry={true}
+            secureTextEntry
+            autoComplete={"password"}
             placeholder={"Password"}
             textContentType={"password"}
             onChange={(event) => setForm({
