@@ -40,6 +40,10 @@ const { ids, styles } = StyleSheet.create({
     width: "100%",
     outline: "none",
   },
+  disabled: {
+    // @ts-ignore - this is now support in React Native Web
+    cursor: "not-allowed",
+  },
   labelInput: {
     paddingLeft: 0,
     borderTopLeftRadius: 0,
@@ -52,16 +56,17 @@ const { ids, styles } = StyleSheet.create({
   }
 });
 
-type Props = {
+interface Props {
   placeholder: string;
   textContentType: string;
   onChange: (event) => void;
   onSubmitEditing?: () => void;
+  disabled: boolean;
   label?: string | React.ReactNode;
   defaultValue?: string;
   helpText?: string;
   secureTextEntry?: boolean;
-};
+}
 
 export const TextInput: React.FC<Props> = (
   {
@@ -69,23 +74,25 @@ export const TextInput: React.FC<Props> = (
     textContentType,
     onChange,
     onSubmitEditing = null,
+    disabled = false,
     label = null,
     defaultValue = null,
     helpText = null,
     secureTextEntry = false,
   }
 ) => {
-  const [onClick, setOnClick] = useState<boolean>(false);
+  const [ onClick, setOnClick ] = useState<boolean>(false);
   const inputContainer = [ styles.inputContainer ];
   const input = [ styles.input ];
 
   if (onClick) inputContainer.push(styles.outlineContainer);
   if (label) input.push(styles.labelInput);
+  if (disabled) input.push(styles.disabled);
 
   return (
     <View style={styles.container}>
       <View style={inputContainer}>
-        { label &&
+        {label &&
           <View style={styles.labelContainer}>
             <Text style={styles.labelText}>
               {label}
@@ -104,10 +111,11 @@ export const TextInput: React.FC<Props> = (
           onBlur={() => setOnClick(false)}
           onSubmitEditing={onSubmitEditing}
           secureTextEntry={secureTextEntry}
+          disabled={disabled}
         />
       </View>
 
-      { helpText &&
+      {helpText &&
         <Text style={styles.helpText}>
           * {helpText}
         </Text>

@@ -8,8 +8,9 @@ import { selectStoreUser, selectTokens, setTokens } from "@src/app/reducer/UserR
 import { useRouter } from "next/router";
 import { fetchUserByToken, refreshTokens } from "@src/services/user";
 import { UserInterface } from "@src/interfaces/UserInterface";
+import { TextInput } from "@src/components/form/TextInput";
 
-const Profile: React.FC = () => {
+const Settings: React.FC = () => {
   const router = useRouter();
   const storeUser = useAppSelector(selectStoreUser);
   const tokens = useAppSelector(selectTokens);
@@ -30,12 +31,13 @@ const Profile: React.FC = () => {
 
       if (userResponse.status === 401) {
         // resync and set tokens
-        const refreshedTokenResponse = await refreshTokens(tokens.accessToken);
+        const refreshedTokenResponse = await refreshTokens(tokens.refreshToken);
 
         if (refreshedTokenResponse.status !== 200) {
           return;
         }
 
+        console.log('refresh tokens and set');
         dispatch(setTokens(await refreshedTokenResponse.json())); // set our refreshed tokens
 
         return;
@@ -64,13 +66,25 @@ const Profile: React.FC = () => {
           Profile
         </Heading>
 
-        <Text>
-          {user.name}
-        </Text>
+        <form>
+          <TextInput
+            label={"Name"}
+            placeholder={"Name"}
+            textContentType={"name"}
+            onChange={(event) => console.log(event)}
+            defaultValue={user.name}
+            disabled
+          />
 
-        <Text>
-          {user.email}
-        </Text>
+          <TextInput
+            label={"Email Address"}
+            placeholder={"Email Address"}
+            textContentType={"emailAddress"}
+            onChange={(event) => console.log(event)}
+            defaultValue={user.email}
+            disabled
+          />
+        </form>
       </PageContent>
     </View>
   );
@@ -82,4 +96,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Profile;
+export default Settings;

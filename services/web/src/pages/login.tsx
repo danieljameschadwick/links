@@ -59,7 +59,7 @@ const Login: React.FC = () => {
       return;
     }
 
-    router.push('/user/profile');
+    router.push('/user/settings');
   }, [storeUser]);
 
   return (

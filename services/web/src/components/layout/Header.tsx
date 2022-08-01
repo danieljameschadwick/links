@@ -23,7 +23,7 @@ export const Header = () => {
             <>
               <ExternalLink
                 style={styles.link}
-                url={"/user/profile"}
+                url={"/user/settings"}
                 openInANewTab={false}
               >
                 {user.name}

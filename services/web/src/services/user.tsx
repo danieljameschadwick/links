@@ -1,11 +1,11 @@
 import { HttpMethod } from "@src/util/http/httpFetch";
 
-export const refreshTokens = async (accessToken: string) => {
+export const refreshTokens = async (refreshToken: string) => {
   return await fetch(`${process.env.NEXT_PUBLIC_API_URI}/authenticate/refresh`, {
     method: HttpMethod.POST,
     headers: {
       "Content-Type": "application/json",
-      "Authorization": `Bearer ${accessToken}`,
+      "Authorization": `Bearer ${refreshToken}`,
     },
   });
 };
