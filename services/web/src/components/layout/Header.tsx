@@ -1,13 +1,14 @@
 import { StyleSheet, View, Text } from "react-native";
 import ExternalLink from "@links/ui/components/links/ExternalLink";
 import { useAppSelector } from "@src/app/hooks";
-import { selectUser } from "@src/app/reducer/UserReducer";
+import { selectStoreUser } from "@src/app/reducer/UserReducer";
 
 export const Header = () => {
-  const user = useAppSelector(selectUser);
+  const user = useAppSelector(selectStoreUser);
 
   const logout = () => {
     // @TODO: implement logout
+    console.log('// @TODO: implement logout')
   };
 
   return (
@@ -23,6 +24,7 @@ export const Header = () => {
               <ExternalLink
                 style={styles.link}
                 url={"/user/profile"}
+                openInANewTab={false}
               >
                 {user.name}
               </ExternalLink>

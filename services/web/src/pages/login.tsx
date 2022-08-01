@@ -7,12 +7,12 @@ import { PageContent } from "@src/components/layout/PageContent";
 import { TextInput } from "@src/components/form/TextInput";
 import { HttpMethod } from "@src/util/http/httpFetch";
 import { useAppDispatch, useAppSelector } from "@src/app/hooks";
-import { selectUser, setTokens, setUser } from "@src/app/reducer/UserReducer";
+import { selectStoreUser, setTokens, setStoreUser } from "@src/app/reducer/UserReducer";
 
 const Login: React.FC = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const user = useAppSelector(selectUser);
+  const storeUser = useAppSelector(selectStoreUser);
   const [ form, setForm ] = useState({
     email: "",
     password: "",
@@ -26,14 +26,14 @@ const Login: React.FC = () => {
       password,
     };
 
-    const tokensResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URI}/authenticate/login`, {
+    const loginResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URI}/authenticate/login`, {
       method: HttpMethod.POST,
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(payload),
     });
-    const tokens = await tokensResponse.json();
+    const tokens = await loginResponse.json();
 
     if (!tokens.accessToken) {
       // throw Error('Access token broken');
@@ -51,16 +51,16 @@ const Login: React.FC = () => {
     const user = await userResponse.json();
 
     dispatch(setTokens(tokens)); // set our tokens
-    dispatch(setUser(user)); // use those tokens, from state
+    dispatch(setStoreUser(user)); // use those tokens, from state
   };
 
   useEffect(() => {
-    if (!user) {
+    if (!storeUser) {
       return;
     }
 
     router.push('/user/profile');
-  }, [user]);
+  }, [storeUser]);
 
   return (
     <View style={styles.container}>
