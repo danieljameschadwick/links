@@ -5,10 +5,13 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { ScreenLink } from "../components/link/ScreenLink";
 import { RootStackParamList } from "../typing/typing";
 import { API_URL } from "@env";
+import { useAppSelector } from "../app/hooks";
+import { selectStoreUser } from "../app/reducer/UserReducer";
 
 type Props = NativeStackScreenProps<RootStackParamList, "Index">;
 
 export const HomeScreen: React.FC<Props> = ({ navigation }) => {
+  const storeUser = useAppSelector(selectStoreUser);
   // @TODO: add typing from @types/links
   const [ profiles, setProfiles ] = useState<any[]>([]);
 
@@ -55,10 +58,17 @@ export const HomeScreen: React.FC<Props> = ({ navigation }) => {
   return (
     <View style={[ styles.container ]}>
       <View style={[ styles.linksContainer ]}>
-        <ScreenLink
-          text={`Login`}
-          onPress={() => navigation.navigate("Login")}
-        />
+        { storeUser?.name ? (
+          <ScreenLink
+            text={`Settings`}
+            onPress={() => navigation.navigate("Settings")}
+          />
+        ) : (
+          <ScreenLink
+            text={`Login`}
+            onPress={() => navigation.navigate("Login")}
+          />
+        )}
       </View>
 
       <View>

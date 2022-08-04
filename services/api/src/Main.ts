@@ -5,7 +5,10 @@ import { AppModule } from '@src/module/AppModule';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  app.enableCors();
+  app.enableCors({
+    origin: '*',
+    allowedHeaders: '*',
+  });
   app.useGlobalPipes(new ValidationPipe({ transform: true }));
   // @TODO: investigate why CLassSerializerInterceptor is throwing
   //        rxjs errors

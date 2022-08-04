@@ -48,7 +48,7 @@ const Settings: React.FC = () => {
     }
 
     fetchData();
-  }, [storeUser])
+  }, [storeUser]);
 
   if (!user) {
     return null;
