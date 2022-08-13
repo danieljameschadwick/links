@@ -4,9 +4,9 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import { StyleSheet } from "react-native";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
-import store, { persistor } from "./src/app/store";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import store, { persistor } from "./src/app/store";
 
 import { HomeScreen } from "./src/screens/HomeScreen";
 import { LinkScreen } from "./src/screens/LinkScreen";
@@ -34,6 +34,7 @@ const App: React.FC = () => {
               <Stack.Screen name="Links" component={LinkScreen} options={{ headerShown: false }} />
               <Stack.Screen name="Login" component={LoginScreen} />
               <Stack.Screen name="Settings" component={SettingsScreen} />
+              {/* // @TODO: implement registration in app */}
               {/*<Stack.Screen name="Register" component={RegisterScreen} />*/}
             </Stack.Navigator>
           </NavigationContainer>

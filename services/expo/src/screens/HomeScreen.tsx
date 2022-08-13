@@ -4,28 +4,68 @@ import { StyleSheet, View, Text } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { ScreenLink } from "../components/link/ScreenLink";
 import { RootStackParamList } from "../typing/typing";
-import { API_URL } from "@env";
-import { useAppSelector } from "../app/hooks";
-import { selectStoreUser } from "../app/reducer/UserReducer";
+import { useAppDispatch, useAppSelector } from "../app/hooks";
+import { selectStoreUser, selectTokens, setStoreUser, setTokens } from "../app/reducer/UserReducer";
+import { getUser, getUsers, refreshTokens } from "../services/user";
+import { UserInterface } from "../interfaces/UserInterface";
 
 type Props = NativeStackScreenProps<RootStackParamList, "Index">;
 
 export const HomeScreen: React.FC<Props> = ({ navigation }) => {
+  const dispatch = useAppDispatch();
+  const tokens = useAppSelector(selectTokens);
   const storeUser = useAppSelector(selectStoreUser);
-  // @TODO: add typing from @types/links
-  const [ profiles, setProfiles ] = useState<any[]>([]);
+  const [ user, setUser ] = useState<UserInterface | null>(null);
+  const [ profiles, setProfiles ] = useState<UserInterface[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
-      // @TODO: replace with env var
-      const response = await fetch(`${API_URL}/users`);
-      const data = await response.json();
+      if (!tokens) {
+        console.log('no tokens to fetch data');
 
-      if (response.status !== 200) {
-        return; // @TODO: error handling
+        dispatch(setStoreUser(null));
+        navigation.navigate("Index");
+
+        return;
       }
 
-      setProfiles(data);
+      const userResponse = await getUser(tokens.accessToken);
+
+      if (userResponse.status === 401) {
+        // resync and set tokens
+        const refreshedTokenResponse = await refreshTokens(tokens.refreshToken);
+
+        if (refreshedTokenResponse.status !== 200) {
+          console.log('refreshedTokenResponse.status !== 200');
+
+          dispatch(setStoreUser(null));
+          dispatch(setTokens(null));
+          navigation.navigate("Index");
+  
+          return;
+        }
+
+        dispatch(setTokens(await refreshedTokenResponse.json())); // set our refreshed tokens
+        navigation.navigate("Index");
+
+        return;
+      }
+
+      if (userResponse.status !== 200) {
+        throw new Error('error with fetching data'); // @TODO: resolve error handling
+      }
+
+      setUser(await userResponse.json());
+    }
+
+    fetchData();
+  }, [storeUser]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const users = await getUsers();
+
+      setProfiles(users);
     };
 
     try {
@@ -58,11 +98,19 @@ export const HomeScreen: React.FC<Props> = ({ navigation }) => {
   return (
     <View style={[ styles.container ]}>
       <View style={[ styles.linksContainer ]}>
-        { storeUser?.name ? (
-          <ScreenLink
-            text={`Settings`}
-            onPress={() => navigation.navigate("Settings")}
-          />
+        { user?.name ? (
+          <>
+            <ScreenLink
+              text={`Your Profile`}
+              onPress={() => navigation.navigate("Links", {
+                username: user.username,
+              })}
+            />
+            <ScreenLink
+              text={`Settings`}
+              onPress={() => navigation.navigate("Settings")}
+            />
+          </>
         ) : (
           <ScreenLink
             text={`Login`}

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { StyleSheet, View, Text, Button, TextInput } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { getUser, postLogin } from "../services/user";
+import { getUser, getUserGracefully, postLogin } from "../services/user";
 import { setTokens, setStoreUser } from "../app/reducer/UserReducer";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 
@@ -32,7 +32,7 @@ export const LoginScreen: React.FC<Props> = ({ navigation }) => {
         return;
       }
 
-      const user = await getUser(tokens.accessToken);
+      const user = await getUserGracefully(tokens.accessToken);
 
       if (!user) {
         // throw Error('User not found');
@@ -45,6 +45,9 @@ export const LoginScreen: React.FC<Props> = ({ navigation }) => {
 
       dispatch(setTokens(tokens)); // set our tokens
       dispatch(setStoreUser(user)); // use those tokens, from state
+      navigation.navigate("Index");
+
+      return;
     } catch (error) {
       console.log(error);
     }

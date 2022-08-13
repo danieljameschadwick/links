@@ -38,6 +38,8 @@ const Settings: React.FC = () => {
 
         dispatch(setTokens(await refreshedTokenResponse.json())); // set our refreshed tokens
         router.reload();
+
+        return;
       }
 
       if (userResponse.status !== 200) {

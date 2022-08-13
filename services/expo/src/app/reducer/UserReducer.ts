@@ -26,15 +26,21 @@ export const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    setTokens: (state, action: PayloadAction<TokensInterface>) => {
+    setTokens: (state, action: PayloadAction<TokensInterface | null>) => {
       console.log('setTokens');
 
       state.tokens = action.payload;
     },
-    setUser: (state, action: PayloadAction<UserInterface>) => {
-      const { id, username, name } = action.payload;
-
+    setUser: (state, action: PayloadAction<UserInterface | null>) => {
       console.log('setUser');
+
+      if (!action.payload) {
+        state.user = null;
+
+        return;
+      }
+
+      const { id, username, name } = action.payload;
 
       state.user = {
         id,
