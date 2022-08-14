@@ -7,7 +7,7 @@ import { RootStackParamList } from "../typing/typing";
 import { useAppDispatch, useAppSelector } from "@links/state/hooks";
 import { selectStoreUser, selectTokens, setStoreUser, setTokens } from "@links/state/reducer/UserReducer";
 import { getUser, getUsers, refreshTokens } from "@links/http/services/user";
-import { UserInterface } from "../interfaces/UserInterface";
+import { UserInterface } from "@links/types/interfaces/UserInterface";
 import { API_URL } from "@env";
 
 type Props = NativeStackScreenProps<RootStackParamList, "Index">;
@@ -22,8 +22,6 @@ export const HomeScreen: React.FC<Props> = ({ navigation }) => {
   useEffect(() => {
     const fetchData = async () => {
       if (!tokens) {
-        console.log('no tokens to fetch data');
-
         dispatch(setStoreUser(null));
         navigation.navigate("Index");
 

@@ -7,7 +7,7 @@ import { PageContent } from "@src/components/layout/PageContent";
 import { useAppDispatch, useAppSelector } from "@links/state/hooks";
 import { selectStoreUser, selectTokens, setStoreUser, setTokens } from "@links/state/reducer/UserReducer";
 import { useRouter } from "next/router";
-import { UserInterface } from "@src/interfaces/UserInterface";
+import { UserInterface } from "@links/types/interfaces/UserInterface";
 import { TextInput } from "@src/components/form/TextInput";
 import { UsernameInput } from "@src/components/form/UsernameInput";
 
@@ -55,6 +55,12 @@ const Settings: React.FC = () => {
 
     fetchData();
   }, [storeUser]);
+
+  if (!tokens) {
+    router.push('/login');
+
+    return null;
+  }
 
   if (!user) {
     return null;

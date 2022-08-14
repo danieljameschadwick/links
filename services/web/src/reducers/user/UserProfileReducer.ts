@@ -1,5 +1,5 @@
 import { Reducer } from "react";
-import { UserInterface } from "@src/interfaces/UserInterface";
+import { UserInterface } from "@links/types/interfaces/UserInterface";
 
 type UserProfileState = {
   user?: UserInterface | null,
