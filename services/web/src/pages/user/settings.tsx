@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
+import { getUser, refreshTokens } from "@links/http/services/user";
 import { Header } from "@src/components/layout/Header";
 import { Heading, headerStyles } from "@src/components/layout/text/h1";
 import { PageContent } from "@src/components/layout/PageContent";
 import { useAppDispatch, useAppSelector } from "@src/app/hooks";
-import { selectStoreUser, selectTokens, setTokens } from "@src/app/reducer/UserReducer";
+import { selectStoreUser, selectTokens, setStoreUser, setTokens } from "@src/app/reducer/UserReducer";
 import { useRouter } from "next/router";
-import { fetchUserByToken, refreshTokens } from "@src/services/user";
 import { UserInterface } from "@src/interfaces/UserInterface";
 import { TextInput } from "@src/components/form/TextInput";
 import { UsernameInput } from "@src/components/form/UsernameInput";
@@ -26,13 +26,17 @@ const Settings: React.FC = () => {
         return;
       }
 
-      const userResponse = await fetchUserByToken(tokens.accessToken);
+      const userResponse = await getUser(process.env.NEXT_PUBLIC_API_URI, tokens.accessToken);
 
       if (userResponse.status === 401) {
         // resync and set tokens
-        const refreshedTokenResponse = await refreshTokens(tokens.refreshToken);
+        const refreshedTokenResponse = await refreshTokens(process.env.NEXT_PUBLIC_API_URI, tokens.refreshToken);
 
         if (refreshedTokenResponse.status !== 200) {
+          dispatch(setStoreUser(null)); // set our refreshed tokens
+          dispatch(setTokens(null)); // set our refreshed tokens
+          router.push('/login');
+
           return;
         }
 
@@ -71,7 +75,7 @@ const Settings: React.FC = () => {
 
         <form>
           <UsernameInput
-            onChange={(event) => console.log(event)}
+            onChange={() => {}} // @TODO: fix inputs onChange to be optional
             defaultValue={user.username}
             disabled
           />
@@ -81,7 +85,7 @@ const Settings: React.FC = () => {
             textContentType={"name"}
             autoComplete={"name"}
             placeholder={"Name"}
-            onChange={(event) => console.log(event)}
+            onChange={() => {}}
             defaultValue={user.name}
             disabled
           />

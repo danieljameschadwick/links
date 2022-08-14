@@ -7,7 +7,8 @@ import { RootStackParamList } from "../typing/typing";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { selectStoreUser, selectTokens, setStoreUser, setTokens } from "../app/reducer/UserReducer";
 import { UserInterface } from "../interfaces/UserInterface";
-import { getUser, refreshTokens } from "../services/user";
+import { getUser, refreshTokens } from "@links/http/services/user";
+import { API_URL } from "@env";
 
 type Props = NativeStackScreenProps<RootStackParamList, "Index">;
 
@@ -48,11 +49,11 @@ export const SettingsScreen: React.FC<Props> = ({ navigation }) => {
         return;
       }
 
-      const userResponse = await getUser(tokens.accessToken);
+      const userResponse = await getUser(API_URL, tokens.accessToken);
 
       if (userResponse.status === 401) {
         // resync and set tokens
-        const refreshedTokenResponse = await refreshTokens(tokens.refreshToken);
+        const refreshedTokenResponse = await refreshTokens(API_URL, tokens.refreshToken);
 
         if (refreshedTokenResponse.status !== 200) {
           console.log('refreshedTokenResponse.status !== 200');

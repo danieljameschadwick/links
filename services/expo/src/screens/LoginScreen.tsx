@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { StyleSheet, View, Text, Button, TextInput } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { getUser, getUserGracefully, postLogin } from "../services/user";
+import { getUser, getUserGracefully, postLogin } from "@links/http/services/user";
 import { setTokens, setStoreUser } from "../app/reducer/UserReducer";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
+import { API_URL } from "@env";
 
 interface Props {
   navigation: any; // @TODO: investigate type
@@ -23,7 +24,7 @@ export const LoginScreen: React.FC<Props> = ({ navigation }) => {
     const { email, password } = form;
 
     try {
-      const tokens = await postLogin(email, password);
+      const tokens = await postLogin(API_URL, email, password);
 
       if (!tokens.accessToken) {
         // throw Error('Access token broken');
@@ -32,7 +33,7 @@ export const LoginScreen: React.FC<Props> = ({ navigation }) => {
         return;
       }
 
-      const user = await getUserGracefully(tokens.accessToken);
+      const user = await getUserGracefully(API_URL, tokens.accessToken);
 
       if (!user) {
         // throw Error('User not found');

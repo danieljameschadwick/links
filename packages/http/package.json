@@ -1,0 +1,13 @@
+{
+    "name": "@links/http",
+    "version": "0.0.1",
+    "type": "module",
+    "license": "UNLICENSED",
+    "dependencies": {
+        "@links/types": "^0.0.1",
+        "react": "17.0.2",
+        "react-devtools": "4.22.0",
+        "react-dom": "17.0.2",
+        "react-native": "0.68.2"
+    }
+}

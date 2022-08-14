@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { useRouter } from "next/router";
+import { postLogin, getUserGracefully } from "@links/http/services/user";
 import { Header } from "@src/components/layout/Header";
 import { Heading, headerStyles } from "@src/components/layout/text/h1";
 import { Button } from "@src/components/form/Button";
 import { PageContent } from "@src/components/layout/PageContent";
 import { TextInput } from "@src/components/form/TextInput";
-import { HttpMethod } from "@src/util/http/httpFetch";
 import { useAppDispatch, useAppSelector } from "@src/app/hooks";
 import { selectStoreUser, setTokens, setStoreUser } from "@src/app/reducer/UserReducer";
 
@@ -22,19 +22,8 @@ const Login: React.FC = () => {
 
   const handleSubmit = async (): Promise<void> => {
     const { email, password } = form;
-    const payload = {
-      username: email,
-      password,
-    };
 
-    const loginResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URI}/authenticate/login`, {
-      method: HttpMethod.POST,
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(payload),
-    });
-    const tokens = await loginResponse.json();
+    const tokens = await postLogin(process.env.NEXT_PUBLIC_API_URI, email, password);
 
     if (!tokens.accessToken) {
       // throw Error('Access token broken');
@@ -43,13 +32,14 @@ const Login: React.FC = () => {
       return;
     }
 
-    const userResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URI}/authenticate/user`, {
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${tokens.accessToken}`,
-      },
-    });
-    const user = await userResponse.json();
+    const user = await getUserGracefully(process.env.NEXT_PUBLIC_API_URI, tokens.accessToken);
+
+    if (!user) {
+      // throw Error('User not found');
+      console.log('user not found');
+
+      return;
+    }
 
     dispatch(setTokens(tokens)); // set our tokens
     dispatch(setStoreUser(user)); // use those tokens, from state

@@ -26,10 +26,16 @@ export const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    setTokens: (state, action: PayloadAction<TokensInterface>) => {
+    setTokens: (state, action: PayloadAction<TokensInterface | null>) => {
       state.tokens = action.payload;
     },
-    setUser: (state, action: PayloadAction<UserInterface>) => {
+    setStoreUser: (state, action: PayloadAction<UserInterface | null>) => {
+      if (!action.payload) {
+        state.user = null;
+
+        return;
+      }
+
       const { id, username, name } = action.payload;
 
       state.user = {
@@ -41,7 +47,7 @@ export const userSlice = createSlice({
   },
 });
 
-export const { setTokens, setUser: setStoreUser } = userSlice.actions;
+export const { setTokens, setStoreUser } = userSlice.actions;
 
 export const selectTokens = (state: AppState) => state.tokens;
 export const selectStoreUser = (state: AppState) => state.user;
