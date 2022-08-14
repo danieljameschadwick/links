@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-import { AppState } from "../store";
-import { TokensInterface } from "../../interfaces/TokensInterface";
-import { UserInterface } from "../../interfaces/UserInterface";
+import { AppState } from "@links/state/store";
+import { TokensInterface } from "@links/types/interfaces/TokensInterface";
+import { UserInterface } from "@links/types/interfaces/UserInterface";
 
 interface PartialUserInterface {
   id: number;
@@ -27,13 +27,9 @@ export const userSlice = createSlice({
   initialState,
   reducers: {
     setTokens: (state, action: PayloadAction<TokensInterface | null>) => {
-      console.log('setTokens');
-
       state.tokens = action.payload;
     },
-    setUser: (state, action: PayloadAction<UserInterface | null>) => {
-      console.log('setUser');
-
+    setStoreUser: (state, action: PayloadAction<UserInterface | null>) => {
       if (!action.payload) {
         state.user = null;
 
@@ -51,7 +47,7 @@ export const userSlice = createSlice({
   },
 });
 
-export const { setTokens, setUser: setStoreUser } = userSlice.actions;
+export const { setTokens, setStoreUser } = userSlice.actions;
 
 export const selectTokens = (state: AppState) => state.tokens;
 export const selectStoreUser = (state: AppState) => state.user;

@@ -9,8 +9,8 @@ import { TextInput } from "@src/components/form/TextInput";
 import { UsernameInput } from "@src/components/form/UsernameInput";
 import post from "@src/util/http/post";
 import { Button } from "@src/components/form/Button";
-import { useAppDispatch, useAppSelector } from "@src/app/hooks";
-import { selectStoreUser } from "@src/app/reducer/UserReducer";
+import { useAppDispatch, useAppSelector } from "@links/state/hooks";
+import { selectStoreUser } from "@links/state/reducer/UserReducer";
 
 type FormData = {
   username: string;

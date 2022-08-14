@@ -4,8 +4,8 @@ import { StyleSheet, View, Text } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { ScreenLink } from "../components/link/ScreenLink";
 import { RootStackParamList } from "../typing/typing";
-import { useAppDispatch, useAppSelector } from "../app/hooks";
-import { selectStoreUser, selectTokens, setStoreUser, setTokens } from "../app/reducer/UserReducer";
+import { useAppDispatch, useAppSelector } from "@links/state/hooks";
+import { selectStoreUser, selectTokens, setStoreUser, setTokens } from "@links/state/reducer/UserReducer";
 import { getUser, getUsers, refreshTokens } from "@links/http/services/user";
 import { UserInterface } from "../interfaces/UserInterface";
 import { API_URL } from "@env";
@@ -96,6 +96,14 @@ export const HomeScreen: React.FC<Props> = ({ navigation }) => {
     },
   });
 
+  const logout = () => {
+    dispatch(setTokens(null));
+    dispatch(setStoreUser(null));
+    setUser(null);
+
+    navigation.navigate("Index");
+  };
+
   return (
     <View style={[ styles.container ]}>
       <View style={[ styles.linksContainer ]}>
@@ -110,6 +118,10 @@ export const HomeScreen: React.FC<Props> = ({ navigation }) => {
             <ScreenLink
               text={`Settings`}
               onPress={() => navigation.navigate("Settings")}
+            />
+            <ScreenLink
+              text={`Logout`}
+              onPress={() => logout()}
             />
           </>
         ) : (
@@ -126,13 +138,13 @@ export const HomeScreen: React.FC<Props> = ({ navigation }) => {
         </Text>
 
         {profiles.map((({ name, username }, index) =>
-            <ScreenLink
-              key={index}
-              text={`${name}'s Profile`}
-              onPress={() => navigation.navigate("Links", {
-                username,
-              })}
-            />
+          <ScreenLink
+            key={index}
+            text={`${name}'s Profile`}
+            onPress={() => navigation.navigate("Links", {
+              username,
+            })}
+          />
         ))}
       </View>
     </View>

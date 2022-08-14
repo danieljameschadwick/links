@@ -6,7 +6,7 @@ import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import store, { persistor } from "./src/app/store";
+import store, { persistor } from "@links/state/store";
 
 import { HomeScreen } from "./src/screens/HomeScreen";
 import { LinkScreen } from "./src/screens/LinkScreen";

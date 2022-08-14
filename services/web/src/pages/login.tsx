@@ -7,8 +7,8 @@ import { Heading, headerStyles } from "@src/components/layout/text/h1";
 import { Button } from "@src/components/form/Button";
 import { PageContent } from "@src/components/layout/PageContent";
 import { TextInput } from "@src/components/form/TextInput";
-import { useAppDispatch, useAppSelector } from "@src/app/hooks";
-import { selectStoreUser, setTokens, setStoreUser } from "@src/app/reducer/UserReducer";
+import { useAppDispatch, useAppSelector } from "@links/state/hooks";
+import { selectStoreUser, setTokens, setStoreUser } from "@links/state/reducer/UserReducer";
 
 const Login: React.FC = () => {
   const router = useRouter();

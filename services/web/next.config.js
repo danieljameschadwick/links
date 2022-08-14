@@ -4,6 +4,7 @@ const withPlugins = require("next-compose-plugins");
 
 const withTM = require("next-transpile-modules")([
   "@links/http",
+  "@links/state",
   "@links/types",
   "@links/ui",
   "react-native-vector-icons",

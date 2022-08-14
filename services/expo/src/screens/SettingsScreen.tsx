@@ -4,9 +4,9 @@ import { StyleSheet, View, Text } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { TextInput } from "@links/ui/components/form/TextInput";
 import { RootStackParamList } from "../typing/typing";
-import { useAppDispatch, useAppSelector } from "../app/hooks";
-import { selectStoreUser, selectTokens, setStoreUser, setTokens } from "../app/reducer/UserReducer";
-import { UserInterface } from "../interfaces/UserInterface";
+import { useAppDispatch, useAppSelector } from "@links/state/hooks";
+import { selectStoreUser, selectTokens, setStoreUser, setTokens } from "@links/state/reducer/UserReducer";
+import { UserInterface } from "@links/types/interfaces/UserInterface";
 import { getUser, refreshTokens } from "@links/http/services/user";
 import { API_URL } from "@env";
 
@@ -41,8 +41,6 @@ export const SettingsScreen: React.FC<Props> = ({ navigation }) => {
   useEffect(() => {
     const fetchData = async () => {
       if (!tokens) {
-        console.log('no tokens to fetch data');
-
         dispatch(setStoreUser(null));
         navigation.navigate("Index");
 
@@ -83,8 +81,6 @@ export const SettingsScreen: React.FC<Props> = ({ navigation }) => {
 
   if (!storeUser) {
     navigation.navigate("Index");
-
-    return;
   }
 
   if (!user) {

@@ -2,16 +2,20 @@ import React from "react";
 import { StyleSheet, View, Text } from "react-native";
 import { useRouter } from "next/router";
 import ExternalLink from "@links/ui/components/links/ExternalLink";
-import { useAppSelector } from "@src/app/hooks";
-import { selectStoreUser } from "@src/app/reducer/UserReducer";
+import { useAppDispatch, useAppSelector } from "@links/state/hooks";
+import { selectStoreUser, setStoreUser, setTokens } from "@links/state/reducer/UserReducer";
 
 export const Header: React.FC = () => {
   const router = useRouter();
   const user = useAppSelector(selectStoreUser);
+  const dispatch = useAppDispatch();
 
   const logout = () => {
-    // @TODO: implement logout
-    console.log('// @TODO: implement logout')
+    dispatch(setTokens(null));
+    dispatch(setStoreUser(null));
+
+    router.push('/');
+    return;
   };
 
   return (

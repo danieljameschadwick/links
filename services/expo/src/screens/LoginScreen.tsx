@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { StyleSheet, View, Text, Button, TextInput } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { getUser, getUserGracefully, postLogin } from "@links/http/services/user";
-import { setTokens, setStoreUser } from "../app/reducer/UserReducer";
-import { useAppDispatch, useAppSelector } from "../app/hooks";
+import { getUserGracefully, postLogin } from "@links/http/services/user";
+import { setTokens, setStoreUser } from "@links/state/reducer/UserReducer";
+import { useAppDispatch } from "@links/state/hooks";
 import { API_URL } from "@env";
 
 interface Props {
@@ -19,8 +19,6 @@ export const LoginScreen: React.FC<Props> = ({ navigation }) => {
   const { email, password } = form;
 
   const onSubmit = async () => {
-    console.log('onSubmit');
-
     const { email, password } = form;
 
     try {
@@ -42,10 +40,8 @@ export const LoginScreen: React.FC<Props> = ({ navigation }) => {
         return;
       }
 
-      console.log('setting to store');
-
-      dispatch(setTokens(tokens)); // set our tokens
-      dispatch(setStoreUser(user)); // use those tokens, from state
+      dispatch(setTokens(tokens)); // tokens get reused for local component state calls
+      dispatch(setStoreUser(user));
       navigation.navigate("Index");
 
       return;

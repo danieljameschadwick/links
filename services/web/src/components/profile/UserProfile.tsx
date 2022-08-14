@@ -5,8 +5,8 @@ import Link from "@links/ui/components/links/Link";
 import { EditPanel } from "@src/components/profile/EditPanel";
 import { ProfileDispatchContext, ProfileStateContext } from "@src/pages/page/[username]";
 import { UserProfileActionType } from "@src/reducers/user/UserProfileReducer";
-import { useAppSelector } from "@src/app/hooks";
-import { selectStoreUser } from "@src/app/reducer/UserReducer";
+import { useAppSelector } from "@links/state/hooks";
+import { selectStoreUser } from "@links/state/reducer/UserReducer";
 
 const UserProfile: React.FC = () => {
   const dispatch = useContext(ProfileDispatchContext);

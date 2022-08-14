@@ -1,0 +1,17 @@
+{
+    "name": "@links/state",
+    "version": "0.0.1",
+    "type": "module",
+    "license": "UNLICENSED",
+    "dependencies": {
+        "@links/types": "^0.0.1",
+        "@reduxjs/toolkit": "^1.8.3",
+        "react": "17.0.2",
+        "react-devtools": "4.22.0",
+        "react-dom": "17.0.2",
+        "react-native": "0.68.2",
+        "react-redux": "^8.0.2",
+        "redux-persist": "^6.0.0",
+        "redux-thunk": "^2.4.1"
+    }
+}
