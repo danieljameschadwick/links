@@ -1,6 +1,7 @@
 import React from "react";
 import {
   Linking,
+  StyleProp,
   TouchableOpacity,
   View,
   ViewStyle,
@@ -23,11 +24,10 @@ const ExternalLink: React.FC<Props> = ({
     openInANewTab ? Linking.openURL(url) : window.open(url, "_self");
   return (
     <TouchableOpacity
-      style={style}
       accessibilityRole={"link"}
       onPress={handleClick}
     >
-      <View>{children}</View>
+      <View style={style}>{children}</View>
     </TouchableOpacity>
   );
 };

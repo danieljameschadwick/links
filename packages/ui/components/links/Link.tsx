@@ -13,12 +13,12 @@ import { Platforms } from "@links/ui/util/enum/Platforms";
 import ExternalLink from "@links/ui/components/links/ExternalLink";
 import AppLink from "./AppLink";
 
-type LinkLogo = {
+interface LinkLogo {
   url: string;
   altText: string;
 };
 
-type Props = {
+interface Props {
   text: string;
   url: string;
   styles?: StyleProp<ViewStyle>;
@@ -35,6 +35,7 @@ const Link: React.FC<Props> = ({ text, url, styles: propStyles = null, logo = nu
     },
     link: {
       display: "flex",
+      flexDirection: "row",
       padding: 16,
     },
     logo: {
