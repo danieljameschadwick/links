@@ -52,14 +52,14 @@ export const HeaderDropdown: React.FC = () => {
           url={`/page/${username}`}
           openInANewTab={false}
         >
-          <Text>{"Profile"}</Text>
+          <Text>Profile</Text>
         </ExternalLink>
         <ExternalLink
           style={styles.menuLink}
           url={"/user/settings"}
           openInANewTab={false}
         >
-          <Text>{"Settings"}</Text>
+          <Text>Settings</Text>
         </ExternalLink>
       </View>
     </View>
@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
     userSelect: "none",
   },
   iconReverse: {
-    transform: [{ rotate: "180deg" }]
+    transform: [{ rotate: "180deg" }],
   },
   menuContainer: {
     display: "flex",

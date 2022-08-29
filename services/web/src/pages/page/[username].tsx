@@ -7,7 +7,10 @@ import { fetchUser } from "@src/pages/page/actions";
 import Error404 from "@src/pages/404";
 import ExternalLink from "@links/ui/components/links/ExternalLink";
 import InvalidArgumentError from "@src/error/InvalidArgumentError";
-import { UserProfileActionType, UserProfileReducer } from "@src/reducers/user/UserProfileReducer";
+import {
+  UserProfileActionType,
+  UserProfileReducer,
+} from "@src/reducers/user/UserProfileReducer";
 
 const footerStyles = StyleSheet.create({
   container: {
@@ -47,15 +50,18 @@ const UserPage: React.FC = () => {
   const router = useRouter();
 
   const { username = undefined } = router.query;
-  const [ httpStatus, setHttpStatus ] = useState<number | null>(null);
-  const [ state, dispatch ] = useReducer(UserProfileReducer, initialState);
+  const [httpStatus, setHttpStatus] = useState<number | null>(null);
+  const [state, dispatch] = useReducer(UserProfileReducer, initialState);
   const { user = undefined } = state;
 
   useEffect(() => {
     const fetchData = async () => {
       if (!username) throw new InvalidArgumentError();
 
-      await dispatch({ type: UserProfileActionType.UPDATE_USER, payload: await fetchUser(username as string) });
+      await dispatch({
+        type: UserProfileActionType.UPDATE_USER,
+        payload: await fetchUser(username as string),
+      });
     };
 
     fetchData()
@@ -68,9 +74,8 @@ const UserPage: React.FC = () => {
         }
 
         setHttpStatus(404); // @TODO: improve error handling/logging/rather than catch all
-      })
-    ;
-  }, [ username ]);
+      });
+  }, [username]);
 
   if (httpStatus === null) {
     return null;
@@ -107,11 +112,27 @@ const UserPage: React.FC = () => {
 
       <View style={footerStyles.container}>
         <Text style={footerStyles.text}>
-          Powered by <ExternalLink style={footerStyles.brandText} url={"/"} openInANewTab={false}>links</ExternalLink>.
+          Powered by{" "}
+          <ExternalLink
+            style={footerStyles.brandText}
+            url={"/"}
+            openInANewTab={false}
+          >
+            <Text>links</Text>
+          </ExternalLink>
+          .
         </Text>
 
         <Text style={footerStyles.text}>
-          Create your own profile <ExternalLink style={footerStyles.linkText} url={"/register"} openInANewTab={false}>here</ExternalLink>.
+          Create your own profile{" "}
+          <ExternalLink
+            style={footerStyles.linkText}
+            url={"/register"}
+            openInANewTab={false}
+          >
+            <Text>here</Text>
+          </ExternalLink>
+          .
         </Text>
       </View>
     </>
