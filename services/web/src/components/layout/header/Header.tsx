@@ -5,6 +5,7 @@ import ExternalLink from "@links/ui/components/links/ExternalLink";
 import { useAppDispatch, useAppSelector } from "@links/state/hooks";
 import { selectStoreUser, setStoreUser, setTokens } from "@links/state/reducer/UserReducer";
 import { HeaderDropdown } from "@src/components/layout/header/HeaderDropdown";
+import { Z_INDEXES } from "@src/enum/zIndex";
 
 export const Header: React.FC = () => {
   const router = useRouter();
@@ -65,7 +66,7 @@ export const Header: React.FC = () => {
 const styles = StyleSheet.create({
   container: {
     position: "fixed", // investigate fixed typehint, does work
-    zIndex: 2, // add overlay constants to layout
+    zIndex: Z_INDEXES.OVERLAY, // add overlay constants to layout
     display: "flex",
     flexDirection: "row",
     width: "100%",

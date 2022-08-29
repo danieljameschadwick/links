@@ -11,32 +11,7 @@ import {
   UserProfileActionType,
   UserProfileReducer,
 } from "@src/reducers/user/UserProfileReducer";
-
-const footerStyles = StyleSheet.create({
-  container: {
-    position: "absolute",
-    bottom: "10px",
-    width: "100%",
-    textAlign: "center",
-    zIndex: 3, // content + 1
-  },
-  text: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    color: "rgb(255,255,255)",
-    marginBottom: "10px",
-  },
-  brandText: {
-    fontSize: 17,
-    fontWeight: "bold",
-    color: "rgb(255,113,0)",
-  },
-  linkText: {
-    textDecorationLine: "underline",
-    color: "rgb(255,113,0)",
-  },
-});
+import { Z_INDEXES } from "@src/enum/zIndex";
 
 const initialState = {
   user: null,
@@ -138,5 +113,31 @@ const UserPage: React.FC = () => {
     </>
   );
 };
+
+const footerStyles = StyleSheet.create({
+  container: {
+    position: "absolute",
+    bottom: "10px",
+    width: "100%",
+    textAlign: "center",
+    zIndex: Z_INDEXES.OVERLAY,
+  },
+  text: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    color: "rgb(255,255,255)",
+    marginBottom: "10px",
+  },
+  brandText: {
+    fontSize: 17,
+    fontWeight: "bold",
+    color: "rgb(255,113,0)",
+  },
+  linkText: {
+    textDecorationLine: "underline",
+    color: "rgb(255,113,0)",
+  },
+});
 
 export default UserPage;

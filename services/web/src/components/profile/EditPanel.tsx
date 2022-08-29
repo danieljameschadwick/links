@@ -3,6 +3,7 @@ import { StyleSheet, TextInput, View, Text, TouchableOpacity } from "react-nativ
 import Icon from "react-native-vector-icons/Entypo";
 import { ProfileDispatchContext, ProfileStateContext } from "@src/pages/page/[username]";
 import { UserProfileActionType } from "@src/reducers/user/UserProfileReducer";
+import { Z_INDEXES } from "@src/enum/zIndex";
 
 const styles = StyleSheet.create({
   settingPanel: {
@@ -10,7 +11,7 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     height: "100%",
     width: "250px",
-    zIndex: 10, // overlay - 1
+    zIndex: Z_INDEXES.SIDE_PANEL,
   },
   headerContainer: {
     display: "flex",
