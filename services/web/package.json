@@ -28,7 +28,7 @@
     "react-native": "0.68.2",
     "react-native-media-query": "1.0.11",
     "react-native-svg": "^12.3.0",
-    "react-native-vector-icons": "^9.1.0",
+    "react-native-vector-icons": "^9.2.0",
     "react-native-web": "0.17.7",
     "react-redux": "^8.0.2",
     "react-transition-group": "^4.4.2",

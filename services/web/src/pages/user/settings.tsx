@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { getUser, refreshTokens } from "@links/http/services/user";
-import { Header } from "@src/components/layout/Header";
+import { Header } from "@src/components/layout/header/Header";
 import { Heading, headerStyles } from "@src/components/layout/text/h1";
 import { PageContent } from "@src/components/layout/PageContent";
 import { useAppDispatch, useAppSelector } from "@links/state/hooks";

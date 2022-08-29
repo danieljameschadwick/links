@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { StyleSheet, View } from "react-native";
 import { useRouter } from "next/router";
 import { Controller, useForm } from "react-hook-form";
-import { Header } from "@src/components/layout/Header";
+import { Header } from "@src/components/layout/header/Header";
 import { PageContent } from "@src/components/layout/PageContent";
 import { Heading, headerStyles } from "@src/components/layout/text/h1";
 import { TextInput } from "@src/components/form/TextInput";

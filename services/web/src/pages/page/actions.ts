@@ -1,4 +1,4 @@
-import { UserInterface } from "@src/interfaces/UserInterface";
+import { UserInterface } from "@links/types/interfaces/UserInterface";
 
 export const fetchUser = async (username: string): Promise<UserInterface | null> => {
   const response = await fetch(`${process.env.NEXT_PUBLIC_API_URI}/users/${username}`);

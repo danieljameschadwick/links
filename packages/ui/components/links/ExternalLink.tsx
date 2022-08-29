@@ -1,24 +1,34 @@
 import React from "react";
-import { Linking, StyleProp, ViewStyle } from "react-native";
-import { Text } from "react-native-web";
+import {
+  Linking,
+  TouchableOpacity,
+  View,
+  ViewStyle,
+} from "react-native";
 
-type Props = {
-  style: StyleProp<ViewStyle>;
+interface Props {
   url: string;
+  style?: StyleProp<ViewStyle>;
   openInANewTab?: boolean;
   children: React.ReactNode;
-};
+}
 
-const ExternalLink: React.FC<Props> = ({ style, url, children, openInANewTab = true }) => {
-  const handleClick = () => openInANewTab
-    ? Linking.openURL(url)
-    : window.open(url, "_self")
-  ;
-
+const ExternalLink: React.FC<Props> = ({
+  style = undefined,
+  url,
+  children,
+  openInANewTab = true,
+}) => {
+  const handleClick = () =>
+    openInANewTab ? Linking.openURL(url) : window.open(url, "_self");
   return (
-    <Text style={style} accessibilityRole={"link"} onClick={handleClick}>
-      {children}
-    </Text>
+    <TouchableOpacity
+      style={style}
+      accessibilityRole={"link"}
+      onPress={handleClick}
+    >
+      <View>{children}</View>
+    </TouchableOpacity>
   );
 };
 

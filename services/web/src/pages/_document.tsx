@@ -33,6 +33,7 @@ export default class Document extends NextDocument {
           {/* @TODO: <title> should not be used in _document.js's <Head>.
                 https://nextjs.org/docs/messages/no-document-title */}
           <title>Links</title>
+          <link href="/styles/font.css" rel="stylesheet"/>
         </Head>
 
         <body style={{ height: "100%" }}>

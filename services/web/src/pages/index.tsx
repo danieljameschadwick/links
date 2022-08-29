@@ -2,11 +2,12 @@ import React from "react";
 import { StyleSheet, View } from "react-native-web";
 import { Transition, TransitionGroup } from "react-transition-group";
 import NoSsrWrapper from "@src/components/noSsrWrapper";
-import { Header } from "@src/components/layout/Header";
+import { Header } from "@src/components/layout/header/Header";
 import { play, exit } from "@src/animations/timelines";
 import { GetStartedPanel } from "@src/components/homepage/panel/GetStartedPanel";
 import { UseAnywherePanel } from "@src/components/homepage/panel/UseAnywherePanel";
 import { PrivacyPanel } from "@src/components/homepage/panel/PrivacyPanel";
+import { PageContent } from "@src/components/layout/PageContent";
 
 const styles = StyleSheet.create({
   container: {
@@ -48,7 +49,7 @@ const Index: React.FC = () => {
       <View style={styles.container}>
         <Header />
 
-        <View style={styles.contentContainer}>
+        <PageContent>
           <TransitionGroup component={null}>
             { panels.map((component, index) =>
               <Transition
@@ -62,7 +63,7 @@ const Index: React.FC = () => {
               </Transition>
             ) }
           </TransitionGroup>
-        </View>
+        </PageContent>
       </View>
     </NoSsrWrapper>
   );

@@ -1,0 +1,24 @@
+@font-face {
+  src: url("assets/fonts/Ionicons.ttf");
+  font-family: "Ionicons";
+}
+
+@font-face {
+  src: url("FontAwesome.ttf");
+  font-family: "FontAwesome";
+}
+
+@font-face {
+  src: url("assets/fonts/MaterialIcons.ttf");
+  font-family: "MaterialIcons";
+}
+
+@font-face {
+  src: url("assets/fonts/Feather.ttf");
+  font-family: "Feather";
+}
+
+@font-face {
+  src: url("assets/fonts/MaterialCommunityIcons.ttf");
+  font-family: "MaterialCommunityIcons";
+}

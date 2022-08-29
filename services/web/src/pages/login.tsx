@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { useRouter } from "next/router";
 import { postLogin, getUserGracefully } from "@links/http/services/user";
-import { Header } from "@src/components/layout/Header";
+import { Header } from "@src/components/layout/header/Header";
 import { Heading, headerStyles } from "@src/components/layout/text/h1";
 import { Button } from "@src/components/form/Button";
 import { PageContent } from "@src/components/layout/PageContent";
