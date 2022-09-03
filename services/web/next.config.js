@@ -18,7 +18,7 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
-  webpack: (config) => {
+  webpack: (config, options) => {
     config.resolve.alias = {
       ...(config.resolve.alias || {}),
       // Transform all direct `react-native` imports to `react-native-web`
@@ -52,9 +52,14 @@ const nextConfig = {
         // include: path.resolve(__dirname, "src/styles"),
       },
     );
-    // config.module.plugins.push([
-    //   new MiniCssExtractPlugin(),
-    // ]);
+    if (options.isServer) {
+      config.plugins.push(
+        new options.webpack.ProvidePlugin({
+          requestAnimationFrame: path.resolve(__dirname, './src/plugins/requestAnimationFrame.ts'),
+        }),
+      );
+    }
+
     return config;
   },
 };

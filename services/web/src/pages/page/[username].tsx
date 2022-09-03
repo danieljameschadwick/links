@@ -12,6 +12,7 @@ import {
   UserProfileReducer,
 } from "@src/reducers/user/UserProfileReducer";
 import { Z_INDEXES } from "@src/enum/zIndex";
+import { FluidPageContent } from "@src/components/layout/FluidPageContent";
 
 const initialState = {
   user: null,
@@ -64,7 +65,6 @@ const UserPage: React.FC = () => {
   const profileStyles = StyleSheet.create({
     container: {
       display: "flex",
-      alignItems: "center",
       width: "100%",
       height: "100%",
       ...userProfile.styles.container, // @TODO: override API styling
@@ -72,7 +72,7 @@ const UserPage: React.FC = () => {
   });
 
   return (
-    <>
+    <FluidPageContent>
       <Head>
         <title>Links | {username}</title>
       </Head>
@@ -110,7 +110,7 @@ const UserPage: React.FC = () => {
           .
         </Text>
       </View>
-    </>
+    </FluidPageContent>
   );
 };
 

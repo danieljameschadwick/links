@@ -7,7 +7,7 @@ import {
   TouchableWithoutFeedback,
   View,
   StyleProp,
-  ViewStyle
+  ViewStyle,
 } from "react-native";
 import { Platforms } from "@links/ui/util/enum/Platforms";
 import ExternalLink from "@links/ui/components/links/ExternalLink";
@@ -16,16 +16,23 @@ import AppLink from "./AppLink";
 interface LinkLogo {
   url: string;
   altText: string;
-};
+}
 
 interface Props {
   text: string;
   url: string;
   styles?: StyleProp<ViewStyle>;
   logo?: LinkLogo;
-};
+  disabled?: boolean;
+}
 
-const Link: React.FC<Props> = ({ text, url, styles: propStyles = null, logo = null }) => {
+const Link: React.FC<Props> = ({
+  text,
+  url,
+  styles: propStyles = null,
+  logo = null,
+  disabled = false,
+}) => {
   const styles = StyleSheet.create({
     container: {
       display: "flex",
@@ -58,8 +65,8 @@ const Link: React.FC<Props> = ({ text, url, styles: propStyles = null, logo = nu
     },
   });
 
-  const containerStyle = [ styles.container ];
-  const textStyle = logo ? [styles.text, logoStyles.text] : [ styles.text ];
+  const containerStyle = [styles.container];
+  const textStyle = logo ? [styles.text, logoStyles.text] : [styles.text];
 
   if (propStyles) {
     if (propStyles.container) containerStyle.push(propStyles.container);
@@ -74,8 +81,8 @@ const Link: React.FC<Props> = ({ text, url, styles: propStyles = null, logo = nu
     return (
       <TouchableWithoutFeedback>
         <View style={containerStyle}>
-          <ExternalLink style={styles.link} url={url}>
-            { logo && (
+          <ExternalLink style={styles.link} url={url} disabled={disabled}>
+            {logo && (
               <Image
                 style={styles.logo}
                 accessibilityLabel={logo.altText}

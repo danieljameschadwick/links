@@ -11,6 +11,7 @@ interface Props {
   url: string;
   style?: StyleProp<ViewStyle>;
   openInANewTab?: boolean;
+  disabled: boolean;
   children: React.ReactNode;
 }
 
@@ -19,9 +20,14 @@ const ExternalLink: React.FC<Props> = ({
   url,
   children,
   openInANewTab = true,
+  disabled = false,
 }) => {
-  const handleClick = () =>
-    openInANewTab ? Linking.openURL(url) : window.open(url, "_self");
+  const handleClick = () => {
+    if (disabled) return;
+
+    return openInANewTab ? Linking.openURL(url) : window.open(url, "_self");
+  }
+    
   return (
     <TouchableOpacity
       accessibilityRole={"link"}

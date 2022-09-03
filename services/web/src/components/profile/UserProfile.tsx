@@ -1,8 +1,9 @@
-import React, { useContext, useState } from "react";
-import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
+import React, { useContext } from "react";
+import { View, Text, TouchableOpacity } from "react-native-web";
+import StyleSheet from "react-native-media-query";
 import Icon from "react-native-vector-icons/Entypo";
 import Link from "@links/ui/components/links/Link";
-import { DraggableGrid } from "react-native-draggable-grid";
+import { DraggableLinks } from "@src/components/profile/DraggableLinks";
 import { EditPanel } from "@src/components/profile/EditPanel";
 import {
   ProfileDispatchContext,
@@ -11,6 +12,7 @@ import {
 import { UserProfileActionType } from "@src/reducers/user/UserProfileReducer";
 import { useAppSelector } from "@links/state/hooks";
 import { selectStoreUser } from "@links/state/reducer/UserReducer";
+import NoSSRWrapper from "../noSsrWrapper";
 
 const UserProfile: React.FC = () => {
   const dispatch = useContext(ProfileDispatchContext);
@@ -23,18 +25,6 @@ const UserProfile: React.FC = () => {
     styles: profileStyles,
     links = [],
   } = user.userProfile;
-  const [items, setItems] = useState([
-    { name: "1", key: "one" },
-    { name: "2", key: "two" },
-    { name: "3", key: "three" },
-    { name: "4", key: "four" },
-    { name: "5", key: "five" },
-    { name: "6", key: "six" },
-    { name: "7", key: "seven" },
-    { name: "8", key: "eight" },
-    { name: "9", key: "night" },
-    { name: "0", key: "zero" },
-  ]);
 
   const openSidebar = () => {
     dispatch({
@@ -45,8 +35,6 @@ const UserProfile: React.FC = () => {
 
   const isCurrentUsersProfile = storeUser?.id === user?.id;
   const renderItem = (item: { name: string; key: string }) => {
-    console.log(item);
-
     return (
       <View style={styles.item} key={item.key}>
         <Text style={styles.itemText}>{item.name}</Text>
@@ -55,22 +43,8 @@ const UserProfile: React.FC = () => {
   };
 
   return (
-    <>
-      <View style={styles.wrapper}>
-        <DraggableGrid
-          numColumns={5}
-          renderItem={renderItem}
-          data={items}
-          onDragRelease={(data) => {
-            console.log("onDragRelease");
-            console.log(data);
-
-            setItems(data);
-          }}
-        />
-      </View>
-
-      <View style={[styles.container]}>
+    <View style={[styles.container]} dataSet={{ media: ids.container }}>
+      <View style={[styles.profileContainer]}>
         <Text
           accessibilityRole={"header"}
           style={[styles.heading, profileStyles.headingText]}
@@ -88,17 +62,9 @@ const UserProfile: React.FC = () => {
         )}
 
         <View>
-          {links.map(({ id, text, url, styles, logo = null }) => {
-            return (
-              <Link
-                key={id}
-                text={text}
-                url={url}
-                styles={styles}
-                logo={logo}
-              />
-            );
-          })}
+          <NoSSRWrapper>
+            <DraggableLinks links={links} />
+          </NoSSRWrapper>
         </View>
       </View>
 
@@ -117,12 +83,25 @@ const UserProfile: React.FC = () => {
             <Icon name={"edit"} size={20} color={"rgb(0, 0, 0)"} />
           </TouchableOpacity>
         ))}
-    </>
+    </View>
   );
 };
 
-const styles = StyleSheet.create({
+const { ids, styles } = StyleSheet.create({
   container: {
+    maxWidth: 400,
+    marginLeft: "auto",
+    marginRight: "auto",
+    "@media (max-width: 667px)": {
+      paddingLeft: "12px",
+      paddingRight: "12px",
+      width: "100%",
+    },
+  },
+  gridContainer: {
+    height: 1000,
+  },
+  profileContainer: {
     marginTop: 24,
   },
   textContainer: {
@@ -154,12 +133,6 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     paddingRight: 10,
     borderRadius: 7,
-  },
-  wrapper: {
-    paddingTop: 100,
-    width: "100%",
-    height: "100%",
-    justifyContent: "center",
   },
   item: {
     width: 100,
