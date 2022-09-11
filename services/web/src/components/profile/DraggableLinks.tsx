@@ -41,7 +41,7 @@ const formatLinksData = (links: LinkInterface[]) => {
   });
 };
 
-export const DraggableLinks = ({ links }) => {
+export const DraggableLinks = ({ links, isEditing }) => {
   const [data, setData] = useState(formatLinksData(links));
 
   const renderItem = ({ item, drag, isActive }: RenderItemParams<Item>) => {
@@ -62,7 +62,7 @@ export const DraggableLinks = ({ links }) => {
               url={url}
               styles={linkStyles}
               logo={logo}
-              disabled={true}
+              disabled={isEditing}
             />
         </TouchableOpacity>
       </ScaleDecorator>
@@ -76,6 +76,7 @@ export const DraggableLinks = ({ links }) => {
         onDragEnd={({ data }) => setData(data)}
         keyExtractor={(item) => item.key}
         renderItem={renderItem}
+        scrollEnabled={isEditing}
       />
     </GestureHandlerRootView>
   );

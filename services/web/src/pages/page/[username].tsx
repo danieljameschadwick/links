@@ -117,10 +117,9 @@ const UserPage: React.FC = () => {
 const footerStyles = StyleSheet.create({
   container: {
     position: "absolute",
-    bottom: "10px",
+    bottom: "10px", 
     width: "100%",
     textAlign: "center",
-    zIndex: Z_INDEXES.OVERLAY,
   },
   text: {
     display: "flex",

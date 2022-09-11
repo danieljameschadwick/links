@@ -26,13 +26,10 @@ const ExternalLink: React.FC<Props> = ({
     if (disabled) return;
 
     return openInANewTab ? Linking.openURL(url) : window.open(url, "_self");
-  }
-    
+  };
+
   return (
-    <TouchableOpacity
-      accessibilityRole={"link"}
-      onPress={handleClick}
-    >
+    <TouchableOpacity accessibilityRole={"link"} onPress={handleClick}>
       <View style={style}>{children}</View>
     </TouchableOpacity>
   );

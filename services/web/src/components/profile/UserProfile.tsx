@@ -2,7 +2,6 @@ import React, { useContext } from "react";
 import { View, Text, TouchableOpacity } from "react-native-web";
 import StyleSheet from "react-native-media-query";
 import Icon from "react-native-vector-icons/Entypo";
-import Link from "@links/ui/components/links/Link";
 import { DraggableLinks } from "@src/components/profile/DraggableLinks";
 import { EditPanel } from "@src/components/profile/EditPanel";
 import {
@@ -13,6 +12,7 @@ import { UserProfileActionType } from "@src/reducers/user/UserProfileReducer";
 import { useAppSelector } from "@links/state/hooks";
 import { selectStoreUser } from "@links/state/reducer/UserReducer";
 import NoSSRWrapper from "../noSsrWrapper";
+import { Z_INDEXES } from "@src/enum/zIndex";
 
 const UserProfile: React.FC = () => {
   const dispatch = useContext(ProfileDispatchContext);
@@ -34,17 +34,10 @@ const UserProfile: React.FC = () => {
   };
 
   const isCurrentUsersProfile = storeUser?.id === user?.id;
-  const renderItem = (item: { name: string; key: string }) => {
-    return (
-      <View style={styles.item} key={item.key}>
-        <Text style={styles.itemText}>{item.name}</Text>
-      </View>
-    );
-  };
 
   return (
-    <View style={[styles.container]} dataSet={{ media: ids.container }}>
-      <View style={[styles.profileContainer]}>
+    <View style={[styles.container]}>
+      <View style={[styles.profileContainer]} dataSet={{ media: ids.profileContainer }}>
         <Text
           accessibilityRole={"header"}
           style={[styles.heading, profileStyles.headingText]}
@@ -63,7 +56,7 @@ const UserProfile: React.FC = () => {
 
         <View>
           <NoSSRWrapper>
-            <DraggableLinks links={links} />
+            <DraggableLinks links={links} isEditing={showSidebar} />
           </NoSSRWrapper>
         </View>
       </View>
@@ -89,6 +82,10 @@ const UserProfile: React.FC = () => {
 
 const { ids, styles } = StyleSheet.create({
   container: {
+    height: "100%",
+  },
+  profileContainer: {
+    marginTop: 24,
     maxWidth: 400,
     marginLeft: "auto",
     marginRight: "auto",
@@ -97,12 +94,6 @@ const { ids, styles } = StyleSheet.create({
       paddingRight: "12px",
       width: "100%",
     },
-  },
-  gridContainer: {
-    height: 1000,
-  },
-  profileContainer: {
-    marginTop: 24,
   },
   textContainer: {
     alignItems: "center",
@@ -156,6 +147,7 @@ const { ids, styles } = StyleSheet.create({
     right: 0,
     height: "100%",
     backgroundColor: "white",
+    zIndex: Z_INDEXES.SIDE_PANEL,
   },
 });
 

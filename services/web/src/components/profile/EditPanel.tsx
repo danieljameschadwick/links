@@ -11,7 +11,6 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     height: "100%",
     width: "250px",
-    zIndex: Z_INDEXES.SIDE_PANEL,
   },
   headerContainer: {
     display: "flex",
@@ -60,7 +59,7 @@ export const EditPanel: React.FC = () => {
   const { user: { userProfile } } = state;
 
   const handleSubmit = () => {
-    alert("save");
+    console.log("save");
 
     // @TODO: pass profile settings and save
   };
